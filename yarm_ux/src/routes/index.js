@@ -6,6 +6,9 @@ import CounterRoute from './Counter'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
+/* See https://github.com/reactjs/react-router/blob/master/examples/auth-with-shared-root/config/routes.js for example of
+   auth with shared root / landing page which changes when user logged in */
+
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
