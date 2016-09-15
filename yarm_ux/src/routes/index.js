@@ -1,6 +1,8 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
+import WelcomeLayout from '../layouts/WelcomeLayout/WelcomeLayout'
 import Home from './Home'
+import Welcome from './Welcome'
 import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -9,13 +11,44 @@ import CounterRoute from './Counter'
 /* See https://github.com/reactjs/react-router/blob/master/examples/auth-with-shared-root/config/routes.js for example of
    auth with shared root / landing page which changes when user logged in */
 
+/* This was a massive help so far: https://github.com/davezuko/react-redux-starter-kit/issues/906 */
+
+function requireAuth (store, replace) {
+  const token = localStorage.getItem('@USER')
+  if (!token) replace('/')
+}
+
+
 export const createRoutes = (store) => ({
   path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-    CounterRoute(store)
+  component   : WelcomeLayout,
+  indexRoute  : Welcome,
+  // childRoutes : [
+    // CounterRoute(store)
+  // ]
+
+/*
+  childRoutes: [
+    {
+      component: CoreLayout,
+      onEnter: requireAuth,
+      indexRoute: Home,
+      childRoutes: [
+        CounterRoute(store)
+        // ProfileRoute,
+        // EtcRoute
+      ]
+    },
+    // non-authed routes
+    {
+      component: WelcomeLayout,
+      indexRoute  : Home,
+      // childRoutes: [
+        // AuthRoute // has for example /login /reset
+      // ]
+    }
   ]
+*/
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
