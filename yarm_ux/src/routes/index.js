@@ -20,11 +20,25 @@ function requireAuth (nextState, replace) {
   if (!token) replace('/welcome')
 }
 
+
+// http://ricostacruz.com/cheatsheets/react-router.html
+//
 export const createRoutes = (store) => ({
   path        : '/',
   childRoutes: [
     {
       path : 'home',
+      component: CoreLayout,
+      indexRoute: Home,
+      // onEnter: requireAuth,
+      childRoutes: [
+        CounterRoute(store)
+        // ProfileRoute,
+        // EtcRoute
+      ]
+    },
+    {
+      path: ':tenant',
       component: CoreLayout,
       indexRoute: Home,
       // onEnter: requireAuth,
