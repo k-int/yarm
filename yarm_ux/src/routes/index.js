@@ -2,7 +2,7 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import WelcomeLayout from '../layouts/WelcomeLayout/WelcomeLayout'
 import Home from './Home'
-import Welcome from './Welcome'
+import WelcomeRoute from './Welcome'
 import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -17,29 +17,27 @@ import CounterRoute from './Counter'
 
 function requireAuth (nextState, replace) {
   const token = localStorage.getItem('@USER')
-  if (!token) replace('/')
+  if (!token) replace('/welcome')
 }
 
 export const createRoutes = (store) => ({
   path        : '/',
   childRoutes: [
     {
+      path : 'home',
       component: CoreLayout,
       indexRoute: Home,
-      path : 'home',
+      // onEnter: requireAuth,
       childRoutes: [
         CounterRoute(store)
         // ProfileRoute,
         // EtcRoute
       ]
     },
-    // non-authed routes
+    // The default / route uses the welcome layout
     {
       component: WelcomeLayout,
-      indexRoute  : Home,
-      // childRoutes: [
-        // AuthRoute // has for example /login /reset
-      // ]
+      indexRoute: WelcomeRoute,
     }
   ]
 })
