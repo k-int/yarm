@@ -21,11 +21,12 @@ function requireAuth (store, replace) {
 
 export const createRoutes = (store) => ({
   path        : '/',
-  component   : WelcomeLayout,
-  indexRoute  : Welcome,
-  // childRoutes : [
-    // CounterRoute(store)
-  // ]
+  childRoutes : [
+    {
+      component   : WelcomeLayout,
+      indexRoute  : Welcome
+    }
+  ]
 
 /*
   childRoutes: [
