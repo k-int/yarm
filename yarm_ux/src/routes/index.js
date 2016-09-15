@@ -11,29 +11,22 @@ import CounterRoute from './Counter'
 /* See https://github.com/reactjs/react-router/blob/master/examples/auth-with-shared-root/config/routes.js for example of
    auth with shared root / landing page which changes when user logged in */
 
-/* This was a massive help so far: https://github.com/davezuko/react-redux-starter-kit/issues/906 */
+/* This was a massive help so far: https://github.com/davezuko/react-redux-starter-kit/issues/906 i
+   https://medium.com/@peterpme/react-router-authentication-onenter-requireauth-plainroute-a-follow-up-to-a-github-issue-71ea3e7d59c9#.2uvm13rb2
+*/
 
-function requireAuth (store, replace) {
+function requireAuth (nextState, replace) {
   const token = localStorage.getItem('@USER')
   if (!token) replace('/')
 }
 
-
 export const createRoutes = (store) => ({
   path        : '/',
-  childRoutes : [
-    {
-      component   : WelcomeLayout,
-      indexRoute  : Welcome
-    }
-  ]
-
-/*
   childRoutes: [
     {
       component: CoreLayout,
-      onEnter: requireAuth,
       indexRoute: Home,
+      path : 'home',
       childRoutes: [
         CounterRoute(store)
         // ProfileRoute,
@@ -49,7 +42,6 @@ export const createRoutes = (store) => ({
       // ]
     }
   ]
-*/
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
