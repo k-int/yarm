@@ -1,3 +1,7 @@
+
+https://suspicious.website/2016/04/29/starting-out-with-react-redux-starter-kit/
+
+
 # React Redux Starter Kit
 
 [![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
