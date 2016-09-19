@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Router } from 'react-router'
 import { Provider } from 'react-redux'
+import { AuthGlobals } from "redux-auth/default-theme";
+import {configure, authStateReducer} from "redux-auth";
 
 class AppContainer extends Component {
   static propTypes = {
@@ -15,6 +17,7 @@ class AppContainer extends Component {
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
+          <AuthGlobals />
           <Router history={history} children={routes} />
         </div>
       </Provider>

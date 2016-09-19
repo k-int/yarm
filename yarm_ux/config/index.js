@@ -59,7 +59,22 @@ const config = {
   coverage_reporters : [
     { type : 'text-summary' },
     { type : 'lcov', dir : 'coverage' }
-  ]
+  ],
+
+  apiUrl:                  'https://devise-token-auth.dev',
+  signOutPath:             '/evil_user_auth/sign_out',
+  emailSignInPath:         '/evil_user_auth/sign_in',
+  emailRegistrationPath:   '/evil_user_auth',
+  accountUpdatePath:       '/evil_user_auth',
+  accountDeletePath:       '/evil_user_auth',
+  passwordResetPath:       '/evil_user_auth/password',
+  passwordUpdatePath:      '/evil_user_auth/password',
+  tokenValidationPath:     '/evil_user_auth/validate_token',
+  authProviderPaths: {
+    github:    '/evil_user_auth/github',
+    facebook:  '/evil_user_auth/facebook',
+    google:    '/evil_user_auth/google_oauth2'
+  }
 }
 
 /************************************************
