@@ -16,7 +16,8 @@ export default {
         host  : 'http://localhost:8000',
         match : /^\/api\/.*/
       }
-    }
+    },
+    apiUrl:                  'http://localhost:8080/yarm',
   }),
 
   // ======================================================
