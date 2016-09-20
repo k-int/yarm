@@ -4,6 +4,8 @@ import WelcomeLayout from '../layouts/WelcomeLayout/WelcomeLayout'
 import Home from './Home'
 import WelcomeRoute from './Welcome'
 import CounterRoute from './Counter'
+import { AuthGlobals } from "redux-auth/default-theme";
+
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -26,6 +28,9 @@ function requireAuth (nextState, replace) {
 export const createRoutes = (store) => ({
   path        : '/',
   childRoutes: [
+    {
+      component:AuthGlobals
+    },
     {
       path : 'home',
       component: CoreLayout,
