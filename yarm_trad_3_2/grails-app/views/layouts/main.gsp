@@ -6,6 +6,7 @@
     <title>
         <g:layoutTitle default="Grails"/>
     </title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
@@ -24,14 +25,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/#">
-                    <i class="fa grails-icon">
-                        <asset:image src="grails-cupsonly-logo-white.svg"/>
-                    </i> Grails
+                  YARM
                 </a>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
                 </ul>
             </div>
         </div>
@@ -39,10 +37,12 @@
 
     <g:layoutBody/>
 
-    <div class="footer" role="contentinfo"></div>
+    <div class="footer" role="contentinfo">
+      Footer
+    </div>
 
     <div id="spinner" class="spinner" style="display:none;">
-        <g:message code="spinner.alt" default="Loading&hellip;"/>
+      <g:message code="spinner.alt" default="Loading&hellip;"/>
     </div>
 
     <asset:javascript src="application.js"/>

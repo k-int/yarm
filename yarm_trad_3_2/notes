@@ -1,0 +1,11 @@
+
+In page body
+
+    <content tag="nav">
+      Nav -&gt; Nav -&gt;
+    </content>
+
+
+In page header to include content from page body
+<g:pageProperty name="page.nav" />
+

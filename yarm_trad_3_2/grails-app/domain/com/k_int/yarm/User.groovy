@@ -9,6 +9,8 @@ class User implements Serializable {
 
   private static final long serialVersionUID = 1
 
+  static hasMany = [oAuthIDs: OAuthId]
+
   transient springSecurityService
 
   String username
@@ -18,7 +20,6 @@ class User implements Serializable {
   boolean accountLocked
   boolean passwordExpired
 
-  static hasMany = [oAuthIDs: OAuthID]
 
   Set<Role> getAuthorities() {
     UserRole.findAllByUser(this)*.role
