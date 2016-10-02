@@ -9,3 +9,7 @@ In page body
 In page header to include content from page body
 <g:pageProperty name="page.nav" />
 
+
+
+Config
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
