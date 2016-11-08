@@ -17,3 +17,10 @@ Notes on mongo and grails::
     -- http://stackoverflow.com/questions/31707811/installing-and-using-mongodb-in-grails-3-x
     -- http://gorm.grails.org/latest/mongodb/manual/index.html
     -- http://gorm.grails.org/latest/mongodb/manual/index.html#multiTenancy
+
+
+DB Setup -- 
+
+postgres=# create database yarm_dev;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
+
