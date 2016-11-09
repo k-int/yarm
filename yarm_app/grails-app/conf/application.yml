@@ -6,6 +6,11 @@ grails:
     spring:
         transactionManagement:
             proxies: false
+    gorm:
+        multiTenancy:
+            mode: DATABASE
+            connectionSourcesClass: com.k_int.yarm.ConnectionSources
+            tenantResolverClass: org.grails.datastore.mapping.multitenancy.web.SubDomainTenantResolver
 info:
     app:
         name: '@info.app.name@'
