@@ -1,6 +1,6 @@
 package com.k_int.yarm
 
-import static grails.gorm.multitenancy.Tenants.*
+import static grails.gorm.multitenancy.Tenants.withCurrent
 
 class HomeController {
 

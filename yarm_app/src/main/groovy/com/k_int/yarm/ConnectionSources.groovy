@@ -28,10 +28,12 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
 
   public ConnectionSources(ConnectionSource<T, S> defaultConnectionSource, ConnectionSourceFactory<T, S> connectionSourceFactory, PropertyResolver configuration) {
     super(defaultConnectionSource, connectionSourceFactory, configuration);
+    log.debug("ConnectionSources::ConnectionSources(...)");
   }
 
   @Override
   public Iterable<ConnectionSource<T, S>> getAllConnectionSources() {
+    log.debug("getAllConnectionSources()");
     return null;
   }
 
