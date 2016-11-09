@@ -1,4 +1,4 @@
-package yarm_app
+package com.k_int.yarm
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification

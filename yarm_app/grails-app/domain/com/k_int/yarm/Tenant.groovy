@@ -1,4 +1,4 @@
-package yarm_app
+package com.k_int.yarm
 
 class Tenant {
 
