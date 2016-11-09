@@ -16,12 +16,14 @@ import org.grails.datastore.mapping.core.connections.AbstractConnectionSources
 import groovy.util.logging.*
 
 @Log4j
-@CompileStatic
 public class ConnectionSources<T, S extends ConnectionSourceSettings> extends AbstractConnectionSources<T, S> {
 
   @javax.annotation.PostConstruct
   def init() {
     log.debug("ConnectionSources::init()");
+    Tenant t = Tenant.findByUriname('test') 
+    if ( t == null ) 
+      t = new Tenant(uriname:'test').save(flush:true, failOnError:true);
   }
 
   public ConnectionSources(ConnectionSource<T, S> defaultConnectionSource, ConnectionSourceFactory<T, S> connectionSourceFactory, PropertyResolver configuration) {
