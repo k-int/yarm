@@ -7,6 +7,7 @@ import org.grails.datastore.mapping.core.connections.ConnectionSource
 import org.grails.datastore.mapping.core.connections.ConnectionSourceFactory
 import org.grails.datastore.mapping.core.connections.InMemoryConnectionSources
 import org.springframework.core.env.PropertyResolver
+import org.springframework.beans.factory.annotation.Autowired
 
 // Inspiration from https://github.com/grails/grails-data-mapping/blob/master/grails-datastore-core/src/main/groovy/org/grails/datastore/mapping/core/connections/InMemoryConnectionSources.groovy
 
