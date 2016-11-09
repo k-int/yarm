@@ -37,6 +37,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
 
   @Override
   public ConnectionSource<T, S> getConnectionSource(String name) {
+    log.debug("getConnectionSource(${name})");
     return null;
   }
 
