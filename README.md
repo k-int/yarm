@@ -21,6 +21,17 @@ Notes on mongo and grails::
 
 DB Setup -- 
 
-postgres=# create database yarm_dev;
-postgres=# GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
+If you are running postgres inside a docker container, use
+
+    psql -h localhost -U postgres
+
+    You will have set a PGSql Password at install - change it from any default!
+
+If you are running a local container just connect as needed
+
+To get a session and then issue
+
+    CREATE USER knowint WITH PASSWORD 'knowint';
+    CREATE DATABASE yarm_dev;
+    GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
 

@@ -8,11 +8,13 @@ import org.grails.datastore.mapping.core.connections.ConnectionSourceFactory
 import org.grails.datastore.mapping.core.connections.InMemoryConnectionSources
 import org.springframework.core.env.PropertyResolver
 import org.springframework.beans.factory.annotation.Autowired
+import org.grails.datastore.mapping.core.connections.ConnectionSourceSettings
+import org.grails.datastore.mapping.core.connections.AbstractConnectionSources
 
 // Inspiration from https://github.com/grails/grails-data-mapping/blob/master/grails-datastore-core/src/main/groovy/org/grails/datastore/mapping/core/connections/InMemoryConnectionSources.groovy
 
 @CompileStatic
-public class ConnectionSources<T, S extends ConnectionSourceSettings> extends AbstractConnectionSources<T, S>
+public class ConnectionSources<T, S extends ConnectionSourceSettings> extends AbstractConnectionSources<T, S> {
 
   public ConnectionSources(ConnectionSource<T, S> defaultConnectionSource, ConnectionSourceFactory<T, S> connectionSourceFactory, PropertyResolver configuration) {
     super(defaultConnectionSource, connectionSourceFactory, configuration);
