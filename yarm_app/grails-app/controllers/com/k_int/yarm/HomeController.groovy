@@ -8,8 +8,8 @@ class HomeController {
     log.debug("Home::Index");
     log.debug("Got current tenant ${grails.gorm.multitenancy.Tenants.currentId()}");
 
-    // withCurrent {
-    //   log.debug("Got current tenant ${grails.gorm.multitenancy.Tenants.currentId}");
-    // }
+    withCurrent {
+      log.debug("Got current tenant ${grails.gorm.multitenancy.Tenants.currentId}");
+    }
   }
 }

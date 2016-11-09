@@ -45,6 +45,9 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
 
   @Override
   public ConnectionSource<T, S> addConnectionSource(String name, PropertyResolver configuration) {
+
+    log.debug("addConnectionSource(${name},${configuration}");
+
     if(name == null) {
       throw new IllegalArgumentException("Argument [name] cannot be null");
     }
@@ -53,6 +56,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
     }
 
     ConnectionSource<T, S> connectionSource = connectionSourceFactory.createRuntime(name, configuration, (S)this.defaultConnectionSource.getSettings());
+
     if(connectionSource == null) {
       throw new IllegalStateException("ConnectionSource factory returned null");
     }
