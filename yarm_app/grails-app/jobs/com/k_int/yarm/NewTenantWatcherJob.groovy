@@ -2,8 +2,7 @@ package com.k_int.yarm
 
 class NewTenantWatcherJob {
 
-  static Date tenant_cursor = new Date(0);
-
+  def tenantManagerService
 
   static triggers = {
     // Every minute
@@ -18,21 +17,8 @@ class NewTenantWatcherJob {
     //                  `- Second, 0-59
   }
 
-  @javax.annotation.PostConstruct
-  def init() {
-    log.debug("NewTenantWatcher::init()");
-  }
-
-
   def execute() {
-    log.debug("NewTenantWatcher Job");
-    Tenant.executeQuery('select t from Tenant as t where t.dateCreated > :d order by t.dateCreated',[d:tenant_cursor]).each {
-      log.debug("Adding tenant : ${it}");
-      if ( tenant_cursor < it.dateCreated ) {
-        tenant_cursor = it.dateCreated
-      }
-    }
-    println("***");
+    tenantManagerService.getLatestTenants()
   }
 
 }

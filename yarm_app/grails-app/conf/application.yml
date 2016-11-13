@@ -7,9 +7,9 @@ grails:
         transactionManagement:
             proxies: false
     gorm:
+        connectionSourcesClass: com.k_int.yarm.ConnectionSources
         multiTenancy:
             mode: DATABASE
-            connectionSourcesClass: com.k_int.yarm.ConnectionSources
             tenantResolverClass: org.grails.datastore.mapping.multitenancy.web.SubDomainTenantResolver
 info:
     app:
