@@ -28,9 +28,6 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
   @javax.annotation.PostConstruct
   def init() {
     log.debug("ConnectionSources::init()");
-    Tenant t = Tenant.findByUriname('test') 
-    if ( t == null ) 
-      t = new Tenant(uriname:'test').save(flush:true, failOnError:true);
   }
 
   public ConnectionSources(ConnectionSource<T, S> defaultConnectionSource, ConnectionSourceFactory<T, S> connectionSourceFactory, PropertyResolver configuration) {
@@ -39,6 +36,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
     this.connectionSourceMap.put(ConnectionSource.DEFAULT, defaultConnectionSource);
 
     for(String name : getConnectionSourceNames(connectionSourceFactory, configuration)) {
+      log.debug("Register ds ${name}");
       if(name.equals("dataSource")) continue; // data source is reserved name for the default
       ConnectionSource<T, S> connectionSource = connectionSourceFactory.create(name, configuration, defaultConnectionSource.getSettings());
       if(connectionSource != null) {
@@ -77,6 +75,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
       throw new IllegalStateException("ConnectionSource factory returned null");
     }
 
+    log.debug("Adding ${name} to connection source map");
     this.connectionSourceMap.put(name, connectionSource);
 
     for(listener in listeners) {

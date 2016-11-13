@@ -93,20 +93,27 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    username: knowint
+    password: knowint
+    driverClassName: org.postgresql.Driver
 
 environments:
     development:
-        dataSource:
-            dbCreate: update
-            url: jdbc:postgresql://pghost:5432/yarm_dev
-            username: knowint
-            password: knowint
-            driverClassName: org.postgresql.Driver
-            dialect: org.hibernate.dialect.PostgreSQLDialect
-            defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
+        dataSources:
+            dataSource:
+                dbCreate: update
+                url: jdbc:postgresql://pghost:5432/yarm_dev
+                username: knowint
+                password: knowint
+                driverClassName: org.postgresql.Driver
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+            # demo:
+            #     dbCreate: update
+            #     url: jdbc:postgresql://pghost:5432/yarm_t_demo
+            #     username: knowint
+            #     password: knowint
+            #     driverClassName: org.postgresql.Driver
+            #     dialect: org.hibernate.dialect.PostgreSQLDialect
     test:
         dataSource:
             dbCreate: update
