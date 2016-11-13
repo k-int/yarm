@@ -21,6 +21,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
   @javax.annotation.PostConstruct
   def init() {
     log.debug("ConnectionSources::init()");
+    println("ConnectionSources::init() --println");
     Tenant t = Tenant.findByUriname('test') 
     if ( t == null ) 
       t = new Tenant(uriname:'test').save(flush:true, failOnError:true);
@@ -28,18 +29,21 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
 
   public ConnectionSources(ConnectionSource<T, S> defaultConnectionSource, ConnectionSourceFactory<T, S> connectionSourceFactory, PropertyResolver configuration) {
     super(defaultConnectionSource, connectionSourceFactory, configuration);
+    println("ConnectionSources::ConnectionSources() --println");
     log.debug("ConnectionSources::ConnectionSources(...)");
   }
 
   @Override
   public Iterable<ConnectionSource<T, S>> getAllConnectionSources() {
     log.debug("getAllConnectionSources()");
+    println("ConnectionSources::getAllConnectionSources() --println");
     return null;
   }
 
   @Override
   public ConnectionSource<T, S> getConnectionSource(String name) {
     log.debug("getConnectionSource(${name})");
+    println("ConnectionSources::getConnectionSource(${name}) --println");
     return null;
   }
 
@@ -47,6 +51,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
   public ConnectionSource<T, S> addConnectionSource(String name, PropertyResolver configuration) {
 
     log.debug("addConnectionSource(${name},${configuration}");
+    println("addConnectionSource(${name},${configuration}");
 
     if(name == null) {
       throw new IllegalArgumentException("Argument [name] cannot be null");
