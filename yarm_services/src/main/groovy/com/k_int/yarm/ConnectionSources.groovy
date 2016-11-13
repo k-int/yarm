@@ -47,7 +47,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
 
   @Override
   public Iterable<ConnectionSource<T, S>> getAllConnectionSources() {
-    log.debug("getAllConnectionSources()");
+    log.debug("getAllConnectionSources() ${this.connectionSourceMap.keySet()}");
     return Collections.unmodifiableCollection(this.connectionSourceMap.values());
   }
 
@@ -75,7 +75,7 @@ public class ConnectionSources<T, S extends ConnectionSourceSettings> extends Ab
       throw new IllegalStateException("ConnectionSource factory returned null");
     }
 
-    log.debug("Adding ${name} to connection source map");
+    log.debug("Created connectionSource :: Adding ${name} to connection source map");
     this.connectionSourceMap.put(name, connectionSource);
 
     for(listener in listeners) {

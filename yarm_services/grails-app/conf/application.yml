@@ -107,13 +107,6 @@ environments:
                 password: knowint
                 driverClassName: org.postgresql.Driver
                 dialect: org.hibernate.dialect.PostgreSQLDialect
-            # demo:
-            #     dbCreate: update
-            #     url: jdbc:postgresql://pghost:5432/yarm_t_demo
-            #     username: knowint
-            #     password: knowint
-            #     driverClassName: org.postgresql.Driver
-            #     dialect: org.hibernate.dialect.PostgreSQLDialect
     test:
         dataSource:
             dbCreate: update
