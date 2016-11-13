@@ -34,7 +34,7 @@ class TenantManagerService {
 
       def new_ds_config = [
                            dbCreate:'update',
-                           url:'jdbc:postgresql://pghost:5432/'+it.uriname,
+                           url:'jdbc:postgresql://pghost:5432/yarm_t_'+it.uriname,
                            username:'knowint',
                            password:'knowint',
                            driverClassName:'org.postgresql.Driver',

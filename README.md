@@ -34,4 +34,6 @@ To get a session and then issue
     CREATE USER knowint WITH PASSWORD 'knowint';
     CREATE DATABASE yarm_dev;
     GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
+    CREATE DATABASE yarm_t_demo;
+    GRANT ALL PRIVILEGES ON DATABASE yarm_t_demo to knowint;
 
