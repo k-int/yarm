@@ -108,14 +108,6 @@ environments:
                 driverClassName: org.postgresql.Driver
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
-            demo:
-                dbCreate: update
-                url: jdbc:postgresql://pghost:5432/yarm_t_demo
-                username: knowint
-                password: knowint
-                driverClassName: org.postgresql.Driver
-                dialect: org.hibernate.dialect.PostgreSQLDialect
-
     test:
         dataSource:
             dbCreate: update
