@@ -5,6 +5,15 @@ public class Component {
   String name
   String normname
   String shortcode
+  Set hashes
+
+  static hasMany = [
+    hashes:ComponentHash
+  ]
+
+  static mappedBy = [
+    hashes:'owner'
+  ]
 
   static mapping = {
     tablePerHierarchy false
