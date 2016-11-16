@@ -47,6 +47,8 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
     console "org.grails:grails-console"
     compile 'org.grails.plugins:quartz:2.0.9'
+    compile "org.grails.plugins:spring-security-core:3.1.1"
+    compile 'org.grails.plugins:spring-security-oauth2:1.1.0'
     profile "org.grails.profiles:web"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime "com.h2database:h2"

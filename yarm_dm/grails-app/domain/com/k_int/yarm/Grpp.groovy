@@ -1,6 +1,6 @@
 package com.k_int.yarm
 
-public class Grrp extends Component {
+public class Grpp extends Component {
   
   GlobalResource global_resource
   Platform plat

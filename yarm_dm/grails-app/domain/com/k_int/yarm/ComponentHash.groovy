@@ -2,15 +2,15 @@ package com.k_int.yarm
 
 public class ComponentHash {
   
-  Component owner
-   HashType hashType
-     String hashValue
+      Component owner
+   RefdataValue hashType
+         String hashValue
 
   static mapping = {
     tablePerHierarchy false
            id column:'ch_id'
       version column:'ch_version'
-     hashType column:'ch_hash_type'
+     hashType column:'ch_hash_type_fk'
     hashValue column:'ch_hash_value'
   }
 
