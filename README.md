@@ -37,3 +37,5 @@ To get a session and then issue
     CREATE DATABASE yarm_t_demo;
     GRANT ALL PRIVILEGES ON DATABASE yarm_t_demo to knowint;
 
+
+http://plugins.grails.org/plugin/spring-security-oauth2
