@@ -10,7 +10,7 @@ class BootStrap {
     // Make sure we at least have a demo tenant
     // N.B. Developers - add something like this to /etc/hosts so you can visit http://demo.localdomain/ and get access to the demo tenant
     //   127.0.0.1       localhost pghost demo.localdomain
-    def demo_tenant = com.k_int.yarm.Org.findByUriname('demo', displayname:'Demo') ?: new com.k_int.yarm.Org(uriname:'demo', displayname:'Demo').save(flush:true, failOnError:true);
+    def demo_tenant = com.k_int.yarm.Org.findByUriName('demo') ?: new com.k_int.yarm.Org(uriName:'demo', displayName:'Demo').save(flush:true, failOnError:true);
   }
 
   def destroy = {
