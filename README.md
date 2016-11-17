@@ -2,10 +2,10 @@ YARM - dev-integration
 
 Root Directory
 
-settings.gradle  -- Controls build and links the yarm_dm plugin to the yarm_app and yarm_services grails apps in a dev environment.
-yarm_app -- The front end application for yarm tenants
-yarm_dm -- The data model - contained in it's own plugin module so it's easy to incorporate into different applications
-yarm_services -- The services component - backend services like sync with upstream data sources, tenant management, internal interfaces
+* settings.gradle  -- Controls build and links the yarm_dm plugin to the yarm_app and yarm_services grails apps in a dev environment.
+* yarm_app -- The front end application for yarm tenants
+* yarm_dm -- The data model - contained in it's own plugin module so it's easy to incorporate into different applications
+* yarm_services -- The services component - backend services like sync with upstream data sources, tenant management, internal interfaces
 
 # DNS Setup
 
