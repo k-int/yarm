@@ -76,6 +76,7 @@ class UserRole implements Serializable {
   }
 
   static mapping = {
+    table 'yarm_user_role'
     id composite: ['user', 'role']
     version false
     user column:'ur_user'

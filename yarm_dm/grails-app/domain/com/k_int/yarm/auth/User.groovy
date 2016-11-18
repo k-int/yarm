@@ -45,6 +45,7 @@ class User extends Party implements Serializable {
   }
 
   static mapping = {
+    table 'yarm_user'
     password column: '`password`'
   }
 
