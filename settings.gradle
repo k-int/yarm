@@ -1,2 +1,2 @@
-include 'yarm_app', 'yarm_dm'
+include 'yarm_app', 'yarm_services', 'yarm_dm'
 project(':yarm_dm').projectDir = new File('./yarm_dm')
