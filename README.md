@@ -67,3 +67,5 @@ Notes on mongo and grails::
 * http://gorm.grails.org/latest/mongodb/manual/index.html
 * http://gorm.grails.org/latest/mongodb/manual/index.html#multiTenancy
 
+
+http://krixi.com/index.php/2016/05/17/bulk-insert-grails-gorm/#more-174
