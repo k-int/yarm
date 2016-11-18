@@ -1,8 +1,11 @@
 package com.k_int.yarm
 
 public class GlobalResource extends Component {
+
+  Work work
   
   static mapping = {
+    work column:'work_fk'
   }
 
 
@@ -10,11 +13,4 @@ public class GlobalResource extends Component {
   }
 
 
-  /**
-   *  Use rules particular to a resource type to either look up or create a DB record
-   *  based on the provided description. Return the ID of the resource. Should use stateless session
-   *  and not impact other transactions
-   */
-  public static Long upsert(resource_description) {
-  }
 }

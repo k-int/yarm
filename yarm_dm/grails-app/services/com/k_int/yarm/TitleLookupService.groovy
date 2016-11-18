@@ -1,10 +1,12 @@
 package com.k_int.yarm
 
-import grails.transaction.Transactional
-import org.hibernate.StatelessSession
-import org.hibernate.Transaction
+//import grails.transaction.Transactional
+//import org.hibernate.Transaction
+//import org.hibernate.Session
 
 class TitleLookupService {
+
+  def sessionFactory
 
   /**
    *  Use rules particular to a resource type to either look up or create a DB record
@@ -13,9 +15,10 @@ class TitleLookupService {
    *  @Return ID of GlobalResource - created or looked up
    */
   public Long upsert(resource_description) {
-    StatelessSession session = sessionFactory.openStatelessSession();
-    // Transaction tx = session.beginTransaction();
-    session.close()
+//    Session session = sessionFactory.openStatelessSession();
+//    Transaction tx = session.beginTransaction();
+//    tx.commit()
+//    session.close()
   }
 
 }
