@@ -2,7 +2,7 @@ package com.k_int.yarm
 
 //import grails.transaction.Transactional
 //import org.hibernate.Transaction
-//import org.hibernate.Session
+// import org.hibernate.Session
 
 class TitleLookupService {
 
