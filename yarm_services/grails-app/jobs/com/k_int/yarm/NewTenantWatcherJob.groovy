@@ -2,8 +2,6 @@ package com.k_int.yarm
 
 class NewTenantWatcherJob {
 
-  def tenantManagerService
-
   static triggers = {
     // Every minute
     cron name:'NewTenantWatcher', cronExpression: "0 0/1 * * * ?"
@@ -18,7 +16,6 @@ class NewTenantWatcherJob {
   }
 
   def execute() {
-    tenantManagerService.getLatestTenants()
   }
 
 }

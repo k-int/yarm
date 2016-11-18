@@ -9,7 +9,7 @@ grails:
     gorm:
         connectionSourcesClass: com.k_int.yarm.ConnectionSources
         multiTenancy:
-            mode: DATABASE
+            mode: DISCRIMINATOR
             tenantResolverClass: org.grails.datastore.mapping.multitenancy.web.SubDomainTenantResolver
 info:
     app:
@@ -93,9 +93,9 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    username: knowint
-    password: knowint
-    driverClassName: org.postgresql.Driver
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
 
 environments:
     development:
@@ -107,6 +107,7 @@ environments:
                 password: knowint
                 driverClassName: org.postgresql.Driver
                 dialect: org.hibernate.dialect.PostgreSQLDialect
+                defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
     test:
         dataSource:
             dbCreate: update
