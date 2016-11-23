@@ -12,7 +12,7 @@ class BootStrap {
                                                                                            name:'GOKB',
                                                                                            type:'OAI',
                                                                                            haveUpTo:null,
-                                                                                           uri:'https://gokb.kuali.org/gokb/oai/packages',
+                                                                                           uri:'http://gokb.openlibraryfoundation.org/gokb/oai/packages',
                                                                                            listPrefix:'oai_dc',
                                                                                            fullPrefix:'gokb',
                                                                                            principal:null,

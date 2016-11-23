@@ -78,6 +78,19 @@ public class PackageLoadingService {
   @Transactional(propagation = Propagation.REQUIRES_NEW)
   def intOAI(sync_job_id) {
     log.debug("internalOAI processing ${sync_job_id}");
+    def sync_job = RemoteKB.get(sync_job_id)
+
+     def oai_client = new OaiClient(host:sync_job.uri)
+     def max_timestamp = 0
+     def date = null
+
+     log.debug("Collect changes since ${date}");
+
+     oai_client.getChangesSince(date, sync_job.fullPrefix) { rec ->
+       log.debug("Got OAI Record ${rec.header.identifier} datestamp: ${rec.header.datestamp} job:${sync_job.id} url:${sync_job.uri}");
+     }
+
+
   }
 
 }
