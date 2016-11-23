@@ -15,7 +15,7 @@ public class Grpp extends Component {
   ]
 
   static mappedBy = [
-    coverageStatements:owner
+    coverageStatements:'owner'
   ]
 
   static constraints = {

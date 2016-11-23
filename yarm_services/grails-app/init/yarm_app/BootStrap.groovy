@@ -7,7 +7,7 @@ class BootStrap {
   def init = { servletContext ->
     log.debug("BootStrap::init");
 
-    def gokb_record_source = GlobalRecordSource.findByIdentifier('gokbPackages') ?: new GlobalRecordSource(
+    def gokb_record_source = RemoteKB.findByIdentifier('gokbPackages') ?: new RemoteKB(
                                                                                            identifier:'gokbPackages',
                                                                                            name:'GOKB',
                                                                                            type:'OAI',

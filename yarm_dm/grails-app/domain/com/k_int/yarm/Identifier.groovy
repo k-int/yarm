@@ -2,6 +2,7 @@ package com.k_int.yarm
 
 public class Identifier {
   
+  // N.B. namespace controlls the domain - ISSN - not eISSN/pISSN - the subtype goes in identifierSubtype
   IdentifierNamespace namespace
   String value
   String identifierSubtype

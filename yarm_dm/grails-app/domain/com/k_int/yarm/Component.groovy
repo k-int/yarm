@@ -13,7 +13,7 @@ public abstract class Component {
   ]
 
   static mappedBy = [
-    hashes:'owner'
+    hashes:'owner',
     identifiers: 'owner'
   ]
 
