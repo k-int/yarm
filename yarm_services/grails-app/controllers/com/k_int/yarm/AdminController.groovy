@@ -9,5 +9,7 @@ class AdminController {
   def triggerRemoteKBSync() {
     log.debug("AdminController::triggerRemoteKBSync");
     packageLoadingService.triggerSync()
+
+    redirect(controller: 'home', action:'index')
   }
 }

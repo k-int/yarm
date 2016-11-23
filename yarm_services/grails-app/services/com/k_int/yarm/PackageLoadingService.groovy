@@ -8,6 +8,7 @@ public class PackageLoadingService {
 
   def executorService
   def running = false;
+  def parallel_jobs = false
 
 
   // Main configuration map
@@ -24,7 +25,7 @@ public class PackageLoadingService {
 
   public void triggerSync() {
     log.debug("PackageLoadingService::triggerSync()");
-    sychronized(this) {
+    synchronized(this) {
       if ( running == false ) {
         running = true;
         runSync()
@@ -35,7 +36,7 @@ public class PackageLoadingService {
   public void runSync() {
     log.debug("PackageLoadingService::runSync");
 
-    def jobs = RemoteKB.executeQuery('select rkb.id, rbk.type from RemoteKB as rkb');
+    def jobs = RemoteKB.executeQuery('select rkb.id, rkb.type from RemoteKB as rkb');
 
     jobs.each { sync_job ->
       log.debug("running sync job ${sync_job}");
@@ -69,7 +70,7 @@ public class PackageLoadingService {
       def future = executorService.submit({ intOAI(sync_job.id) } as java.util.concurrent.Callable)
     }
     else {
-      intOAI(sync_job.id)
+      intOAI(sync_job)
     }
     log.debug("doneOAISync");
   }
