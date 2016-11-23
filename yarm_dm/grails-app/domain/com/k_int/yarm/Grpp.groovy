@@ -10,6 +10,14 @@ public class Grpp extends Component {
   }
 
 
+  static hasMany = [
+    coverageStatements:CoverageStatement
+  ]
+
+  static mappedBy = [
+    coverageStatements:owner
+  ]
+
   static constraints = {
     global_resource(nullable:false, blank:false);
     plat(nullable:false, blank:false);
