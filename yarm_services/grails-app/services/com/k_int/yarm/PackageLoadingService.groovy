@@ -23,6 +23,7 @@ public class PackageLoadingService {
   }
 
   public void triggerSync() {
+    log.debug("PackageLoadingService::triggerSync()");
     sychronized(this) {
       if ( running == false ) {
         running = true;
@@ -37,7 +38,7 @@ public class PackageLoadingService {
     def jobs = RemoteKB.executeQuery('select rkb.id, rbk.type from RemoteKB as rkb');
 
     jobs.each { sync_job ->
-      log.debug(sync_job);
+      log.debug("running sync job ${sync_job}");
       // String identifier
       // String name
       // String type

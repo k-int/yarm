@@ -39,6 +39,7 @@
               <li class="dropdown-header">Nav header</li>
               <li><a href="#">Separated link</a></li>
               <li><a href="#">One more separated link</a></li>
+              <li><g:link controller="admin" action="triggerRemoteKBSync"><g:message code="admin.triggerRemoteKBSync"/></g:link></li>
             </ul>
           </li>
         </ul>
