@@ -1,6 +1,6 @@
 package com.k_int.yarm
 
-// import com.k_int.goai.OaiClient
+import com.k_int.goai.OaiClient
 import java.text.SimpleDateFormat
 import org.springframework.transaction.annotation.*
 

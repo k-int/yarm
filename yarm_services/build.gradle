@@ -51,7 +51,7 @@ dependencies {
     compile 'org.grails.plugins:quartz:2.0.9'
     compile "org.grails.plugins:spring-security-core:3.1.1"
     compile 'org.grails.plugins:spring-security-oauth2:1.1.0'
-    // compile 'com.k-int:goai:1.0.2'
+    compile 'com.k-int:goai:1.0.2'
 
     profile "org.grails.profiles:web"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
