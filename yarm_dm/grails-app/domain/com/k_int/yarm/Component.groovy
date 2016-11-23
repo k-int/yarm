@@ -8,11 +8,13 @@ public abstract class Component {
   Set hashes
 
   static hasMany = [
-    hashes:ComponentHash
+    hashes:ComponentHash,
+    identifiers: IdentifierOccurrence
   ]
 
   static mappedBy = [
     hashes:'owner'
+    identifiers: 'owner'
   ]
 
   static mapping = {
