@@ -59,8 +59,25 @@ class TitleLookupService {
    *      identifiers: [ [ ns:'String', value:'String' ] ]
    */
   public Long upsert(resource_description) {
+    def result = null;
     log.debug("TitleLookupService::upsert ${resource_description}");
-    def result = lookup(resource_description)
+    def lookup_result = lookup(resource_description)
+    switch ( lookup_result.status ) {
+      case 0:
+        log.debug("Does not exist in KB. Create");
+        break;
+      case 1:
+        result = lookup_result.id
+        break;
+      case 2:
+        log.debug("Ambiguous lookup - define discriminators");
+        break;
+      default:
+        throw new RuntimeException("Unexpected return code from lookup : ${result.status}");
+        break;
+    }
+
+    result;
   }
 
   
@@ -92,12 +109,13 @@ class TitleLookupService {
       log.debug("Find components for hash values matching ${query_hashes}");
       def qry_params = []
       StringWriter sw = new StringWriter();
-      sw.write('select c.id from component as c where ');
+      sw.write('select c.id from Component as c where ');
       def first=true;
       query_hashes.each { qhc ->
         first ? first=false : sw.write(' and ');
         sw.write('exists ( select ch from ComponentHash as ch where ch.owner = c and ch.hashType.value = ? and ch.hashValue = ? )')
-        qry_params.add(qhc.property, qhc.value)
+        qry_params.add(qhc.property)
+        qry_params.add(qhc.value)
       }
 
       def qry = sw.toString()
