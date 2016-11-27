@@ -54,11 +54,16 @@ class TitleLookupService {
    *  @Return ID of GlobalResource - created or looked up
    *
    *  @param resource_description
-   *      title: 'String'
-   *      discriminator: 'String'
+   *      type: 'com.k_int.yarm.GlobalResource',
+   *      title: 'String',
+   *      discriminator: 'String',
    *      identifiers: [ [ ns:'String', value:'String' ] ]
    */
   public Long upsert(resource_description) {
+    internalUpsert(resource_description)
+  }
+
+  private Long internalUpsert(resource_description) {
     def result = null;
     log.debug("TitleLookupService::upsert ${resource_description}");
     def lookup_result = lookup(resource_description)
