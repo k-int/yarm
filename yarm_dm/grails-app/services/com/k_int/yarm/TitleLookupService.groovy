@@ -70,6 +70,9 @@ class TitleLookupService {
     switch ( lookup_result.status ) {
       case 0:
         log.debug("Does not exist in KB. Create");
+        def cls = Class.forName(resource_description.type)
+        def res_obj = cls.create(resource_description)
+        result = res_obj.id
         break;
       case 1:
         result = lookup_result.id

@@ -5,6 +5,7 @@ public abstract class Component {
   String name
   String normname
   String shortcode
+  String discriminator
   Set hashes
 
   static hasMany = [
@@ -22,6 +23,7 @@ public abstract class Component {
     id column:'c_id'
     version column:'c_version'
     name column:'c_name', type:'text'
+    discriminator column:'c_discriminator'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
   }
@@ -31,6 +33,7 @@ public abstract class Component {
              name (nullable:true, blank:false, maxSize:2048)
          normname (nullable:true, blank:false, maxSize:2048)
         shortcode (nullable:true, blank:false, maxSize:128)
+    discriminator (nullable:true, blank:false, maxSize:128)
   }
 
   /**
