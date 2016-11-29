@@ -71,8 +71,9 @@ class TitleLookupService {
       case 0:
         log.debug("Does not exist in KB. Create");
         StatelessSession session = sessionFactory.openStatelessSession();
+        def work = internalUpsertWork(resource_description)
         def cls = Class.forName(resource_description.type)
-        def res_obj = cls.create(resource_description)
+        def res_obj = cls.create(session,resource_description,work)
         session.close()
         result = res_obj.id
         break;
@@ -90,6 +91,11 @@ class TitleLookupService {
     result;
   }
 
+  private Work internalUpsertWork(resource_description) {
+    def result = null
+    result = lookup(resource_description)
+    result
+  }
   
 
   public Map lookup(resource_description) {

@@ -1,6 +1,8 @@
 package com.k_int.yarm
 
 public abstract class Component {
+
+  transient def titleNormalisationService
   
   String name
   String normname
@@ -44,8 +46,9 @@ public abstract class Component {
   }
 
   def addHash(session, type, value) {
+    def candidate_hash = titleNormalisationService.generateComponentHash(titleNormalisationService.normalise(value))
     def type_rdv = RefdataCategory.lookupOrCreate(session,'ComponentHashType',type)
-    def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:value)
+    def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:candidate_hash)
     session.save(ch)
   }
 

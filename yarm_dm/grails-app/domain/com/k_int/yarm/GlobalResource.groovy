@@ -17,7 +17,9 @@ public class GlobalResource extends Component {
   }
 
 
-  public static GlobalResource create(session, Map resource_description) {
+  public static GlobalResource create(session, 
+                                      Map resource_description,
+                                      work) {
     def result = null
     if ( resource_description.title ) {
       Transaction tx = session.beginTransaction();
@@ -26,10 +28,11 @@ public class GlobalResource extends Component {
       result.discriminator = resource_description.discriminator
       result.normname = null
       result.shortcode = null
+      result.work = work
       result.save(flush:true, failOnError:true)
 
-      addHash(session,'title',name)
-      addHash(session,'discriminator',discriminator)
+      addHash(session,'title',result.name)
+      addHash(session,'discriminator',result.discriminator)
 
       // Add hashvalues for title and discriminator
       tx.commit()

@@ -353,6 +353,7 @@ public class PackageLoadingService {
     // println("Remote Title ID: ${titleinfo.titleId}");
     // println("Identifiers: ${titleinfo.title.identifiers}");
     def resource_description = [
+      type:'com.k_int.yarm.GlobalResource',
       title:titleinfo.title.name,
       identifiers:titleinfo.title.identifiers
     ]
