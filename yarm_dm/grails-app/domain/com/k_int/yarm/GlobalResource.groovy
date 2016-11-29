@@ -29,6 +29,9 @@ public class GlobalResource extends Component {
       result.shortcode = null
       result.save(flush:true, failOnError:true)
 
+      addHash(session,'title',name)
+      addHash(session,'discriminator',discriminator)
+
       // Add hashvalues for title and discriminator
       tx.commit()
       session.close()

@@ -6,6 +6,11 @@ public abstract class Component {
   String normname
   String shortcode
   String discriminator
+  // The component hash is a hash of all the significant properties of a component.
+  // It is used to see if a new descriptive record is different to the one we curretly have
+  // The hash should include the primary property and all variants so we are not distracted
+  // by repeat variant values
+  String componentHash
   Set hashes
 
   static hasMany = [
@@ -24,6 +29,7 @@ public abstract class Component {
     version column:'c_version'
     name column:'c_name', type:'text'
     discriminator column:'c_discriminator'
+    componentHash column:'c_component_hash'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
   }
@@ -34,31 +40,13 @@ public abstract class Component {
          normname (nullable:true, blank:false, maxSize:2048)
         shortcode (nullable:true, blank:false, maxSize:128)
     discriminator (nullable:true, blank:false, maxSize:128)
+    componentHash (nullable:true, blank:false, maxSize:128)
   }
 
-  /**
-   *  Use rules particular to a resource type to either look up or create a DB record
-   *  based on the provided description.
-   */
-  def public static upsert(resource_description) {
-    throw new RuntimeException("Only concrete classes may upsert in this model");
-  }
-
-
-  /**
-   * Use properties from the resource_description to attempt to look up a record
-   * by value.
-   */
-  def public static lookupByValue(resource_description) {
-  }
-
-  /**
-   * The only hash method we know about at the component level is a hash of the normalised DC title
-   */
-  public Set getHashMethods() {
-    return [
-      [ 'dc_title' ]
-    ]
+  def addHash(session, type, value) {
+    def type_rdv = RefdataCategory.lookupOrCreate(session,'ComponentHashType',type)
+    def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:value)
+    session.save(ch)
   }
 
 }
