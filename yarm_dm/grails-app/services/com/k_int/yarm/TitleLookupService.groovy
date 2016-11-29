@@ -70,8 +70,10 @@ class TitleLookupService {
     switch ( lookup_result.status ) {
       case 0:
         log.debug("Does not exist in KB. Create");
+        StatelessSession session = sessionFactory.openStatelessSession();
         def cls = Class.forName(resource_description.type)
         def res_obj = cls.create(resource_description)
+        session.close()
         result = res_obj.id
         break;
       case 1:

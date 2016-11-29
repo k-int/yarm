@@ -17,10 +17,9 @@ public class GlobalResource extends Component {
   }
 
 
-  public static GlobalResource create(Map resource_description) {
+  public static GlobalResource create(session, Map resource_description) {
     def result = null
     if ( resource_description.title ) {
-      StatelessSession session = sessionFactory.openStatelessSession();
       Transaction tx = session.beginTransaction();
       result = new GlobalResource()
       result.name = resource_description.title
