@@ -4,10 +4,13 @@ class RefdataCategory {
   
   private static rdv_cache = [:]
 
-  String description
+  String desc
   String label
 
   static mapping = {
+    label column:'rdc_label'
+    desc column:'rdc_desc'
+    id column:'rdc_id'
   }
 
   static hasMany = [
