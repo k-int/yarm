@@ -31,6 +31,7 @@ If you are running postgres locally sudo su - postgres
 Once connected, issue
 
     CREATE USER knowint WITH PASSWORD 'knowint';
+    DROP DATABASE yarm_dev;
     CREATE DATABASE yarm_dev;
     GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
     CREATE DATABASE yarm_t_demo;
