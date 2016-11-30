@@ -49,7 +49,7 @@ public abstract class Component {
     def candidate_hash = titleNormalisationService.generateComponentHash(titleNormalisationService.normalise(value))
     def type_rdv = RefdataCategory.lookupOrCreate(session,'ComponentHashType',type)
     def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:candidate_hash)
-    session.save(ch)
+    session.insert(ch)
   }
 
 }

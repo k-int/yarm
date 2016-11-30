@@ -29,7 +29,7 @@ public class GlobalResource extends Component {
       result.normname = null
       result.shortcode = null
       result.work = work
-      result.save(flush:true, failOnError:true)
+      result.insert(result)
 
       result.addHash(session,'title',result.name)
       result.addHash(session,'discriminator',result.discriminator)
