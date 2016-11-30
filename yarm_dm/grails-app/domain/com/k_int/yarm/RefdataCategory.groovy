@@ -21,7 +21,7 @@ class RefdataCategory {
   }
 
   static RefdataValue lookupOrCreate(session, category_name, value) {
-    return lookupOrCreate(category_name,value,null);
+    return lookupOrCreate(session,category_name,value,null);
   }
 
   static RefdataValue lookupOrCreate(session, category_name, value, sortkey) {

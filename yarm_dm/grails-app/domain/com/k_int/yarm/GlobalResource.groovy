@@ -31,8 +31,8 @@ public class GlobalResource extends Component {
       result.work = work
       result.save(flush:true, failOnError:true)
 
-      addHash(session,'title',result.name)
-      addHash(session,'discriminator',result.discriminator)
+      result.addHash(session,'title',result.name)
+      result.addHash(session,'discriminator',result.discriminator)
 
       // Add hashvalues for title and discriminator
       tx.commit()

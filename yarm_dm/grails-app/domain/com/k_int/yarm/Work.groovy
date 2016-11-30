@@ -20,8 +20,8 @@ public class Work extends Component {
       result.name = resource_description.title
       result.discr = resource_description.discriminator
       result.save(flush:true, failOnError:true)
-      addHash(session,'title',result.name)
-      addHash(session,'discriminator',result.discriminator)
+      result.addHash(session,'title',result.name)
+      result.addHash(session,'discriminator',result.discriminator)
       tx.commit()
       session.close()
     }
