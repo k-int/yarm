@@ -35,7 +35,11 @@ class TitleLookupService {
 
 
 
-  static def ruleset = [
+  static def instance_ruleset = [
+    [ ruleName:'Simple Title and Discriminator', properties: [ 'title', 'discriminator' ] ]
+  ]
+
+  static def work_ruleset = [
     [ ruleName:'Simple Title and Discriminator', properties: [ 'title', 'discriminator' ] ]
   ]
 
@@ -66,12 +70,12 @@ class TitleLookupService {
   private Long internalUpsert(resource_description) {
     def result = null;
     log.debug("TitleLookupService::upsert ${resource_description}");
-    def lookup_result = lookup(resource_description)
+    def lookup_result = lookup(instance_ruleset,resource_description)
     switch ( lookup_result.status ) {
       case 0:
-        log.debug("Does not exist in KB. Create");
+        log.debug("Resource Description Does not exist in KB. Create");
         StatelessSession session = sessionFactory.openStatelessSession();
-        def work = internalUpsertWork(resource_description)
+        def work = internalUpsertWork(session,work_ruleset,resource_description)
         def cls = Class.forName(resource_description.type)
         def res_obj = cls.create(session,resource_description,work)
         session.close()
@@ -91,14 +95,36 @@ class TitleLookupService {
     result;
   }
 
-  private Work internalUpsertWork(resource_description) {
+  private Long internalUpsertWork(resource_description) {
     def result = null
-    result = lookup(resource_description)
+    def work_lookup_result = lookup(work_ruleset, resource_description)
+    if ( work_lookup_result == null ) {
+      switch ( work_lookup_result.status ) {
+        case 0:
+          log.debug("Work Does not exist in KB. Create");
+          StatelessSession session = sessionFactory.openStatelessSession();
+          def res_obj=Work.create(session,resource_description)
+          session.close()
+          result = res_obj.id
+          break;
+        case 1:
+          result = work_lookup_result.id
+          break;
+        case 2:
+          log.debug("Ambiguous lookup - define discriminators");
+          break;
+        default:
+          throw new RuntimeException("Unexpected return code from lookup : ${result.status}");
+          break;
+      }
+    }
     result
   }
   
 
-  public Map lookup(resource_description) {
+  public Map lookup(ruleset, resource_description) {
+
+    log.debug("lookup(${ruleset},${resource_description}");
 
     // Start off assuming we have not been able to look up a unique item
     def result = [status:2]
