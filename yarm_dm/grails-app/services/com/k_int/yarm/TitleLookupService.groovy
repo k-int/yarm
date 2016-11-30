@@ -73,13 +73,22 @@ class TitleLookupService {
     def lookup_result = lookup(instance_ruleset,resource_description)
     switch ( lookup_result.status ) {
       case 0:
-        log.debug("Resource Description Does not exist in KB. Create");
         StatelessSession session = sessionFactory.openStatelessSession();
-        def work = internalUpsertWork(session,work_ruleset,resource_description)
-        def cls = Class.forName(resource_description.type)
-        def res_obj = cls.create(session,resource_description,work)
+        log.debug("Lookup or create work");
+        def work = internalUpsertWork(work_ruleset,resource_description)
+        log.debug("  -> Result of lookup or create work : ${work}");
+
+        if ( work ) {
+          log.debug("Resource Description Does not exist in KB. Create (work=${work})");
+          def cls = Class.forName(resource_description.type)
+          def res_obj = cls.create(session,resource_description,work)
+          result = res_obj.id
+        }
+        else {
+          throw new RuntimeException("Unable to resolve work for resource description ${resource_description}");
+        }
+
         session.close()
-        result = res_obj.id
         break;
       case 1:
         result = lookup_result.id
@@ -95,10 +104,14 @@ class TitleLookupService {
     result;
   }
 
-  private Long internalUpsertWork(resource_description) {
+  private Long internalUpsertWork(ruleset,resource_description) {
+
+    log.debug("internalUpsertWork");
+
     def result = null
-    def work_lookup_result = lookup(work_ruleset, resource_description)
-    if ( work_lookup_result == null ) {
+    def work_lookup_result = lookup(ruleset, resource_description)
+    log.debug("work_lookup_result:${work_lookup_result}");
+    if ( work_lookup_result != null ) {
       switch ( work_lookup_result.status ) {
         case 0:
           log.debug("Work Does not exist in KB. Create");
@@ -108,6 +121,7 @@ class TitleLookupService {
           result = res_obj.id
           break;
         case 1:
+          log.debug("Matched work");
           result = work_lookup_result.id
           break;
         case 2:
@@ -118,6 +132,9 @@ class TitleLookupService {
           break;
       }
     }
+
+    log.debug("internalUpsertWork returns ${result}");
+
     result
   }
   
@@ -169,15 +186,18 @@ class TitleLookupService {
       switch (matching_components.size()) {
         case 0:
           // No matches - this must be a new item
+          log.debug("No matches");
           resolved=true
           result.status=0
           break;
         case 1:
+          log.debug("Good match");
           resolved=true
           result.status=1
           result.id=matching_components.get(0);
           break;
         default:
+          log.debug("Other");
           break;
       }
 
@@ -189,6 +209,9 @@ class TitleLookupService {
     // Lookup operations never commit
     tx.rollback()
     session.close()
+
+    log.debug("lookup returns ${result}");
+
     result
   }
 

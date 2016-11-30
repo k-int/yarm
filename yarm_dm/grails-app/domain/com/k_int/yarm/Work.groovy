@@ -1,5 +1,8 @@
 package com.k_int.yarm
 
+import org.hibernate.Transaction
+import org.hibernate.StatelessSession
+
 public class Work extends Component {
   
   static mapping = {
@@ -15,14 +18,14 @@ public class Work extends Component {
       Transaction tx = session.beginTransaction();
       result = new Work()
       result.name = resource_description.title
-      result.discriminator = resource_description.discriminator
+      result.discr = resource_description.discriminator
       result.save(flush:true, failOnError:true)
       addHash(session,'title',result.name)
       addHash(session,'discriminator',result.discriminator)
       tx.commit()
       session.close()
     }
-    result.id
+    result
   }
 
 }

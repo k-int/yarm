@@ -25,7 +25,7 @@ public class GlobalResource extends Component {
       Transaction tx = session.beginTransaction();
       result = new GlobalResource()
       result.name = resource_description.title
-      result.discriminator = resource_description.discriminator
+      result.discr = resource_description.discriminator
       result.normname = null
       result.shortcode = null
       result.work = work

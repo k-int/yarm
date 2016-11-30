@@ -7,7 +7,7 @@ public abstract class Component {
   String name
   String normname
   String shortcode
-  String discriminator
+  String discr
   // The component hash is a hash of all the significant properties of a component.
   // It is used to see if a new descriptive record is different to the one we curretly have
   // The hash should include the primary property and all variants so we are not distracted
@@ -27,10 +27,10 @@ public abstract class Component {
 
   static mapping = {
     tablePerHierarchy false
+    discr column:'c_discrim'
     id column:'c_id'
     version column:'c_version'
     name column:'c_name', type:'text'
-    discriminator column:'c_discriminator'
     componentHash column:'c_component_hash'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
@@ -38,10 +38,10 @@ public abstract class Component {
 
 
   static constraints = {
+            discr (nullable:true, blank:false, maxSize:128)
              name (nullable:true, blank:false, maxSize:2048)
          normname (nullable:true, blank:false, maxSize:2048)
         shortcode (nullable:true, blank:false, maxSize:128)
-    discriminator (nullable:true, blank:false, maxSize:128)
     componentHash (nullable:true, blank:false, maxSize:128)
   }
 
