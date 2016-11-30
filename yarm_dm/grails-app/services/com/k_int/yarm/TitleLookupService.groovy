@@ -75,7 +75,7 @@ class TitleLookupService {
       case 0:
         StatelessSession session = sessionFactory.openStatelessSession();
         log.debug("Lookup or create work");
-        def work = internalUpsertWork(work_ruleset,resource_description)
+        def work = Work.get(internalUpsertWork(work_ruleset,resource_description))
         log.debug("  -> Result of lookup or create work : ${work}");
 
         if ( work ) {

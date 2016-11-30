@@ -29,14 +29,13 @@ public class GlobalResource extends Component {
       result.normname = null
       result.shortcode = null
       result.work = work
-      result.insert(result)
+      session.insert(result)
 
       result.addHash(session,'title',result.name)
-      result.addHash(session,'discriminator',result.discriminator)
+      result.addHash(session,'discriminator',result.discr)
 
       // Add hashvalues for title and discriminator
       tx.commit()
-      session.close()
     }
     result
   }
