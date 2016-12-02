@@ -17,7 +17,7 @@ public class ComponentHash {
   static constraints = {
              owner (nullable:false, blank:false, maxSize:256)
           hashType (nullable:false, blank:false, maxSize:256)
-         hashValue (nullable:false, blank:false, maxSize:256)
+         hashValue (nullable:false, blank:false, maxSize:256, unique: 'owner')
   }
 
 }
