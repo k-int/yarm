@@ -25,7 +25,23 @@ endpoints:
     enabled: false
     jmx:
         enabled: true
-
+---
+grails:
+    plugin:
+        springsecurity:
+            oauth2:
+                active: true    #whether the whole plugin is active or not
+                registration:
+                    askToLinkOrCreateAccountUri: '/oauth2/ask' # The URI that is called to aks the user to either create a new account or link to an existing account
+                    roleNames: ['ROLE_USER'] #A list of role names that should be automatically granted to an OAuth User. The roles will be created if they do not exist
+                providers:
+                    google:  # GOOGLE_API_KEY and GOOGLE_SECRET are set in the environment, see crowdcat_env.sh
+                        api_key: '${YARM_GOOGLE_API_KEY}'   #needed
+                        api_secret: '${YARM_GOOGLE_SECRET}' #needed
+                        successUri: "/oauth2/google/success"    #optional
+                        failureUri: "/oauth2/google/failure"    #optional
+                        callback: "/oauth2/google/callback"     #optional
+                        scopes: "https://www.googleapis.com/auth/userinfo.profile" #optional, see https://developers.google.com/identity/protocols/googlescopes#monitoringv3
 ---
 grails:
     mime:
