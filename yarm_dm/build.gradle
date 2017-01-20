@@ -47,6 +47,8 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.1.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
 
+    compile "org.grails.plugins:slug-generator:0.5"
+
     console "org.grails:grails-console"
     profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-services"

@@ -5,8 +5,11 @@ package com.k_int.yarm
  */ 
 class Party {
 
+  def slugGeneratorService
+
   String uriName
   String displayName
+  String slug
 
   static mapping = {
     tablePerHierarchy false
@@ -19,6 +22,16 @@ class Party {
   static constraints = {
         uriName (nullable:false, blank:false, maxSize:64)
     displayName (nullable:false, blank:false, maxSize:64)
+  }
+
+  def beforeInsert() {
+    this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
+  }
+
+  def beforeUpdate() {
+    if (isDirty('name')) {
+      this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
+    }
   }
 
 }
