@@ -61,8 +61,9 @@ https://console.developers.google.com/apis/credentials
 
 Google API keys are passed to the app via environment variables set before starting the app
 
-export YARM_GOOGLE_API_KEY="xxxxx"
-export YARM_GOOGLE_SECRET="xxxxx"
+    export YARM_GOOGLE_API_KEY="xxxxx"
+    export YARM_GOOGLE_SECRET="xxxxx"
+    export YARM_ADM_PW="xxxx"
 
 Usually these are set in a script that wraps the start command
 
