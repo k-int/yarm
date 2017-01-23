@@ -18,6 +18,7 @@
             <g:each in="${user_contexts}" var="u">
               <li><g:link controller="directory" action="${u.type}" id="${u.name}">${u.label}</g:link></li>
             </g:each>
+            <li><g:link controller="account" action="organisations" id="new">New Organisation</g:link></li>
           </ul>
         </div>
 
