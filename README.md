@@ -40,7 +40,7 @@ Once connected, issue
 
 # Build
 
-The yarm_app can be build without building the dm dependency first. Currently targeted at grais 3.2.3 (This will go up in line with grails releases however) run
+The yarm_app can be built without building the dm dependency first. Currently targeted at grais 3.2.3 (This will go up in line with grails releases however) run
 
     grails run-app
 
