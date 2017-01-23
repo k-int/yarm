@@ -9,23 +9,20 @@
   <div class="container-fluid">
     <div class="row">
       <div class="container-fluid">
-        Switch Context:
-        <select class="select2tag">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
-        </select>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <g:each in="${user_contexts}" var="u">
+              <li><g:link controller="directory" action="${u.type}" id="${u.name}">${u.label}</g:link></li>
+            </g:each>
+          </ul>
+        </div>
+
       </div>
     </div>
   </div>
 </body>
 </html>
-
-<content tag="footScripts">
-  <script language="javascript">
-    $(document).ready(function() {
-      alert("OK");
-      $(".select2tag").select2();
-    });
-  </script>
-</content>
-                      

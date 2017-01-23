@@ -8,10 +8,18 @@ class HomeController {
   def springSecurityService
 
   def index() { 
-    
+
+    def result=[:]
+
     log.debug("Home::Index");
     if (springSecurityService.isLoggedIn()){
-      render(view:'loggedInIndex')
+      result.user_contexts = []
+      result.user_contexts.add([
+                                name:springSecurityService.currentUser.uriName,
+                                type:'user',
+                                label:springSecurityService.currentUser.displayName]);
+
+      render(view:'loggedInIndex', model:result)
     }
     else {
       render(view:'index')
