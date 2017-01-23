@@ -5,7 +5,7 @@ package com.k_int.yarm
  */ 
 class Party {
 
-  def slugGeneratorService
+  // def slugGeneratorService
 
   String uriName
   String displayName
@@ -22,16 +22,17 @@ class Party {
   static constraints = {
         uriName (nullable:false, blank:false, maxSize:64)
     displayName (nullable:false, blank:false, maxSize:64)
+           slug (nullable:true, blank:false, maxSize:64)
   }
 
-  def beforeInsert() {
-    this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
-  }
+  // def beforeInsert() {
+  //   this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
+  // }
 
-  def beforeUpdate() {
-    if (isDirty('name')) {
-      this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
-    }
-  }
+  // def beforeUpdate() {
+  //   if (isDirty('name')) {
+  //     this.slug = slugGeneratorService.generateSlug(this.class, "slug", displayName)
+  //   }
+  // }
 
 }
