@@ -1,15 +1,27 @@
 package com.k_int.yarm
 
-import static grails.gorm.multitenancy.Tenants.withCurrent
+import grails.plugin.springsecurity.annotation.Secured
+
 
 class HomeController {
 
-  def index() { 
-    log.debug("Home::Index");
-    log.debug("Got current tenant ${grails.gorm.multitenancy.Tenants.currentId()}");
+  def springSecurityService
 
-    withCurrent {
-      log.debug("Got current tenant ${grails.gorm.multitenancy.Tenants.currentId()}");
+  def index() { 
+    
+    log.debug("Home::Index");
+    if (springSecurityService.isLoggedIn()){
+      render(view:'loggedInIndex')
+    }
+    else {
+      render(view:'index')
     }
   }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def login() {
+    log.debug("HomeController::login");
+    redirect action:'index'
+  }
+
 }
