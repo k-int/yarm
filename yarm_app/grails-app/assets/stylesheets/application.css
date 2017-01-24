@@ -10,5 +10,6 @@
 *= require bootstrap
 *= require main
 *= require mobile
+*= require select2/css/select2.min
 *= require_self
 */

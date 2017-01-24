@@ -1,5 +1,8 @@
 package com.k_int.yarm
 
+import groovy.util.logging.*
+
+@Log4j
 class RefdataCategory {
   
   private static rdv_cache = [:]
@@ -39,20 +42,21 @@ class RefdataCategory {
     def rdv_cache_key = category_name+':'+value+':'+sortkey
     def rdv_id  = rdv_cache[rdv_cache_key]
     if ( rdv_id ) {
-      result = RefdataValue.get(rdv_id);
+      result = session.get(RefdataValue,rdv_id);
     }
     else {
       // The category.
       RefdataCategory.withTransaction { status ->
   
   
-        def cats = RefdataCategory.executeQuery('select c from RefdataCategory as c where c.desc = ?',category_name);
+        def cats = RefdataCategory.executeQuery('select c from RefdataCategory as c where c.desc = :dsc',[dsc:category_name]);
         def cat = null;
   
         if ( cats.size() == 0 ) {
           log.debug("Create new refdata category ${category_name}");
           cat = new RefdataCategory(desc:category_name, label:category_name)
-          if ( cat.save(failOnError:true, flush:true) ) {
+          if ( cat.save(flush:true, failOnError:true) ) {
+            log.debug("Created new category: ${cat} ${cat.id}");
           }
           else {
             log.error("Problem creating new category ${category_name}");
@@ -73,9 +77,11 @@ class RefdataCategory {
   
         if ( !result ) {
           // Create and save a new refdata value.
-          log.info("Attempt to create new refdataValue(${category_name},${value},${sortkey})");
-          result = new RefdataValue(owner:cat, value:value, sortKey:sortkey)
-          if ( result.save(failOnError:true, flush:true) ) {
+          log.info("Attempt to create new refdataValue(${cat.id}(${category_name}),${value},${sortkey})");
+          def rdv = new RefdataValue(owner:cat, value:value, sortKey:sortkey)
+          rdv_id = rdv.save(flush:true, failOnError:true)
+          if ( rdv_id ) {
+            log.debug("Created rdv ${rdv_id}")
           }
           else {
             log.debug("Problem saving new refdata item");
@@ -85,9 +91,13 @@ class RefdataCategory {
           }
         }
         else {
-          rdv_cache[rdv_cache_key] = result.id
+          rdv_id = result.id
+          rdv_cache[rdv_cache_key] = rdv_id
         }
       }
+
+      // Transaction committed at this point.
+      result = session.get(RefdataValue, rdv_id);
     }
     
 

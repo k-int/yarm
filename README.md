@@ -40,7 +40,7 @@ Once connected, issue
 
 # Build
 
-The yarm_app can be build without building the dm dependency first. Currently targeted at grais 3.2.3 (This will go up in line with grails releases however) run
+The yarm_app can be built without building the dm dependency first. Currently targeted at grais 3.2.3 (This will go up in line with grails releases however) run
 
     grails run-app
 
@@ -53,6 +53,20 @@ The hostname/dns tenant resolver is specified in application.yml - the app uses 
 # OAuth config
 
 * http://plugins.grails.org/plugin/spring-security-oauth2
+
+Google OAuth creds page::
+https://console.developers.google.com/apis/credentials
+
+# Configuring OAuth service provider
+
+Google API keys are passed to the app via environment variables set before starting the app
+
+    export YARM_GOOGLE_API_KEY="xxxxx"
+    export YARM_GOOGLE_SECRET="xxxxx"
+    export YARM_ADM_PW="xxxx"
+
+Usually these are set in a script that wraps the start command
+
 
 
 
