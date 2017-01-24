@@ -107,7 +107,6 @@ environments:
                 password: knowint
                 driverClassName: org.postgresql.Driver
                 dialect: org.hibernate.dialect.PostgreSQLDialect
-                defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
     test:
         dataSource:
             dbCreate: update
