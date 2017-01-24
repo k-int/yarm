@@ -16,9 +16,12 @@ class Org extends Party {
   }
 
 
-  def refdataFind(params) {
-    def result = null;
-    result = Org.executeQuery('select o.id, o.displayName from Org as o where o.displayName like :f',[f:"%${params.q?:''}%"],params)
+  public static List refdataFind(grails.web.servlet.mvc.GrailsParameterMap params) {
+    def result = []
+    def qr = Org.executeQuery('select o.id, o.displayName from Org as o where o.displayName like :f',[f:"%${params.q?:''}%"],params)
+    qr.each { r ->
+      result.add([id:r[0], text:r[1]]);
+    }
     result
   }
 }

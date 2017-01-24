@@ -22,8 +22,6 @@
           <div class="form-group">
             <label for="newOrganisationName">New Organisation Name</label>
             <select class="js-example-basic-single form-control" id="newOrganisationName" name="newOrganisationName" placeholder="New Organisation Name">
-              <option value="AL">Alabama</option>
-              <option value="WY">Wyoming</option>
             </select>
           </div>
           <button type="submit" class="btn btn-success">Create new organisation</button>
@@ -40,7 +38,39 @@
 <content tag="footScripts">
   <script type="text/javascript">
     $(document).ready(function() {
-      $(".js-example-basic-single").select2();
+      $(".js-example-basic-single").select2( {
+        ajax: {
+          url: "<g:createLink controller="ajaxSupport" action="lookup" params="[baseClass:'com.k_int.yarm.Org']"/>",
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+            return {
+              q: params.term, // search term
+              page: params.page
+            };
+          },
+          processResults: function (data, params) {
+            params.page = params.page || 1;
+            return {
+              results: data.values,
+              pagination: {
+                more: (params.page * 30) < data.total_count
+              }
+            };
+          },
+          cache: true
+        },
+        minimumInputLength: 1,
+        tags:true,
+        createTag: function (params) {
+          console.log("Create new org :: %o",params);
+          return {
+            id: "__new__",
+            text: params.term,
+            newOption: true
+          }
+        }
+      });
     });
   </script>
 </content>
