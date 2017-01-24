@@ -23,7 +23,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Project name</a>
+        <a class="navbar-brand" href="#">YARM</a>
       </div>
 
       <div class="collapse navbar-collapse pull-right">
@@ -31,7 +31,7 @@
           <sec:ifLoggedIn>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:username/><b class="caret"></b></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu pull-right">
                 <li><g:link controller="directory" action="user" id="${current_user?.uriName}">Your Profile</g:link></li>
                 <li class="divider"></li>
                 <li><g:link controller="home" action="logout">Logout</g:link></li>
