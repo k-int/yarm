@@ -15,4 +15,10 @@ class Org extends Party {
     isConsortium (nullable:true, blank:false)
   }
 
+
+  def refdataFind(params) {
+    def result = null;
+    result = Org.executeQuery('select o.id, o.displayName from Org as o where o.displayName like :f',[f:"%${params.q?:''}%"],params)
+    result
+  }
 }
