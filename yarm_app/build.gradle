@@ -63,19 +63,20 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
-    println "Looking for yarm_dm..."
-    def gtp = parent?.subprojects?.find {
-      if (it.name == "yarm_dm") {
+    println "Looking for yarm_subprojects... ${parent?.subprojects}"
+    def gtp = parent?.subprojects?.findAll {
+      if (["yarm_dm"].contains(it.name) ) {
         compile it
         println "\tfound locally at ${it.projectDir}"
         return true
       }
+
       false
     }
 
     if (!gtp) {
       println "\tno local copy found downloading from Maven"
-      compile 'com.k-int.yarm:yarm_dm:1.0.0'
+      compile 'com.k-int.yarm:yarm_dm:0.1'
     }
 
 }

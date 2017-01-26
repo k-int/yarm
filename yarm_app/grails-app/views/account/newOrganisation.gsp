@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="newOrganisationName">New Organisation Name</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="newOrganisationName" name="newOrganisationName" placeholder="New Organisation Name">
+              <input type="text" class="form-control" id="newOrganisationName" name="newOrganisationName" placeholder="New Organisation Name" autocomplete="off">
               <span class="input-group-btn">
                 <button id="newOrgBtn" type="submit" class="btn btn-error">Create new organisation</button>
               </span>

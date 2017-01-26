@@ -62,7 +62,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
-    println "Looking for yarm_dm..."
+    println "(Services) Looking for yarm_dm..."
     def gtp = parent?.subprojects?.find {
       if (it.name == "yarm_dm") {
         compile it

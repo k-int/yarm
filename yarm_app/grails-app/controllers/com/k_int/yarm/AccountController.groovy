@@ -5,6 +5,8 @@ import grails.converters.JSON
 
 class AccountController {
 
+  def slugGeneratorService
+
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() { 
     log.debug("Account::Index");
@@ -20,7 +22,16 @@ class AccountController {
 
       if ( request.method == 'POST' ) {
         // Redirect to new org home
-        redirect(controller:'home',action:'index')
+        if ( slugGeneratorService ) {
+          def new_org_slug = slugGeneratorService.generateSlug(Org.class, 'uriName', params.newOrganisationName)
+          def new_org = new Org(displayName:params.newOrganisationName, uriName:new_org_slug).save(flush:true, failOnError:true);
+          redirect(controller:'directory',action:'org',id:new_org_slug)
+        }
+        else {
+          // There was an error - re-render the new orgs form with a message
+          log.error("Slug generator service was null....");
+        }
+    
       }
 
       render view:'newOrganisation'
@@ -50,7 +61,7 @@ class AccountController {
     }
     else {
       result.isOk = Org.executeQuery('select count(o) from Org as o where o.displayName = :o',[o:params.name])[0]
-      result.candiateOrgs = Org.executeQuery('select o.id, o.displayName from Org as o where textSearch(o.displayName,:oname) = true',[oname:params.name])
+      result.candiateOrgs = Org.executeQuery('select o.id, o.displayName from Org as o where textSearch(o.displayName,:oname) = true',[oname:"'"+params.name+"'"])
       if ( result.candiateOrgs.size() > 0 ) {
         result.message="${params.name} Seems to be OK as a new organisation name, but please check in the list below for similar names"
       }
