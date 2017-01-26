@@ -9,22 +9,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="container-fluid">
-
         <div class="btn-group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Action <span class="caret"></span>
+            ${current_user.displayName} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
+            <li class="dropdown-header">Switch Dashboard Context</li>
             <g:each in="${user_contexts}" var="u">
               <li><g:link controller="directory" action="${u.type}" id="${u.name}">${u.label}</g:link></li>
             </g:each>
+            <li class="divider"></li>
             <li><g:link controller="account" action="organisations" id="new">New Organisation</g:link></li>
           </ul>
         </div>
-
-<pre>
-${userContexts}
-</pre>
       </div>
     </div>
   </div>
