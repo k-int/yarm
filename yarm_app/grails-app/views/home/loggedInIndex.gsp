@@ -18,8 +18,10 @@
             <g:each in="${user_contexts}" var="u">
               <li><g:link controller="directory" action="${u.type}Dash" id="${u.name}">${u.label}</g:link></li>
             </g:each>
-            <li class="divider"></li>
-            <li><g:link controller="account" action="organisations" id="new">New Organisation</g:link></li>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+              <li class="divider"></li>
+              <li><g:link controller="account" action="organisations" id="new">New Organisation</g:link></li>
+            </sec:ifAnyGranted>
           </ul>
         </div>
       </div>
