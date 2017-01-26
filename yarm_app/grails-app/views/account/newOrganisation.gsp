@@ -21,10 +21,13 @@
         <form>
           <div class="form-group">
             <label for="newOrganisationName">New Organisation Name</label>
-            <select class="js-example-basic-single form-control" id="newOrganisationName" name="newOrganisationName" placeholder="New Organisation Name">
-            </select>
+            <div class="input-group">
+              <input type="text" class="form-control" id="newOrganisationName" name="newOrganisationName" placeholder="New Organisation Name">
+              <span class="input-group-btn">
+                <button id="newOrgBtn" type="submit" class="btn btn-error">Create new organisation</button>
+              </span>
+            </div>
           </div>
-          <button type="submit" class="btn btn-success">Create new organisation</button>
         </form>
         
       </div>
@@ -38,39 +41,31 @@
 <content tag="footScripts">
   <script type="text/javascript">
     $(document).ready(function() {
-      $(".js-example-basic-single").select2( {
-        ajax: {
-          url: "<g:createLink controller="ajaxSupport" action="lookup" params="[baseClass:'com.k_int.yarm.Org']"/>",
-          dataType: 'json',
-          delay: 250,
-          data: function (params) {
-            return {
-              q: params.term, // search term
-              page: params.page
-            };
-          },
-          processResults: function (data, params) {
-            params.page = params.page || 1;
-            return {
-              results: data.values,
-              pagination: {
-                more: (params.page * 30) < data.total_count
-              }
-            };
-          },
-          cache: true
-        },
-        minimumInputLength: 1,
-        tags:true,
-        createTag: function (params) {
-          console.log("Create new org :: %o",params);
-          return {
-            id: "__new__",
-            text: params.term,
-            newOption: true
-          }
-        }
-      });
+       $( "#newOrgBtn" ).prop('disabled', true);
+       var e = document.getElementById('newOrganisationName');
+       e.oninput = validateNewOrgName;
+       e.onpropertychange = e.oninput;
     });
+
+    function validateNewOrgName(event) {
+      console.log ("The new content %o", event.target.value);
+      $.ajax({
+        dataType: "json",
+        url: "<g:createLink controller='account' action='validateProposedOrg'/>?name="+event.target.value
+      }).done(function( data ) {
+        if ( data.isOk ) {
+            $( "#newOrgBtn" ).prop('disabled', false);
+            $( "#newOrgBtn" ).removeClass( "btn-error" );
+            $( "#newOrgBtn" ).addClass( "btn-success" );
+        }
+        else {
+            $( "#newOrgBtn" ).prop('disabled', true);
+            $( "#newOrgBtn" ).removeClass( "btn-success" );
+            $( "#newOrgBtn" ).addClass( "btn-error" );
+        }
+
+        console.log("Data:%o",data);
+      });
+    }
   </script>
 </content>

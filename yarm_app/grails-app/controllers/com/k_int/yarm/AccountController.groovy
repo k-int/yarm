@@ -1,6 +1,7 @@
 package com.k_int.yarm
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.converters.JSON
 
 class AccountController {
 
@@ -24,4 +25,13 @@ class AccountController {
     result
   }
 
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def validateProposedOrg() {
+    def result=[:]
+
+    result.isOk = Org.executeQuery('select count(o) from Org as o where o.displayName = :o',[o:params.name])
+    result.candiateOrgs = Org.executeQuery('select o.id, o.displayName from Org as o where textSearch(o.displayName,:oname) = true',[oname:params.name])
+
+    render result as JSON
+  }
 }

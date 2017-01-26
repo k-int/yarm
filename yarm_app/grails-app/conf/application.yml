@@ -117,7 +117,7 @@ environments:
                 username: knowint
                 password: knowint
                 driverClassName: org.postgresql.Driver
-                dialect: org.hibernate.dialect.PostgreSQLDialect
+                dialect: com.k_int.yarm.utils.PgSQLCustomDialect
     test:
         dataSource:
             dbCreate: update
