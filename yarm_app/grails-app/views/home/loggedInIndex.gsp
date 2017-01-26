@@ -22,6 +22,9 @@
           </ul>
         </div>
 
+<pre>
+${userContexts}
+</pre>
       </div>
     </div>
   </div>

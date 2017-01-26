@@ -11,7 +11,10 @@ class AccountController {
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() { 
+    def user = springSecurityService.currentUser
+    def result = [:]
     log.debug("Account::Index");
+    result
   }
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
