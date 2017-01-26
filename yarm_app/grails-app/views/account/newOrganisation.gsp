@@ -18,7 +18,7 @@
           administrative access.
         </p>
 
-        <form>
+        <g:form controller="account" action="organisations" id="new" method="POST">
           <div class="form-group">
             <label for="newOrganisationName">New Organisation Name</label>
             <div class="input-group">
@@ -27,8 +27,9 @@
                 <button id="newOrgBtn" type="submit" class="btn btn-error">Create new organisation</button>
               </span>
             </div>
+            <p id="NewOrgNameHelpBlock" class="help-block"></p>
           </div>
-        </form>
+        </g:form>
         
       </div>
     </div>
@@ -53,7 +54,7 @@
         dataType: "json",
         url: "<g:createLink controller='account' action='validateProposedOrg'/>?name="+event.target.value
       }).done(function( data ) {
-        if ( data.isOk ) {
+        if ( data.isOk===0 ) {
             $( "#newOrgBtn" ).prop('disabled', false);
             $( "#newOrgBtn" ).removeClass( "btn-error" );
             $( "#newOrgBtn" ).addClass( "btn-success" );
@@ -63,6 +64,8 @@
             $( "#newOrgBtn" ).removeClass( "btn-success" );
             $( "#newOrgBtn" ).addClass( "btn-error" );
         }
+
+        $('#NewOrgNameHelpBlock').html(data.message);
 
         console.log("Data:%o",data);
       });
