@@ -6,6 +6,8 @@ import grails.converters.JSON
 class AccountController {
 
   def slugGeneratorService
+  def springSecurityService
+  def sessionFactory
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() { 
@@ -17,6 +19,8 @@ class AccountController {
     log.debug("AccountController::organisations ${params}");
     def result=[:]
 
+    def user = springSecurityService.currentUser
+
     if ( params.id == 'new' ) {
       log.debug("newOrg");
 
@@ -25,6 +29,13 @@ class AccountController {
         if ( slugGeneratorService ) {
           def new_org_slug = slugGeneratorService.generateSlug(Org.class, 'uriName', params.newOrganisationName)
           def new_org = new Org(displayName:params.newOrganisationName, uriName:new_org_slug).save(flush:true, failOnError:true);
+
+          def owner = new PartyRelationship(
+                                            from:user,
+                                            to:new_org,
+                                            role:RefdataCategory.lookupOrCreate('relationshipRole','UOAdmin'),
+                                            status:RefdataCategory.lookupOrCreate('relationshipStatus','Approved'),
+                                            ).save(flush:true, failOnError:true);
           redirect(controller:'directory',action:'org',id:new_org_slug)
         }
         else {

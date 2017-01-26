@@ -3,8 +3,11 @@ package yarm_app
 import com.k_int.yarm.auth.User
 import com.k_int.yarm.auth.Role
 import com.k_int.yarm.auth.UserRole
+import com.k_int.yarm.RefdataCategory
 
 class BootStrap {
+
+  def sessionFactory
 
   def sysusers = [
     [
@@ -21,6 +24,7 @@ class BootStrap {
   def init = { servletContext ->
     log.debug("BootStrap::init");
     setUpUserAccounts()
+    setUpRefdata()
   }
 
   def setUpUserAccounts() {
@@ -62,6 +66,15 @@ class BootStrap {
         }
       }
     }
+  }
+
+  def setUpRefdata() {
+     RefdataCategory.lookupOrCreate('relationshipRole','UOAdmin')
+     RefdataCategory.lookupOrCreate('relationshipRole','UOMember')
+     RefdataCategory.lookupOrCreate('relationshipRole','UOReadOnly')
+     RefdataCategory.lookupOrCreate('relationshipStatus','Pending')
+     RefdataCategory.lookupOrCreate('relationshipStatus','Approved')
+     RefdataCategory.lookupOrCreate('relationshipStatus','Rejected')
   }
 
   def destroy = {
