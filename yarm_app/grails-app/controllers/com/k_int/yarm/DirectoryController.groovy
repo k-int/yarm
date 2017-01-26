@@ -23,4 +23,11 @@ class DirectoryController {
     def result=[:]
     result
   }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def orgDash() { 
+    log.debug("Directory::OrgDash ${params}");
+    def result=[:]
+    result
+  }
 }
