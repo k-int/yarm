@@ -75,6 +75,10 @@ class BootStrap {
      RefdataCategory.lookupOrCreate('relationshipStatus','Pending')
      RefdataCategory.lookupOrCreate('relationshipStatus','Approved')
      RefdataCategory.lookupOrCreate('relationshipStatus','Rejected')
+     RefdataCategory.lookupOrCreate('orgType','Institution')
+     RefdataCategory.lookupOrCreate('orgType','Consortium')
+     RefdataCategory.lookupOrCreate('orgType','Vendor')
+     RefdataCategory.lookupOrCreate('orgType','Department')
   }
 
   def destroy = {

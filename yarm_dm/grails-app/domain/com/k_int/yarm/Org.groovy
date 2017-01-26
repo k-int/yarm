@@ -5,14 +5,14 @@ package com.k_int.yarm
  */ 
 class Org extends Party {
 
-  Boolean isConsortium
+  RefdataValue orgType
 
   static mapping = {
-    isConsortium column:'o_is_consortium'
+    orgType column:'o_type_rdv_fk'
   }
 
   static constraints = {
-    isConsortium (nullable:true, blank:false)
+    orgType (nullable:true, blank:false)
   }
 
 
