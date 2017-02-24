@@ -14,59 +14,57 @@
 </head>
 <body>
 
-  <div class="navbar navbar-default navbar-fixed-top">
+<div class="wrapper">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <!-- sidebar -->
+        <div class="column col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
 
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">YARM</a>
-      </div>
-
-      <div class="collapse navbar-collapse pull-right">
-        <ul class="nav navbar-nav">
-          <sec:ifLoggedIn>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:username/><b class="caret"></b></a>
-              <ul class="dropdown-menu pull-right">
-                <li><g:link controller="directory" action="user" id="${current_user?.uriName}">Your Profile</g:link></li>
-                <li class="divider"></li>
-                <li><g:link controller="home" action="logout">Logout</g:link></li>
-              </ul>
-            </li>
-          </sec:ifLoggedIn>
-          <sec:ifNotLoggedIn>
-            <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login">Login</g:link></li>
-          </sec:ifNotLoggedIn>
-        </ul>
-      </div>
-
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><g:link controller="home" action="index">Home</g:link></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+          <ul class="nav" id="menu">
+            <sec:ifLoggedIn>
+              <li><g:link controller="directory" action="user" id="${current_user?.uriName}">Your Profile</g:link></li>
               <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!--/.nav-collapse -->
+              <li><g:link controller="home" action="logout">Logout</g:link></li>
+            </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+              <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login">Login</g:link></li>
+            </sec:ifNotLoggedIn>
+
+                <li><a href="#"><i class="fa fa-list-alt"></i> <span class="collapse in hidden-xs">Link 1</span></a></li>
+                <li><a href="#"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Stories</span></a></li>
+                <li><a href="#"><i class="fa fa-paperclip"></i> <span class="collapse in hidden-xs">Saved</span></a></li>
+                <li><a href="#"><i class="fa fa-refresh"></i> <span class="collapse in hidden-xs">Refresh</span></a></li>
+                <li>
+                    <a href="#" data-target="#item1" data-toggle="collapse"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Menu <span class="caret"></span></span></a>
+                    <ul class="nav nav-stacked collapse left-submenu" id="item1">
+                        <li><a href="google.com">View One</a></li>
+                        <li><a href="gmail.com">View Two</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-target="#item2" data-toggle="collapse"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Menu <span class="caret"></span></span></a>
+                    <ul class="nav nav-stacked collapse" id="item2">
+                        <li><a href="#">View One</a></li>
+                        <li><a href="#">View Two</a></li>
+                        <li><a href="#">View Three</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span class="collapse in hidden-xs">Link</span></a></li>
+          </ul>
+        </div>
+        <!-- /sidebar -->
+
+        <!-- main right col -->
+        <div class="column col-sm-9 col-xs-11" id="main">
+            <p><a href="#" data-toggle="offcanvas"><i class="fa fa-navicon fa-2x"></i>clp</a></p>
+            <p>
+              <g:layoutBody/>
+            </p>
+        </div>
+        <!-- /main -->
     </div>
-  </div>
-  
-  <g:layoutBody/>
+</div>
+
+
 
   <asset:javascript src="application.js"/>
 
