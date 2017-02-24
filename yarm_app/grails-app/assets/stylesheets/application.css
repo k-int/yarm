@@ -57,7 +57,7 @@ html, body {
 }
 
 #main {
-    padding: 15px;
+    padding: 33px;
     left: 0;
 }
 
@@ -115,7 +115,7 @@ html, body {
     top: 0;
     width: 3%;
     text-align: center;
-    min-width:42px;
+    min-width:60px;
   }
   
   #main {
