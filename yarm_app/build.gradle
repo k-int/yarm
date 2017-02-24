@@ -85,6 +85,7 @@ dependencies {
 assets {
     minifyJs = true
     minifyCss = true
+    includes = ["fonts/*"]
     // configOptions = [commonJs: false] //useful for custom config on extension libraries
     // excludes = [ 'select2/js/*' ]
 }

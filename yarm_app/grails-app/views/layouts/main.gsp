@@ -55,7 +55,8 @@
 
         <!-- main right col -->
         <div class="column col-sm-9 col-xs-11" id="main">
-            <p><a href="#" data-toggle="offcanvas"><i class="fa fa-navicon fa-2x"></i>clp</a></p>
+            <p><a href="#" data-toggle="offcanvas"><i class="glyphicon glyphicon-menu-hamburger"></i>clp</a></p>
+
             <p>
               <g:layoutBody/>
             </p>
