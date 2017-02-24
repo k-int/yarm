@@ -21,12 +21,13 @@
 
           <ul class="nav" id="menu">
             <sec:ifLoggedIn>
-              <li><g:link controller="directory" action="user" id="${current_user?.uriName}">Your Profile</g:link></li>
+              <li><g:link controller="directory" action="user" id="${current_user?.uriName}"><i class="glyphicon glyphicon-user gi-2x"></i><span class="collapse in hidden-xs"> Profile</span></g:link></li>
               <li class="divider"></li>
-              <li><g:link controller="home" action="logout">Logout</g:link></li>
+              <li><g:link controller="titles" action="list"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
+              <li><g:link controller="home" action="logout"><span class="collapse in hidden-xs">Logout</span></g:link></li>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
-              <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login">Login</g:link></li>
+              <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login"><i class="glyphicon glyphicon-user gi-2x"></i>Login</g:link></li>
             </sec:ifNotLoggedIn>
 
                 <li><a href="#"><i class="fa fa-list-alt"></i> <span class="collapse in hidden-xs">Link 1</span></a></li>
