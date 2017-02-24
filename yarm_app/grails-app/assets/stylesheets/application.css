@@ -62,7 +62,7 @@ html, body {
  */
 @media screen and (max-width: 768px) {
     #sidebar {
-        min-width: 44px;
+        min-width: 60px;
     }
     
     #main {

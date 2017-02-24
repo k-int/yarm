@@ -14,53 +14,72 @@
 </head>
 <body>
 
+  <div class="navbar navbar-default navbar-fixed-top">
+
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">YARM</a>
+      </div>
+
+      <div class="collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav">
+          <sec:ifLoggedIn>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:username/><b class="caret"></b></a>
+              <ul class="dropdown-menu pull-right">
+                <li><g:link controller="directory" action="user" id="${current_user?.uriName}">Your Profile</g:link></li>
+                <li class="divider"></li>
+                <li><g:link controller="home" action="logout">Logout</g:link></li>
+              </ul>
+            </li>
+          </sec:ifLoggedIn>
+          <sec:ifNotLoggedIn>
+            <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login">Login</g:link></li>
+          </sec:ifNotLoggedIn>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
 <div class="wrapper">
     <div class="row row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
         <div class="column col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
+          <ul class="nav" id="menu">
+            <li><a href="#" data-toggle="offcanvas"><i class="glyphicon glyphicon-menu-hamburger gi-2x"></i></a></li>
+          </ul>
 
           <ul class="nav" id="menu">
             <sec:ifLoggedIn>
               <li><g:link controller="directory" action="user" id="${current_user?.uriName}"><i class="glyphicon glyphicon-user gi-2x"></i><span class="collapse in hidden-xs"> Profile</span></g:link></li>
               <li class="divider"></li>
+              <li><g:link controller="home" action="index"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Home</span></g:link></li>
+              <li><g:link controller="home" action="switchContext"><i class="glyphicon glyphicon-education gi-2x"></i><span class="collapse in hidden-xs"> Change Home Institution</span></g:link></li>
               <li><g:link controller="titles" action="list"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
-              <li><g:link controller="home" action="logout"><span class="collapse in hidden-xs">Logout</span></g:link></li>
+              <li><g:link controller="home" action="logout"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Logout</span></g:link></li>
             </sec:ifLoggedIn>
-            <sec:ifNotLoggedIn>
-              <li class="${controllerName=='home' && actionName=='login' ? 'active' : ''}"><g:link controller="home" action="login"><i class="glyphicon glyphicon-user gi-2x"></i>Login</g:link></li>
-            </sec:ifNotLoggedIn>
 
-                <li><a href="#"><i class="fa fa-list-alt"></i> <span class="collapse in hidden-xs">Link 1</span></a></li>
-                <li><a href="#"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Stories</span></a></li>
-                <li><a href="#"><i class="fa fa-paperclip"></i> <span class="collapse in hidden-xs">Saved</span></a></li>
-                <li><a href="#"><i class="fa fa-refresh"></i> <span class="collapse in hidden-xs">Refresh</span></a></li>
-                <li>
-                    <a href="#" data-target="#item1" data-toggle="collapse"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Menu <span class="caret"></span></span></a>
-                    <ul class="nav nav-stacked collapse left-submenu" id="item1">
-                        <li><a href="google.com">View One</a></li>
-                        <li><a href="gmail.com">View Two</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" data-target="#item2" data-toggle="collapse"><i class="fa fa-list"></i> <span class="collapse in hidden-xs">Menu <span class="caret"></span></span></a>
-                    <ul class="nav nav-stacked collapse" id="item2">
-                        <li><a href="#">View One</a></li>
-                        <li><a href="#">View Two</a></li>
-                        <li><a href="#">View Three</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span class="collapse in hidden-xs">Link</span></a></li>
+            <li>
+              <a href="#" data-target="#item1" data-toggle="collapse"><i class="glyphicon glyphicon-certificate gi-2x"></i> <span class="collapse in hidden-xs">Admin <span class="caret"></span></span></a>
+              <ul class="nav nav-stacked collapse left-submenu" id="item1">
+                <li><a href="google.com"><i class="glyphicon glyphicon-lock gi-2x"></i><span class="collapse in hidden-xs"> Manage Affiliations</span></a></li>
+                <li><g:link controller="admin" action="orgsDataload"><i class="glyphicon glyphicon-cloud-upload gi-2x"></i><span class="collapse in hidden-xs"> Upload Organisations Data</span></g:link></li>
+                <li><a href="gmail.com">View Two</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <!-- /sidebar -->
 
         <!-- main right col -->
         <div class="column col-sm-9 col-xs-11" id="main">
-            <p><a href="#" data-toggle="offcanvas"><i class="glyphicon glyphicon-menu-hamburger gi-2x"></i></a></p>
-
-            <p>
-              <g:layoutBody/>
-            </p>
+          <g:layoutBody/>
         </div>
         <!-- /main -->
     </div>
