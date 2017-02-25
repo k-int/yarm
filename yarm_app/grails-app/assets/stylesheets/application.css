@@ -39,12 +39,16 @@ html, body {
     background-color: #444;
     color: #fff !important;
     padding-left: 0;
+    padding-right:0;
     float: left;
     min-height: 100%;
 }
 
 #sidebar a {
     color: #fff !important;
+}
+
+#sidebar ul li a:focus {
 }
 
 #sidebar .collapse.in {
@@ -127,3 +131,7 @@ html, body {
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
+
+ul .nav-stacked li {
+  padding-left: 20px;
+}

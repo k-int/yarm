@@ -47,15 +47,12 @@
   </div>
 
 
-<div class="wrapper">
+  <div class="wrapper">
     <div class="row row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
         <div class="column col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
           <ul class="nav" id="menu">
             <li><a href="#" data-toggle="offcanvas"><i class="glyphicon glyphicon-menu-hamburger gi-2x"></i></a></li>
-          </ul>
-
-          <ul class="nav" id="menu">
             <sec:ifLoggedIn>
               <li><g:link controller="directory" action="user" id="${current_user?.uriName}"><i class="glyphicon glyphicon-user gi-2x"></i><span class="collapse in hidden-xs"> Profile</span></g:link></li>
               <li class="divider"></li>
@@ -67,11 +64,11 @@
             </sec:ifLoggedIn>
 
             <li>
-              <a href="#" data-target="#item1" data-toggle="collapse"><i class="glyphicon glyphicon-certificate gi-2x"></i> <span class="collapse in hidden-xs">Admin <span class="caret"></span></span></a>
+              <a href="#" data-target="#item1"
+                          data-toggle="collapse"><i class="glyphicon glyphicon-certificate gi-2x"></i> <span class="collapse in hidden-xs">Admin <span class="caret"></span></span></a>
               <ul class="nav nav-stacked collapse left-submenu" id="item1">
                 <li><a href="google.com"><i class="glyphicon glyphicon-lock gi-2x"></i><span class="collapse in hidden-xs"> Manage Affiliations</span></a></li>
                 <li><g:link controller="admin" action="orgsDataload"><i class="glyphicon glyphicon-cloud-upload gi-2x"></i><span class="collapse in hidden-xs"> Upload Organisations Data</span></g:link></li>
-                <li><a href="gmail.com">View Two</a></li>
               </ul>
             </li>
           </ul>
@@ -84,7 +81,7 @@
         </div>
         <!-- /main -->
     </div>
-</div>
+  </div>
 
 
 
