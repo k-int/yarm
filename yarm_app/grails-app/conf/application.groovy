@@ -32,9 +32,46 @@ reserved_names = [ 'new', 'admin', 'system', 'master' ]
 // Configuration for various search tools
 srch_cfg = [
   'adm_global_sources':[
-    name:'Search Global Sources'
+    name:'Search Global Sources',
+    baseclass:'com.k_int.yarm.GlobalRecordSource',
+    title:'Global Sources',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
+        ]
+      ],
+      qbeResults:[
+        [heading:'Type', property:'class.name'],
+        [heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'] ]
+      ]
+    ]
   ],
-  'tenant_all_titles':[
-    name:'All Titles'
+  'tenant_titles':[
+    name:'All Titles',
+    baseclass:'com.k_int.yarm.GlobalResource',
+    title:'All Titles',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
+        ]
+      ],
+      qbeResults:[
+        [heading:'Type', property:'class.name'],
+        [heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'] ]
+      ]
+    ]
+
   ]
 ]
