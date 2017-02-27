@@ -1,5 +1,6 @@
 package yarm_app
 
+import com.k_int.yarm.GlobalRecordSource
 import com.k_int.yarm.auth.User
 import com.k_int.yarm.auth.Role
 import com.k_int.yarm.auth.UserRole
@@ -25,6 +26,7 @@ class BootStrap {
     log.debug("BootStrap::init");
     setUpUserAccounts()
     setUpRefdata()
+    setUpGlobalSources()
   }
 
   def setUpUserAccounts() {
@@ -79,6 +81,22 @@ class BootStrap {
      RefdataCategory.lookupOrCreate('orgType','Consortium')
      RefdataCategory.lookupOrCreate('orgType','Vendor')
      RefdataCategory.lookupOrCreate('orgType','Department')
+  }
+
+  def setUpGlobalSources() {
+    def gokb_record_source = GlobalRecordSource.findByIdentifier('gokbPackages') ?: new GlobalRecordSource(
+                                                                                          identifier:'gokbPackages',
+                                                                                          name:'GOKB',
+                                                                                          type:'OAI',
+                                                                                          haveUpTo:null,
+                                                                                          uri:'https://gokb.openlibraryfoundation.org/gokb/oai/packages',
+                                                                                          listPrefix:'oai_dc',
+                                                                                          fullPrefix:'gokb',
+                                                                                          principal:null,
+                                                                                          credentials:null,
+                                                                                          rectype:0)
+    gokb_record_source.save(flush:true, stopOnError:true);
+    log.debug("New gokb record source: ${gokb_record_source}");
   }
 
   def destroy = {
