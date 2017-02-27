@@ -1,7 +1,7 @@
 <g:if test="${hide.contains('SEARCH_FORM')}">
 </g:if>
 <g:else>
-  <g:form method="get" class="form-horizontal" controller="search" role="form">
+  <g:form method="get" class="form-horizontal" controller="DBSearch" action="getSearchResult" role="form" id="__dbsearchForm">
 
     <input type="hidden" name="qbe" value="${params.qbe}"/>
 
@@ -54,7 +54,7 @@
         </g:if>
         <g:else>
           <div class="btn-group pull-right" role="group" aria-label="Search Buttons">
-            <button name="searchAction" class="btn btn-success btn-sm" value="search" onclick="javascript:doSearch();">Search</button>
+            <button name="searchAction" class="btn btn-success btn-sm" value="search" type="submit">Search</button>
             <!--
             <div class="btn-group" role="group">
               <button class="btn btn-success btn-sm" data-toggle="dropdown" >Save <span class="caret"></span></button>

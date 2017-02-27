@@ -1,6 +1,8 @@
 package com.k_int.yarm
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.converters.JSON
+
 
 class DBSearchController {
 
@@ -43,7 +45,7 @@ class DBSearchController {
                                                     genericOIDService,
                                                     'rows')
     }
-    result
+    render result as JSON
   }
  
 
