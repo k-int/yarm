@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <title>YARM</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <asset:javascript src="gokb/search.js" />
 </head>
 <body>
   <div class="container-fluid">
@@ -27,10 +28,6 @@
           <tbody>
           </tbody>
         </table>
-
-        <pre>
-          ${qryconfig}
-        </pre>
       </div>
     </div>
   </div>

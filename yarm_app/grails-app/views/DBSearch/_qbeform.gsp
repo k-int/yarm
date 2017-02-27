@@ -54,7 +54,7 @@
         </g:if>
         <g:else>
           <div class="btn-group pull-right" role="group" aria-label="Search Buttons">
-            <button name="searchAction" type="submit" class="btn btn-success btn-sm" value="search">Search</button>
+            <button name="searchAction" class="btn btn-success btn-sm" value="search" onclick="javascript:doSearch();">Search</button>
             <!--
             <div class="btn-group" role="group">
               <button class="btn btn-success btn-sm" data-toggle="dropdown" >Save <span class="caret"></span></button>
@@ -84,15 +84,7 @@
 
 <asset:script type="text/javascript">
 (function($) {
-  // When DOM is ready.
-  $(document).ready(function(){
-
-    $("#savePopupForm").click(function(e) {
-      e.stopPropagation();
-      // $('#savePopupForm').toggle();
-    });
-
-  });
+});
 
 
 })(jQuery);
