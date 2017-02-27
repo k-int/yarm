@@ -47,16 +47,13 @@ public class HQLBuilder {
    *
    */
   public static def build(grailsApplication, 
-                          code, 
+                          qbetemplate,
                           params,
                           result, 
                           genericOIDService,
                           returnObjectsOrRows='objects') {
 
-
-    def qbetemplate = grailsApplication.config.srch_cfg[code]
-
-    log.debug("build(...${code} ${qbetemplate}..)");
+    log.debug("build(...${qbetemplate}..)");
 
     if ( qbetemplate ) {
       def baseclass = Class.forName(qbetemplate.baseclass)
@@ -67,9 +64,6 @@ public class HQLBuilder {
       result.recset = baseclass.executeQuery(builder_result.hql, 
                                              builder_result.bindvars,
                                              builder_result.query_params);
-    }
-    else {
-      throw new RuntimeException("Unable to locate configuration for ${code}");
     }
 
     result

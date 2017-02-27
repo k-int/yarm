@@ -6,6 +6,7 @@ class DBSearchController {
 
   def springSecurityService
   def genericOIDService
+  def yarmConfigService
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() {
@@ -17,19 +18,33 @@ class DBSearchController {
 
     log.debug("Home::Index");
     if (springSecurityService.isLoggedIn()){
-
-      log.debug("Build Query");
-
-      com.k_int.grails.tools.query.HQLBuilder.build(grailsApplication,
-                                                    params.srch_cfg,
-                                                    params,
-                                                    result,
-                                                    genericOIDService,
-                                                    'rows')
+      log.debug("Get query config");
+      // never go directly to config - we want to allow user customisation at some point
+      // so always use the service
+      result.qryconfig = yarmConfigService.getQueryConfig(params.srch_cfg);
     }
 
     log.debug("Returning..");
     result;
   }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def getSearchResult() {
+    def result=[:]
+
+    log.debug("Home::Index");
+    if (springSecurityService.isLoggedIn()){
+      def qryconfig = yarmConfigService.getQueryConfig(params.srch_cfg);
+
+      com.k_int.grails.tools.query.HQLBuilder.build(grailsApplication,
+                                                    qryconfig,
+                                                    params,
+                                                    result,
+                                                    genericOIDService,
+                                                    'rows')
+    }
+    result
+  }
+ 
 
 }
