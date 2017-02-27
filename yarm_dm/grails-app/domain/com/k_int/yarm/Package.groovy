@@ -28,7 +28,7 @@ public class Package extends Component {
 
   static mappedBy = [titles: 'pkg',
                      orgs: 'pkg',
-                     ids: 'pkg' ]
+                     ids: 'owner' ]
 
 
   static mapping = {
