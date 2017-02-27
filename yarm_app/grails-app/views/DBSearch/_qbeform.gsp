@@ -1,9 +1,9 @@
 <g:if test="${hide.contains('SEARCH_FORM')}">
 </g:if>
 <g:else>
-  <g:form method="get" class="form-horizontal" controller="DBSearch" action="getSearchResult" role="form" id="__dbsearchForm">
+  <g:form method="get" class="form-horizontal" controller="DBSearch" action="getSearchResult" role="form" name="__dbsearchForm">
 
-    <input type="hidden" name="qbe" value="${params.qbe}"/>
+    <input type="hidden" name="srch_cfg" value="${params.srch_cfg}"/>
 
     <g:each in="${hide}" var="hidden_var">
       <input type="hidden" name="hide" value="${hidden_var}"/>

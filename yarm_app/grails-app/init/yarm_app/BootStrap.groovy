@@ -94,9 +94,8 @@ class BootStrap {
                                                                                           fullPrefix:'gokb',
                                                                                           principal:null,
                                                                                           credentials:null,
-                                                                                          rectype:0)
-    gokb_record_source.save(flush:true, stopOnError:true);
-    log.debug("New gokb record source: ${gokb_record_source}");
+                                                                                          rectype:0).save(flush:true, stopOnError:true)
+    log.debug("Gokb record source: ${gokb_record_source}");
   }
 
   def destroy = {

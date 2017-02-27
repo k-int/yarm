@@ -47,8 +47,9 @@ srch_cfg = [
         ]
       ],
       qbeResults:[
-        [heading:'Type', property:'class.name', labelKey:'type.name'],
-        [heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'], labelKey:'resource.title' ]
+        // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
+        [ heading:'Type', property:'class.name', labelKey:'type.name'],
+        [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'], labelKey:'resource.title' ]
       ]
     ]
   ],
@@ -68,6 +69,7 @@ srch_cfg = [
         ]
       ],
       qbeResults:[
+        // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
         [ heading:'Type', property:'class.name', labelKey:'type.name'],
         [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'],labelKey:'resource.title' ]
       ]

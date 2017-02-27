@@ -433,12 +433,41 @@ public class HQLBuilder {
   static def buildFieldList(defns) {
     def result = new java.io.StringWriter()
     result.write('o.id');
+    // type(o) only works for polymorphic queries -- thats a real pain in the ass.
+    // result.write(',type(o)');
     result.write(',type(o)');
     defns.each { defn ->
-      result.write(",o.");
-      result.write(defn.property);
+      result.write(",");
+      if ( defn.expression ) {
+        addExpression(defn.expression, result);
+      }
+      else {
+        result.write("o.");
+        result.write(defn.property);
+      }
     }
     result.toString();
+  }
+
+  static def addExpression(expr, writer) {
+    switch ( expr.type ) {
+      case 'fn':
+        writer.write(expr.name)
+        writer.write('(');
+        def first=true;
+        expr.params.each { p ->
+          if ( first) { first=false; } else { writer.write(',') }
+          addExpression(p,writer)
+        }
+        writer.write(')');
+        break;
+      case 'bv':
+        writer.write(expr.bv);
+        break;
+      default:
+        log.warn("Unhandled expression type ${expr.type}");
+        break;
+    }
   }
 
   // If a value begins __ then it's a special value and needs to be interpreted, otherwise just return the value

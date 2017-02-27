@@ -43,7 +43,7 @@ class DBSearchController {
                                                     params,
                                                     result,
                                                     genericOIDService,
-                                                    'rows')
+                                                    'objects')
     }
     render result as JSON
   }
