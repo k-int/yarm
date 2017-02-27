@@ -61,16 +61,21 @@
               <li><g:link controller="titles" action="list"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
               <li><g:link controller="home" action="agreements"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Agreements</span></g:link></li>
               <li><g:link controller="home" action="logout"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Logout</span></g:link></li>
+
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <li>
+                  <a href="#" data-target="#item1"
+                              data-toggle="collapse"><i class="glyphicon glyphicon-certificate gi-2x"></i> <span class="collapse in hidden-xs">Admin <span class="caret"></span></span></a>
+                  <ul class="nav nav-stacked collapse left-submenu" id="item1">
+                    <li><a href="google.com"><i class="glyphicon glyphicon-lock gi-2x"></i><span class="collapse in hidden-xs"> Manage Affiliations</span></a></li>
+                    <li><g:link controller="admin" action="orgsDataload"><i class="glyphicon glyphicon-cloud-upload gi-2x"></i><span class="collapse in hidden-xs"> Upload Organisations Data</span></g:link></li>
+                    <li><link:admManageGlobalSources>Manage Global Sources</link:admManageGlobalSources></li>
+                  </ul>
+                </li>
+              </sec:ifAnyGranted>
+
             </sec:ifLoggedIn>
 
-            <li>
-              <a href="#" data-target="#item1"
-                          data-toggle="collapse"><i class="glyphicon glyphicon-certificate gi-2x"></i> <span class="collapse in hidden-xs">Admin <span class="caret"></span></span></a>
-              <ul class="nav nav-stacked collapse left-submenu" id="item1">
-                <li><a href="google.com"><i class="glyphicon glyphicon-lock gi-2x"></i><span class="collapse in hidden-xs"> Manage Affiliations</span></a></li>
-                <li><g:link controller="admin" action="orgsDataload"><i class="glyphicon glyphicon-cloud-upload gi-2x"></i><span class="collapse in hidden-xs"> Upload Organisations Data</span></g:link></li>
-              </ul>
-            </li>
           </ul>
         </div>
         <!-- /sidebar -->

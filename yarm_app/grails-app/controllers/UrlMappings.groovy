@@ -13,5 +13,9 @@ class UrlMappings {
         "/directory/org/$id/dashboard"(controller:'directory',action:'orgDash')
         "500"(view:'/error')
         "404"(view:'/notFound')
+
+        // "/instituion/$shortcode"
+
+        name 'admManageGlobalSources': '/admin/globalSources' ( controller:'DBSearch', action:'index', baseClass:'com.k_int.yarm.GlobalRecordSource' )
     }
 }
