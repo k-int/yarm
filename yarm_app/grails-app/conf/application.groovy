@@ -28,3 +28,13 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 
 reserved_names = [ 'new', 'admin', 'system', 'master' ]
+
+// Configuration for various search tools
+srch_cfg = [
+  'adm_global_sources':[
+    name:'Search Global Sources'
+  ],
+  'tenant_all_titles':[
+    name:'All Titles'
+  ]
+]

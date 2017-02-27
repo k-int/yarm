@@ -58,7 +58,8 @@
               <li class="divider"></li>
               <li><g:link controller="home" action="index"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Home</span></g:link></li>
               <li><g:link controller="home" action="switchContext"><i class="glyphicon glyphicon-education gi-2x"></i><span class="collapse in hidden-xs"> Change Home Institution</span></g:link></li>
-              <li><g:link controller="titles" action="list"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
+              <li><g:link mapping="tenantTitles" params="[institution_shortcode:'shu']"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
+
               <li><g:link controller="home" action="agreements"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Agreements</span></g:link></li>
               <li><g:link controller="home" action="logout"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Logout</span></g:link></li>
 

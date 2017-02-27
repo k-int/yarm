@@ -9,7 +9,7 @@ class DBSearchController {
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() {
 
-    log.debug("DBSearchController::index");
+    log.debug("DBSearchController::index ${params} ${params.srch_cfg}");
 
     def user = springSecurityService.currentUser
     def result=[:]
