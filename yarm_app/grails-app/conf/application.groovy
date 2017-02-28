@@ -35,6 +35,8 @@ srch_cfg = [
     name:'Search Global Sources',
     baseclass:'com.k_int.yarm.GlobalRecordSource',
     title:'Global Sources',
+    selectType:'scalar',   // scalar or objects
+    discriminatorType:'manual',  // manual or type
     qbeConfig:[
       // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
       // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
@@ -48,7 +50,6 @@ srch_cfg = [
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
-        [ heading:'Type', property:'class.name', labelKey:'type.name'],
         [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'], labelKey:'resource.title' ]
       ]
     ]
@@ -57,6 +58,8 @@ srch_cfg = [
     name:'All Titles',
     baseclass:'com.k_int.yarm.GlobalResource',
     title:'All Titles',
+    selectType:'scalar',
+    discriminatorType:'manual',
     qbeConfig:[
       // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
       // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
@@ -70,7 +73,6 @@ srch_cfg = [
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
-        [ heading:'Type', property:'class.name', labelKey:'type.name'],
         [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'],labelKey:'resource.title' ]
       ]
     ]

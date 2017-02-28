@@ -42,8 +42,7 @@ class DBSearchController {
                                                     qryconfig,
                                                     params,
                                                     result,
-                                                    genericOIDService,
-                                                    'objects')
+                                                    genericOIDService)
     }
     render result as JSON
   }

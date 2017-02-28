@@ -14,6 +14,8 @@ public class HQLBuilder {
    *  [
    *		baseclass:'Fully.Qualified.Class.Name.To.Search',
    *		title:'Title Of Search',
+   *            selectType:'scalar',         // scalar or objects
+   *            discriminatorType:'manual',  // manual or type
    *		qbeConfig:[
    *			// For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
    *			// Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
@@ -50,20 +52,21 @@ public class HQLBuilder {
                           qbetemplate,
                           params,
                           result, 
-                          genericOIDService,
-                          returnObjectsOrRows='objects') {
+                          genericOIDService) {
 
     log.debug("build(...${qbetemplate}..)");
 
     if ( qbetemplate ) {
       def baseclass = Class.forName(qbetemplate.baseclass)
-      def builder_result = internalBuild(grailsApplication,qbetemplate,params,result,genericOIDService,returnObjectsOrRows,baseclass)
+      def builder_result = internalBuild(grailsApplication,qbetemplate,params,result,genericOIDService,qbetemplate.selectType?:'objects',baseclass)
     
     
       result.reccount = baseclass.executeQuery(builder_result.count_hql, builder_result.bindvars)[0]
       result.recset = baseclass.executeQuery(builder_result.hql, 
                                              builder_result.bindvars,
                                              builder_result.query_params);
+
+      log.debug("${builder_result.count_hql} ${result.reccount} ${result.recset.size()}");
     }
 
     result
@@ -149,19 +152,24 @@ public class HQLBuilder {
     }
 
     def fetch_hql = null
-    if ( returnObjectsOrRows=='objects' ) {
-      if ( qbetemplate.useDistinct == true ) {
+    switch ( returnObjectsOrRows ) {
+      case 'objects' :
+        if ( qbetemplate.useDistinct == true ) {
         
-        // SO: Because of the way Hibernate handles distinct, the distinction may not be carried out by the DBMS.
-        // Adding the ID should ensure the distinct happens at the DB end rather than filtered manually by Hibernate.
-        fetch_hql = "select o from ${qbetemplate.baseclass} o where o.id IN (select distinct o.id ${hql})"
-      } else {
-        fetch_hql = "select o ${hql}"
-      }
-//      fetch_hql = "select ${qbetemplate.useDistinct == true ? 'distinct' : ''} o ${hql}"
-    }
-    else {
-      fetch_hql = "select ${buildFieldList(qbetemplate.qbeConfig.qbeResults)} ${hql}"
+          // SO: Because of the way Hibernate handles distinct, the distinction may not be carried out by the DBMS.
+          // Adding the ID should ensure the distinct happens at the DB end rather than filtered manually by Hibernate.
+          // fetch_hql = "select ${qbetemplate.useDistinct == true ? 'distinct' : ''} o ${hql}"
+          fetch_hql = "select o from ${qbetemplate.baseclass} o where o.id IN (select distinct o.id ${hql})"
+        } else {
+          fetch_hql = "select o ${hql}"
+        }
+        break;
+      case 'scalar':
+        fetch_hql = "select ${buildFieldList(qbetemplate)} ${hql}"
+        break;
+      default:
+        throw new RuntimeException("Unhandled fetch type ${returnObjectsOrRows} - must be scalar or objects");
+        break;
     }
     
     log.debug("Consider sort: ${hql_builder_context.sort}");
@@ -430,12 +438,24 @@ public class HQLBuilder {
     sw.toString();
   }
 
-  static def buildFieldList(defns) {
+  static def buildFieldList(cfg) {
+    def defns = cfg.qbeConfig.qbeResults
     def result = new java.io.StringWriter()
     result.write('o.id');
     // type(o) only works for polymorphic queries -- thats a real pain in the ass.
     // result.write(',type(o)');
-    result.write(',type(o)');
+    switch ( cfg.discriminatorType ) {
+      case 'manual':
+        result.write(',\''+cfg.baseclass+'\'');
+        break;
+      case 'type':
+        result.write(',type(o)');
+        break;
+      default:
+        throw new RuntimeException("Unknown discriminatorType ${cfg.discriminatorType}. Must be manual (for explicit class name) or type (for type(o))");
+        break;
+    }
+
     defns.each { defn ->
       result.write(",");
       if ( defn.expression ) {
