@@ -10,6 +10,10 @@
       var yarm_dt_config = {
         "searching": false,
         "bLengthChange": false,
+        "bScrollInfinite": true,
+        "bScrollCollapse": true,
+        "sScrollY": "200px",
+        "bPaginate": false,
         "columns": [
           { "title": "engine" },
           { "title": "browser" },
