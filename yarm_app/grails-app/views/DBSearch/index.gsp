@@ -11,11 +11,17 @@
         "searching": false,
         "bLengthChange": false,
         "columns": [
-          { "name": "engine" },
-          { "name": "browser" },
-          { "name": "platform" },
-          { "name": "version" },
-          { "name": "grade" }
+          { "title": "engine" },
+          { "title": "browser" },
+          { "title": "platform" },
+          { "title": "version" },
+          { "title": "grade" }
+        ], 
+        "data": [ 
+          [ 'one1', 'two', 'three', 'four', 'five' ] ,
+          [ 'one2', 'two', 'three', 'four', 'five' ] ,
+          [ 'one3', 'two', 'three', 'four', 'five' ] ,
+          [ 'one4', 'two', 'three', 'four', 'five' ]
         ]
       };
     </script>
@@ -29,7 +35,7 @@
           <g:render template="qbeform" contextPath="." model="${[formdefn:qryconfig.qbeConfig?.qbeForm, 'hide':[], cfg:qryconfig.qbeConfig]}" />
         </div>
 
-        <table id="yarmQResTable" class="table table-striped well">
+        <table id="yarmQResTable" class="table table-striped">
           <thead>
           </thead>
           <tbody>
