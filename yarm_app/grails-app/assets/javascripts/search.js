@@ -11,7 +11,10 @@ if (typeof jQuery !== 'undefined') {
 
     $('#__dbsearchForm').submit( function() {            
 
-      console.log("submitform");
+
+      var search_data = $('#__dbsearchForm').serialize();
+
+      console.log("submitform %o",search_data);
 
       $.ajax({
         url     : $(this).attr('action'),

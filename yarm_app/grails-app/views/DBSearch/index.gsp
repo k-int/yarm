@@ -39,7 +39,9 @@
           <g:render template="qbeform" contextPath="." model="${[formdefn:qryconfig.qbeConfig?.qbeForm, 'hide':[], cfg:qryconfig.qbeConfig]}" />
         </div>
 
-        <table id="yarmQResTable" class="table table-striped">
+        <table id="yarmQResTable" 
+               data-qryurl="${createLink(action:'getSearchResult',params:[srch_cfg:params.srch_cfg])}"
+               class="table table-striped">
           <thead>
           </thead>
           <tbody>
