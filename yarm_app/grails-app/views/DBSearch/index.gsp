@@ -23,8 +23,8 @@
         ], 
         ajax : function(data,callback,settings) {
           console.log("ajax(%o,%o,%o)",data,callback,settings);
-          var url = "${createLink(action:'getSearchResult',params:[srch_cfg:params.srch_cfg])}";
-          console.log("Do callback");
+          var url = "${createLink(action:'getSearchResult',params:[srch_cfg:params.srch_cfg])}&"+$('#__dbsearchForm').serialize();
+          console.log("Do callback %s",url);
           callback({ aaData: [ [ "one1", "two", "three", "four", "five" ],
                                [ "one2", "two", "three", "four", "five" ] ] } );
           console.log("Done callback");
