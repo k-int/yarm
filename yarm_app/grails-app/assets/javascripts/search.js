@@ -5,7 +5,9 @@
 if (typeof jQuery !== 'undefined') {
   (function($) {
 
-    $('#yarmQResTable').DataTable();
+    console.log("cfg: %o",yarm_dt_config);
+
+    $('#yarmQResTable').DataTable(yarm_dt_config);
 
     $('#__dbsearchForm').submit( function() {            
 
