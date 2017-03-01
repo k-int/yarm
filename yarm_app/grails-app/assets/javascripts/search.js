@@ -12,6 +12,7 @@ if (typeof jQuery !== 'undefined') {
     $('#__dbsearchForm').submit( function() {            
       console.log("Calling reload on data table...");
       $('#yarmQResTable').dataTable().reload();
+      return false;
     });
 
   })(jQuery);

@@ -49,13 +49,18 @@ srch_cfg = [
         ]
       ],
       selectList:[
+        // ID and class are added by default
         [ type:'bv', bv:'o.name', name:'name' ]
+      ],
+      enrichments:[  // Things we add to the row after we get the raw values back
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id' ]
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
         [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
-        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ]
+        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ],
+        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk" ]
       ]
     ]
   ],
@@ -79,10 +84,14 @@ srch_cfg = [
       selectList:[
         [ type:'bv', bv:'o.name', name:'name' ]
       ],
+      enrichments:[
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id' ]
+      ],
       qbeResults:[
         [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
-        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ]
+        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ],
+        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk" ]
       ]
     ]
 

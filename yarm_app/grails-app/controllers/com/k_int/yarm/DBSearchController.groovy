@@ -62,6 +62,8 @@ class DBSearchController {
     def list_of_maps = []
     result.each { row ->
       def row_as_map = [:]
+     
+      // Add the id and class of the object the row represents
       row_as_map.__id=row[0]
       row_as_map.__cls=row[1]
       int ctr = 2;
@@ -69,17 +71,35 @@ class DBSearchController {
       cfg.qbeConfig.selectList.each { select_list_entry_defn ->
         row_as_map[select_list_entry_defn.name] = row[ctr++]
       }
+
+      enhanceRow(cfg,row_as_map);
+
       list_of_maps.add(row_as_map);
     }
     list_of_maps;
   }
 
-  def private enhanceQueryResult(cfg, result) {
-    // result.each { row ->
-    //   log.debug("Enhance row ${row.class.name} ${row}");
-    //   row.add([href:createLink(action:"index"), text:"this is a link"])
-    //   row.add([href:createLink(action:"index"), text:"this is a link"])
-    // }
+  def private enhanceRow(cfg, row_as_map) {
+    //  [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id' ]
+    cfg.qbeConfig.enrichments.each { enh ->
+      switch ( enh.type ) {
+        case 'link':
+          row_as_map[enh.name] = linkValue(enh, row_as_map)
+          break;
+        case 'static':
+          row_as_map[enh.name] = enh.value;
+          break;
+        default:
+          log.warn("Unhandled enhancement type ${enh.type}");
+          break;
+      }
+    }
+  }
+
+  def private linkValue(cfg, row_as_map) {
+    def result = [:]
+    result.label = row_as_map[cfg.label.prop]
+    result.value = [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ]
     result;
   }
 }
