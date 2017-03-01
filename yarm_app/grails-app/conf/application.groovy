@@ -48,6 +48,9 @@ srch_cfg = [
           contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
         ]
       ],
+      selectList:[
+        [ type:'bv', bv:'o.name' ]
+      ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
         [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'], labelKey:'resource.title' ]
@@ -70,6 +73,9 @@ srch_cfg = [
           placeholder:'Name or title of item',
           contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
         ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.name' ]
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],

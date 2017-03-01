@@ -30,6 +30,9 @@ class DBSearchController {
     result;
   }
 
+  /**
+   *  @params willl be used to control pagination etc
+   */
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def getSearchResult() {
     def result=[:]
@@ -38,11 +41,16 @@ class DBSearchController {
     if (springSecurityService.isLoggedIn()){
       def qryconfig = yarmConfigService.getQueryConfig(params.srch_cfg);
 
-      com.k_int.grails.tools.query.HQLBuilder.build(grailsApplication,
-                                                    qryconfig,
-                                                    params,
-                                                    result,
-                                                    genericOIDService)
+      def qry_result = com.k_int.grails.tools.query.HQLBuilder.build(grailsApplication,
+                                                                     qryconfig,
+                                                                     params,
+                                                                     genericOIDService)
+
+
+      if ( qry_result ) {
+        result.reccount = qry_result.reccount
+        result.recset = qry_result.recset
+      }
     }
     render result as JSON
   }

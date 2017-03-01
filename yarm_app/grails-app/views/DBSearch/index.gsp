@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <title>YARM</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <asset:stylesheet src="datatables.min.css"/>
     <asset:javascript src="gokb/search.js" />
 </head>
 <body>
@@ -15,20 +16,15 @@
           <g:render template="qbeform" contextPath="." model="${[formdefn:qryconfig.qbeConfig?.qbeForm, 'hide':[], cfg:qryconfig.qbeConfig]}" />
         </div>
 
-        <table class="table table-striped">
+        <table id="yarmQResTable" class="table table-striped">
           <thead>
-            <tr>
-              <g:each in="${qryconfig.qbeConfig.qbeResults}" var="qbeCol">
-                <th>
-                  ${message(code: qbeCol.labelKey)} 
-                </th>
-              </g:each>
-            </tr>
           </thead>
           <tbody>
           </tbody>
         </table>
       </div>
+      <pre id="dumpingGround">
+      </pre>
     </div>
   </div>
 </body>

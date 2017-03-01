@@ -39,6 +39,9 @@ public class HQLBuilder {
    *					contextTree:['ctxtp':'qry', 'comparator' : 'eq', 'prop':'ids.value']
    *				],
    *			],
+   *                    selectList:[
+   *                      [ type:'bv', bv:'o.name' ]
+   *                    ],
    *			qbeResults:[
    *				[heading:'Type', property:'class.simpleName'],
    *				[heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'] ]
@@ -46,19 +49,23 @@ public class HQLBuilder {
    *		]
    *	]
    *
+   *    selectList is an array of expressions that will form the basis of the select clauses
+   *    qbeResults is used to form the results array - this may be values from the select list, or it may
+   *       be expressions or function calls. Worst case, the object can be serialised and base methods called,
+   *       but that should be avoided for performance reasons.
    *
    */
   public static def build(grailsApplication, 
                           qbetemplate,
                           params,
-                          result, 
                           genericOIDService) {
 
     log.debug("build(...${qbetemplate}..)");
+    def result = [:]
 
     if ( qbetemplate ) {
       def baseclass = Class.forName(qbetemplate.baseclass)
-      def builder_result = internalBuild(grailsApplication,qbetemplate,params,result,genericOIDService,qbetemplate.selectType?:'objects',baseclass)
+      def builder_result = internalBuild(grailsApplication,qbetemplate,params,genericOIDService,qbetemplate.selectType?:'objects',baseclass)
     
     
       result.reccount = baseclass.executeQuery(builder_result.count_hql, builder_result.bindvars)[0]
@@ -75,7 +82,6 @@ public class HQLBuilder {
   public static def internalBuild(grailsApplication,
                                   qbetemplate,
                                   params,
-                                  result,
                                   genericOIDService,
                                   returnObjectsOrRows,
                                   baseclass) {
@@ -186,10 +192,10 @@ public class HQLBuilder {
     ibr.count_hql = count_hql
 
     def query_params = [:]
-    if ( result.max )
-      query_params.max = result.max;
-    if ( result.offset )
-      query_params.offset = result.offset
+    if ( params.max )
+      query_params.max = params.max;
+    if ( params.offset )
+      query_params.offset = params.offset
 
     ibr.hql = fetch_hql
     ibr.query_params = query_params
@@ -439,7 +445,9 @@ public class HQLBuilder {
   }
 
   static def buildFieldList(cfg) {
-    def defns = cfg.qbeConfig.qbeResults
+
+    def defns = cfg.qbeConfig.selectList
+
     def result = new java.io.StringWriter()
     result.write('o.id');
     // type(o) only works for polymorphic queries -- thats a real pain in the ass.
@@ -458,13 +466,7 @@ public class HQLBuilder {
 
     defns.each { defn ->
       result.write(",");
-      if ( defn.expression ) {
-        addExpression(defn.expression, result);
-      }
-      else {
-        result.write("o.");
-        result.write(defn.property);
-      }
+      addExpression(defn, result);
     }
     result.toString();
   }
