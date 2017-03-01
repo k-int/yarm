@@ -50,11 +50,36 @@ class DBSearchController {
 
       if ( qry_result ) {
         result.reccount = qry_result.reccount
-        result.recset = qry_result.recset
+        result.iTotalRecords = qry_result.reccount
+        result.recset = toMap(qryconfig,qry_result.recset)
       }
     }
     render result as JSON
   }
- 
 
+ 
+  def private toMap(cfg, result) {
+    def list_of_maps = []
+    result.each { row ->
+      def row_as_map = [:]
+      row_as_map.__id=row[0]
+      row_as_map.__cls=row[1]
+      int ctr = 2;
+
+      cfg.qbeConfig.selectList.each { select_list_entry_defn ->
+        row_as_map[select_list_entry_defn.name] = row[ctr++]
+      }
+      list_of_maps.add(row_as_map);
+    }
+    list_of_maps;
+  }
+
+  def private enhanceQueryResult(cfg, result) {
+    // result.each { row ->
+    //   log.debug("Enhance row ${row.class.name} ${row}");
+    //   row.add([href:createLink(action:"index"), text:"this is a link"])
+    //   row.add([href:createLink(action:"index"), text:"this is a link"])
+    // }
+    result;
+  }
 }

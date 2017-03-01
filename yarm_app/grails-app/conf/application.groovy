@@ -49,11 +49,13 @@ srch_cfg = [
         ]
       ],
       selectList:[
-        [ type:'bv', bv:'o.name' ]
+        [ type:'bv', bv:'o.name', name:'name' ]
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
-        [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'], labelKey:'resource.title' ]
+        [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
+        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ]
       ]
     ]
   ],
@@ -75,11 +77,12 @@ srch_cfg = [
         ]
       ],
       selectList:[
-        [ type:'bv', bv:'o.name' ]
+        [ type:'bv', bv:'o.name', name:'name' ]
       ],
       qbeResults:[
-        // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
-        [ heading:'Name/Title', property:'name', link:[controller:'resource',action:'show',id:'x.r.class.name+\':\'+x.r.id'],labelKey:'resource.title' ]
+        [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
+        [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ]
       ]
     ]
 

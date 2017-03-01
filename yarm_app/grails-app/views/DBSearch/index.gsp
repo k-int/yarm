@@ -16,9 +16,9 @@
         "bPaginate": false,
         "sAjaxDataProp": "recset",
         "columns": [
-          { "title": "c1" },
-          { "title": "c2" },
-          { "title": "c3" }
+          <g:each in="${qryconfig.qbeConfig.qbeResults}" var="coldef">
+            { "title": "${coldef.heading}", "visible":${coldef.visible?:false}, "data":"${coldef.name}" },
+          </g:each>
         ], 
         ajax : function(data,callback,settings) {
           console.log("ajax(%o,%o,%o)",data,callback,settings);
@@ -38,10 +38,6 @@
               console.log("o",err);
             }
           });    
-
-          // callback({ aaData: [ [ "one1", "two", "three", "four", "five" ],
-          //                      [ "one2", "two", "three", "four", "five" ] ] } );
-          // console.log("Done callback");
         }
       };
     </script>
