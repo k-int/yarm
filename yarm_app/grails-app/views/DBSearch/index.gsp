@@ -64,8 +64,6 @@
           </tbody>
         </table>
       </div>
-      <pre id="dumpingGround">
-      </pre>
     </div>
   </div>
 </body>
