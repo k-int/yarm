@@ -12,24 +12,26 @@ if (typeof jQuery !== 'undefined') {
     $('#__dbsearchForm').submit( function() {            
 
 
-      var search_data = $('#__dbsearchForm').serialize();
+      // var search_data = $('#__dbsearchForm').serialize();
+      // console.log("submitform %o",search_data);
 
-      console.log("submitform %o",search_data);
+      console.log("Calling reload on data table...");
+      $('#yarmQResTable').dataTable().reload();
 
-      $.ajax({
-        url     : $(this).attr('action'),
-        type    : $(this).attr('method'),
-        dataType: 'json',
-        data    : $(this).serialize(),
-        success : function( data ) {
-          console.log("o",data);
-          $('#dumpingGround').html(data);
-        },
-        error   : function( xhr, err ) {
-          console.log("o",err);
-        }
-      });    
-      return false;
+      // $.ajax({
+      //   url     : $(this).attr('action'),
+      //   type    : $(this).attr('method'),
+      //   dataType: 'json',
+      //   data    : $(this).serialize(),
+      //   success : function( data ) {
+      //     console.log("o",data);
+      //     $('#dumpingGround').html(data);
+      //   },
+      //   error   : function( xhr, err ) {
+      //     console.log("o",err);
+      //   }
+      // });    
+      // return false;
     });
 
   })(jQuery);
