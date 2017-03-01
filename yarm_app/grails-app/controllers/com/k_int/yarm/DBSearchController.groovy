@@ -36,9 +36,9 @@ class DBSearchController {
    */
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def getSearchResult() {
+    log.debug("DBSearchController::getSearchResult(${params})");
     def result=[:]
 
-    log.debug("Home::Index");
     if (springSecurityService.isLoggedIn()){
       def qryconfig = yarmConfigService.getQueryConfig(params.srch_cfg);
 

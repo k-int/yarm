@@ -14,20 +14,34 @@
         "bScrollCollapse": true,
         "sScrollY": "200px",
         "bPaginate": false,
+        "sAjaxDataProp": "recset",
         "columns": [
-          { "title": "engine" },
-          { "title": "browser" },
-          { "title": "platform" },
-          { "title": "version" },
-          { "title": "grade" }
+          { "title": "c1" },
+          { "title": "c2" },
+          { "title": "c3" }
         ], 
         ajax : function(data,callback,settings) {
           console.log("ajax(%o,%o,%o)",data,callback,settings);
-          var url = "${createLink(action:'getSearchResult',params:[srch_cfg:params.srch_cfg])}&"+$('#__dbsearchForm').serialize();
+          var url = "${createLink(action:'getSearchResult')}?"+$('#__dbsearchForm').serialize();
           console.log("Do callback %s",url);
-          callback({ aaData: [ [ "one1", "two", "three", "four", "five" ],
-                               [ "one2", "two", "three", "four", "five" ] ] } );
-          console.log("Done callback");
+
+          $.ajax({
+            url     : url,
+            type    : 'GET',
+            dataType: 'json',
+            data    : data,
+            success : function( data ) {
+              console.log("o",data);
+              callback(data);
+            },
+            error   : function( xhr, err ) {
+              console.log("o",err);
+            }
+          });    
+
+          // callback({ aaData: [ [ "one1", "two", "three", "four", "five" ],
+          //                      [ "one2", "two", "three", "four", "five" ] ] } );
+          // console.log("Done callback");
         }
       };
     </script>
