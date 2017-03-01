@@ -25,7 +25,7 @@ grails:
     plugin:
         springsecurity:
             oauth2:
-                active: true    #whether the whole plugin is active or not
+                active: false    #whether the whole plugin is active or not
                 registration:
                     askToLinkOrCreateAccountUri: '/oauth2/ask' # The URI that is called to aks the user to either create a new account or link to an existing account
                     roleNames: ['ROLE_USER'] #A list of role names that should be automatically granted to an OAuth User. The roles will be created if they do not exist

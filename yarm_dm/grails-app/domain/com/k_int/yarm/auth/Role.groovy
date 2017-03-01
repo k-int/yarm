@@ -17,6 +17,6 @@ class Role implements Serializable {
 
   static mapping = {
     table 'yarm_role'
-    cache true
+    // cache true
   }
 }
