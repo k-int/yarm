@@ -101,23 +101,22 @@ hibernate:
         use_query_cache: false
         region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
-dataSource:
-    pooled: true
-    jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+#dataSource:
+#    pooled: true
+#    jmxExport: true
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password:
 
 environments:
     development:
-        dataSources:
-            dataSource:
-                dbCreate: update
-                url: jdbc:postgresql://pghost:5432/yarm_dev
-                username: knowint
-                password: knowint
-                driverClassName: org.postgresql.Driver
-                dialect: com.k_int.yarm.utils.PgSQLCustomDialect
+        dataSource:
+            dbCreate: update
+            url: jdbc:postgresql://pghost:5432/yarm_dev
+            username: knowint
+            password: knowint
+            driverClassName: org.postgresql.Driver
+            dialect: com.k_int.yarm.utils.PgSQLCustomDialect
     test:
         dataSource:
             dbCreate: update
