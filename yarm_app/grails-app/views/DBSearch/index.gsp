@@ -17,7 +17,16 @@
         "sAjaxDataProp": "recset",
         "columns": [
           <g:each in="${qryconfig.qbeConfig.qbeResults}" var="coldef">
-            { "title": "${coldef.heading}", "visible":${coldef.visible?:false}, "data":"${coldef.name}" },
+            { 
+              <g:if test="${coldef.type=='link'}">
+                "render":function ( data, type, row ) {
+                    return "<a href='"+row['${coldef.name}'].link+"'>"+row['${coldef.name}'].label+"</a>";
+                },
+              </g:if>
+              "title": "${coldef.heading}", 
+              "visible":${coldef.visible?:false}, 
+              "data":"${coldef.name}"
+            },
           </g:each>
         ], 
         ajax : function(data,callback,settings) {

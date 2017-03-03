@@ -60,7 +60,7 @@ srch_cfg = [
         [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
         [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ],
-        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk" ]
+        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk", type:'link' ]
       ]
     ]
   ],
@@ -91,7 +91,7 @@ srch_cfg = [
         [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.title',  visible:false, name:"__cls" ],
         [ heading:'Name/Title', labelKey:'resource.title',  visible:true, name:"name" ],
-        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk" ]
+        [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk", type:'link' ]
       ]
     ]
 
