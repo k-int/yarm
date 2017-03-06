@@ -17,5 +17,6 @@ class UrlMappings {
         name 'tenantTitles' : "/instituion/$institution_shortcode/titles" ( controller:'DBSearch', action:'index') { srch_cfg='tenant_titles' }
 
         name 'admManageGlobalSources': '/admin/globalSources' ( controller:'DBSearch', action:'index' ) { srch_cfg='adm_global_sources' }
+        name 'admEditGlobalSource': "/admin/globalSources/$id" ( controller:'Resource', action:'edit' ) { cls='com.k_int.yarm.GlobalRecordSource' }
     }
 }

@@ -53,7 +53,7 @@ srch_cfg = [
         [ type:'bv', bv:'o.name', name:'name' ]
       ],
       enrichments:[  // Things we add to the row after we get the raw values back
-        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id' ]
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'admEditGlobalSource' ]
       ],
       qbeResults:[
         // [ heading:'Type', expression:[type:'fn', name:'type', params:[[type:'bv', bv:'o']]], labelKey:'type.name'],
@@ -85,7 +85,7 @@ srch_cfg = [
         [ type:'bv', bv:'o.name', name:'name' ]
       ],
       enrichments:[
-        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id' ]
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'admEditGlobalSource' ]
       ],
       qbeResults:[
         [ heading:'ID', labelKey:'resource.title',  visible:false, name:"__id" ],

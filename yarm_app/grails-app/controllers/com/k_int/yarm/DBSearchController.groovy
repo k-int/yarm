@@ -99,8 +99,12 @@ class DBSearchController {
   def private linkValue(cfg, row_as_map) {
     def result = [:]
     result.label = row_as_map[cfg.label.prop]
-    // result.value = [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ]
-    result.link = createLink(controller:'resource', action:'index', params: [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ]);
+    if ( cfg.mapping ) {
+      result.link = createLink(controller:'resource', action:'index', id : row_as_map[cfg.idProp], mapping:cfg.mapping);
+    }
+    else {
+      result.link = createLink(controller:'resource', action:'index', params: [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ], mapping:cfg.mapping);
+    }
     result;
   }
 }
