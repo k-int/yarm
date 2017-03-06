@@ -1,0 +1,7 @@
+json {
+  test {
+    file 'test1.gson'
+    message 'hello'
+    wibble 'goodbye'
+  }
+}
