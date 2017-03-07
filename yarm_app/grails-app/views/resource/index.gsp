@@ -10,11 +10,14 @@
     <div class="row">
       <div class="container-fluid">
         <p>This is the edit page</p>
-        <form data-content="${createLink(mapping:params.mapping, id:params.id, params:['format':'json'])}"
-              data-schema="${createLink(controller:'resource',action:'schema',params:params)}"
-              data-layout="${createLink(controller:'resource',action:'layout',params:params)}" ></form>
+        <form id="yarm_form_subject"
+              data-content="${createLink(mapping:params.mapping, id:params.id, params:['format':'json'])}"
+              data-schema="${createLink(controller:'config',action:'jsonSchema',id:params.jsonSchema)}"
+              data-layout="${createLink(controller:'config',action:'layout',id:params.layout)}" ></form>
 
-        <g:link mapping="${params.mapping}" id="${params.id}" params="[format:'json']">Link</g:link>
+        <g:link mapping="${params.mapping}" id="${params.id}" params="[format:'json']">Data</g:link>
+        <g:link controller="config" action="jsonSchema" id="${params.jsonSchema}">Schema</g:link>
+        <g:link controller="config" action="layout" id="${params.layout}">Layout</g:link>
 
       </div>
     </div>
