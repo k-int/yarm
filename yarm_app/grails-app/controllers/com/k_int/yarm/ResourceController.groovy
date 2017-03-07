@@ -20,6 +20,7 @@ class ResourceController {
 
     log.debug("ResourceController::Index");
     if (springSecurityService.isLoggedIn()){
+      result.__yr = genericOIDService.resolveOID2(params.cls,params.id);
     }
 
     log.debug("Returning..");
