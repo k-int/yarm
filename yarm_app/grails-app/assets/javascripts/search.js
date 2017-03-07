@@ -1,5 +1,6 @@
 // search.js
 
+//= require application
 //= require datatables.min
 
 if (typeof jQuery !== 'undefined') {

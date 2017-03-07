@@ -13,7 +13,7 @@ class ResourceController {
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() {
 
-    log.debug("ResourceController::index ${params} ${params.srch_cfg}");
+    log.debug("ResourceController::index params:${params}");
 
     def user = springSecurityService.currentUser
     def result=[:]
