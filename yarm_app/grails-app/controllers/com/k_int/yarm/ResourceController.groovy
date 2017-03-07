@@ -20,10 +20,15 @@ class ResourceController {
 
     log.debug("ResourceController::Index");
     if (springSecurityService.isLoggedIn()){
+      if ( params.format == 'json' ) {
+        // Client is asking for JSON -- send back 
+        result.subject = genericOIDService.resolveOID2(params.cls,params.id);
+        respond result, formats:['json'], view : params.gsonTemplate
+      }
+      else {
+        respond result
+      }
     }
-
-    log.debug("Returning..");
-    result;
   }
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])

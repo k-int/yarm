@@ -19,8 +19,10 @@ class UrlMappings {
         name 'admManageGlobalSources': '/admin/globalSources' ( controller:'DBSearch', action:'index' ) { srch_cfg='adm_global_sources' }
         name 'admEditGlobalSource': "/admin/globalSources/$id" ( controller:'Resource', action:'index' ) { 
           cls='com.k_int.yarm.GlobalRecordSource' 
+          mapping='admEditGlobalSource'
           gsonTemplate='globalRecordSource'
-          jsonSchema='sch_globalRecordSource'
+          jsonSchema='GlobalRecordSource'
+          layout='GlobalRecordSource'
         }
     }
 }

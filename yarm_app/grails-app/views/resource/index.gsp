@@ -10,7 +10,12 @@
     <div class="row">
       <div class="container-fluid">
         <p>This is the edit page</p>
-        <form></form>
+        <form data-content="${createLink(mapping:params.mapping, id:params.id, params:['format':'json'])}"
+              data-schema="${createLink(controller:'resource',action:'schema',params:params)}"
+              data-layout="${createLink(controller:'resource',action:'layout',params:params)}" ></form>
+
+        <g:link mapping="${params.mapping}" id="${params.id}" params="[format:'json']">Link</g:link>
+
       </div>
     </div>
   </div>
