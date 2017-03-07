@@ -24,7 +24,7 @@ class ResourceController {
     }
 
     log.debug("Returning..");
-    render(view:params.gsp, model:result)
+    result
   }
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
