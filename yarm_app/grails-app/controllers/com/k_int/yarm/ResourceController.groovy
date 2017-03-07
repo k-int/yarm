@@ -13,7 +13,7 @@ class ResourceController {
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() {
 
-    log.debug("ResourceController::index ${params} ${params.srch_cfg}");
+    log.debug("ResourceController::index ${params}");
 
     def user = springSecurityService.currentUser
     def result=[:]
@@ -23,7 +23,7 @@ class ResourceController {
     }
 
     log.debug("Returning..");
-    result;
+    render(view:params.gsp, model:result)
   }
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
@@ -32,7 +32,6 @@ class ResourceController {
     def user = springSecurityService.currentUser
     def result=[:]
     result.subject = genericOIDService.resolveOID2(params.cls,params.id);
-
     respond result, formats:['json'], view : params.gsonTemplate
   }
 
