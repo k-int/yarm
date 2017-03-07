@@ -1,0 +1,7 @@
+json {
+  test {
+    file 'grails-app/views/resource/globalRecordSource.gson'
+    message 'hello'
+    wibble 'goodbye'
+  }
+}

@@ -28,9 +28,10 @@ class ResourceController {
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def edit() {
+    log.debug("edit(${params})")
     def user = springSecurityService.currentUser
     def result=[:]
-    respond result, formats:['json'], view : "test1"
+    respond result, formats:['json'], view : params.gsonTemplate
   }
 
 }
