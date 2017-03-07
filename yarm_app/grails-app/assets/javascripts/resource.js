@@ -1,4 +1,6 @@
 //= require application
+//= require underscore
+//= require jsv
 //= require jsonform/jsonform-defaults
 //= require jsonform/jsonform
 //= require jsonform/jsonform-split
