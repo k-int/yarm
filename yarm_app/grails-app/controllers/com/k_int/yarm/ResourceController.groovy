@@ -31,6 +31,8 @@ class ResourceController {
     log.debug("edit(${params})")
     def user = springSecurityService.currentUser
     def result=[:]
+    result.subject = genericOIDService.resolveOID2(params.cls,params.id);
+
     respond result, formats:['json'], view : params.gsonTemplate
   }
 

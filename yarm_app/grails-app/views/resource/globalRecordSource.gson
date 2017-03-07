@@ -1,7 +1,10 @@
-json {
-  test {
+model {
+  com.k_int.yarm.GlobalRecordSource subject
+}
+// response.contentType "application/hal+json"
+// response.header "Token", "foo"
+json g.render(subject) {
+  __additional {
     file 'grails-app/views/resource/globalRecordSource.gson'
-    message 'hello'
-    wibble 'goodbye'
   }
 }
