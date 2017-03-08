@@ -56,7 +56,7 @@ dependencies {
     compile 'org.grails.plugins:spring-security-oauth2-google:1.1.+'
     compile 'com.k-int:goai:1.0.2'
     compile 'org.grails.plugins:views-json:1.1.5'
-
+    compile 'org.grails.plugins:grails-executor:0.4'
 
     // compile "org.grails.plugins:slug-generator:0.5"
 

@@ -8,6 +8,7 @@ class AdminController {
 
   def springSecurityService
   def genericOIDService
+  def globalSourceSyncService
 
   @Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
   def index() {
@@ -18,6 +19,7 @@ class AdminController {
   @Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
   def sync() {
     log.debug("sync(${params})")
+    globalSourceSyncService.triggerSync();
     redirect(controller:'home',action:'index');
   }
 

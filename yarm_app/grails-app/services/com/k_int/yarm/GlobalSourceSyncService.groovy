@@ -19,6 +19,11 @@ class GlobalSourceSyncService {
   def executorService
   boolean parallel_jobs = false
 
+  def triggerSync() {
+    log.debug("GlobalSourceSyncService::triggerSync()");
+    runAllActiveSyncTasks()
+  }
+
   def titleReconcile = { grt ,oldtitle, newtitle ->
     log.debug("Reconcile grt: ${grt} oldtitle:${oldtitle} newtitle:${newtitle}");
 
@@ -432,9 +437,15 @@ class GlobalSourceSyncService {
   ]
 
   def runAllActiveSyncTasks() {
+    log.debug("GlobalSourceSyncService::runAllActiveSyncTasks()...");
 
     if ( running == false ) {
-      def future = executorService.submit({ internalRunAllActiveSyncTasks() } as java.util.concurrent.Callable)
+      log.debug("Starting...");
+      runAsync { 
+        log.debug("Starting2...");
+        internalRunAllActiveSyncTasks();
+      }
+      log.debug("Started");
     }
     else {
       log.warn("Not starting duplicate OAI thread");
@@ -443,41 +454,59 @@ class GlobalSourceSyncService {
 
   def internalRunAllActiveSyncTasks() {
 
+    try {
+      println("internalRunAllActiveSyncTasks");
+      this.log.debug("GlobalSourceSyncService::internalRunAllActiveSyncTasks");
+
       running = true;
 
-     def jobs = GlobalRecordSource.findAll() 
+      def jobs = GlobalRecordSource.findAll() 
 
-     jobs.each { sync_job ->
-       log.debug(sync_job);
-       // String identifier
-       // String name
-       // String type
-       // Date haveUpTo
-       // String uri
-       // String listPrefix
-       // String fullPrefix
-       // String principal
-       // String credentials
-       switch ( sync_job.type ) {
-         case 'OAI':
-           log.debug("start internal sync");
-           this.doOAISync(sync_job)
-           log.debug("this.doOAISync has returned...");
-           break;
-         default:
-           log.error("Unhandled sync job type: ${sync_job.type}");
-           break;
-       }
-     }
-     running = false
+      jobs.each { sync_job ->
+        log.debug("Running job ${sync_job}");
+        // String identifier
+        // String name
+        // String type
+        // Date haveUpTo
+        // String uri
+        // String listPrefix
+        // String fullPrefix
+        // String principal
+        // String credentials
+        switch ( sync_job.type ) {
+          case 'OAI':
+            log.debug("start internal sync");
+            this.doOAISync(sync_job)
+            log.debug("this.doOAISync has returned...");
+            break;
+          default:
+            log.error("Unhandled sync job type: ${sync_job.type}");
+            break;
+        }
+      }
+      println("done");
+    }
+    catch ( Exception e ) {
+      System.out.println("Problem")
+      log.error("problem",e);
+      e.printStackTrace()
+    }
+    finally {
+      running = false
+      println("complete");
+    }
   }
 
   def private doOAISync(sync_job) {
     log.debug("doOAISync");
     if ( parallel_jobs ) {
-      def future = executorService.submit({ intOAI(sync_job.id) } as java.util.concurrent.Callable)
+      log.debug("async oai");
+      runAsync {
+        intOAI(sync_job.id);
+      }
     }
     else {
+      log.debug("sync oai");
       intOAI(sync_job.id)
     }
     log.debug("doneOAISync");
