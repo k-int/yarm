@@ -9,9 +9,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="container-fluid">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="POST">
 
-         <g:render template="${params.gsp}" contextPath="." model="${['__yr':__yr]}" />
+         <g:render template="${params.gsp}" contextPath="." model="${['yrt':yrt]}" />
 
          <div class="form-group">
            <div class="col-sm-offset-2 col-sm-10">

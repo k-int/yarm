@@ -20,7 +20,15 @@ class ResourceController {
 
     log.debug("ResourceController::Index");
     if (springSecurityService.isLoggedIn()){
-      result.__yr = genericOIDService.resolveOID2(params.cls,params.id);
+      result.yrt = genericOIDService.resolveOID2(params.cls,params.id);
+      if ( request.method=='GET' ) {
+        log.debug("Processing GET");
+      }
+      else {
+        log.debug("Processing Post - Binding data ${params.yrt}");
+        bindData(result.yrt, params.yrt);
+        result.yrt.save(flush:true, failOnError:true);
+      }
     }
 
     log.debug("Returning..");

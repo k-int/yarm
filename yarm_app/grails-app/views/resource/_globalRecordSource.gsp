@@ -1,13 +1,13 @@
 <div class="form-group">
-  <label for="__yr.identifier" class="col-sm-2 control-label">Identifier</label>
+  <label for="yrt.identifier" class="col-sm-2 control-label">Identifier</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="__yr.identifier" name="__yr.identifier" placeholder="Identifier" value="${__yr.identifier}">
+    <input type="text" class="form-control" id="yrt.identifier" name="yrt.identifier" placeholder="Identifier" value="${yrt.identifier}">
   </div>
 </div>
 <div class="form-group">
-  <label for="__yr.name" class="col-sm-2 control-label">Name</label>
+  <label for="yrt.name" class="col-sm-2 control-label">Name</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="__yr.identifier" name="__yr.name" placeholder="Name" value="${__yr.name}">
+    <input type="text" class="form-control" id="yrt.identifier" name="yrt.name" placeholder="Name" value="${yrt.name}">
   </div>
 </div>
 
@@ -23,6 +23,6 @@
   String credentials
   Long rectype
   Boolean active
-  ${__yr}
+  ${yrt}
 -->
 
