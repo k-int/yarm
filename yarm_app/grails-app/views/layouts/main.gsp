@@ -70,6 +70,7 @@
                   <ul class="nav nav-stacked collapse left-submenu" id="item1">
                     <li><a href="google.com"><i class="glyphicon glyphicon-lock gi-2x"></i><span class="collapse in hidden-xs"> Manage Affiliations</span></a></li>
                     <li><g:link controller="admin" action="orgsDataload"><i class="glyphicon glyphicon-cloud-upload gi-2x"></i><span class="collapse in hidden-xs"> Upload Organisations Data</span></g:link></li>
+                    <li><g:link controller="admin" action="sync"><i class="glyphicon glyphicon-cloud-download gi-2x"></i><span class="collapse in hidden-xs"> Force Sync</span></g:link></li>
                     <li><link:admManageGlobalSources>Manage Global Sources</link:admManageGlobalSources></li>
                   </ul>
                 </li>
