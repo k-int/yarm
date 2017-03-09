@@ -20,6 +20,12 @@ class GlobalSourceSyncService {
   def workLocatorService
   boolean parallel_jobs = false
 
+  def identifier_families = [
+    [ name:'print',      level:'instance', medium:'print',      namespaces:[ 'issn' ]],
+    [ name:'electronic', level:'instance', medium:'electronic', namespaces:[ 'eissn', 'doi' ]],
+    [ name:'work',       level:'work',     medium:null,         namespaces:[ 'issnl' ]]
+  ];
+
   def triggerSync() {
     log.debug("GlobalSourceSyncService::triggerSync()");
     runAllActiveSyncTasks()
@@ -378,7 +384,7 @@ class GlobalSourceSyncService {
       }
       newtip.title.identifiers.add([namespace:'uri',value:newtip.titleId]);
 
-      log.debug("Harmonise identifiers");
+      log.debug("Harmonise identifiers - This makes sure we have records for the title in the DB before we start worrying about TIPPs");
       harmoniseTitleIdentifiers(newtip);
 
       result.parsed_rec.tipps.add(newtip)
@@ -726,7 +732,20 @@ class GlobalSourceSyncService {
     // title is found.
     def work = workLocatorService.locateWorkFor(titleinfo)
 
+    // If the titleinfo as a linking issn - it belongs at the work level (more or less)
+    identifier_families.each { family ->
+      switch ( family.level ) {
+        case 'instance':
+          def identifiers = titleinfo.title.identifiers.findAll { candidate_id -> family.namespaces.contains(candidate_id.namespace) }
+          log.debug("Collected together the following identifiers: ${identifiers} for ${family.name} (${family.medium}) ${family.namespaces} ${titleinfo.title.identifiers}");
+          break;
+        default:
+          break;
+      }
+    }
+
     // def title_instance = GlobalResource.lookupOrCreate(titleinfo.title.identifiers, titleinfo.title.name, work)
+    // Now group the identifiers together into families
   }
 
   def diff(localPackage, globalRecordInfo) {
