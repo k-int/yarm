@@ -738,6 +738,21 @@ class GlobalSourceSyncService {
         case 'instance':
           def identifiers = titleinfo.title.identifiers.findAll { candidate_id -> family.namespaces.contains(candidate_id.namespace) }
           log.debug("Collected together the following identifiers: ${identifiers} for ${family.name} (${family.medium}) ${family.namespaces} ${titleinfo.title.identifiers}");
+          if ( identifiers.size() > 0 ) {
+            def matched_titles = GlobalResource.lookup(identifiers)
+            switch ( matched_titles.size() ) {
+              case 0:
+                log.debug("No match - create new Instance (GlobalResource)");
+                break;
+              case 1:
+                log.debug("Match exactly one - great");
+                break;
+              default:
+                log.debug("Match multiple - Nightmare");
+                break;
+            }
+          }
+         
           break;
         default:
           break;

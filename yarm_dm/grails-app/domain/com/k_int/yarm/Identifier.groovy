@@ -9,8 +9,8 @@ public class Identifier {
 
   static mapping = {
     id column:'id_id'
-    namespace column:'id_namespace', index:'id_value_idx'
     value column:'id_value', index:'id_value_idx'
+    namespace column:'id_namespace', index:'id_value_idx'
     identifierSubtype column:'id_subtype'
   }
 
