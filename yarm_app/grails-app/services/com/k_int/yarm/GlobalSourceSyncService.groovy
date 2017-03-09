@@ -17,6 +17,7 @@ class GlobalSourceSyncService {
   public static boolean running = false;
   def genericOIDService
   def executorService
+  def workLocatorService
   boolean parallel_jobs = false
 
   def triggerSync() {
@@ -708,10 +709,24 @@ class GlobalSourceSyncService {
    *  record.
    */
   def harmoniseTitleIdentifiers(titleinfo) {
+    log.debug("harmoniseTitleIdentifiers(${titleinfo})");
     // println("harmoniseTitleIdentifiers");
     // println("Remote Title ID: ${titleinfo.titleId}");
     // println("Identifiers: ${titleinfo.title.identifiers}");
-    def title_instance = GlobalResource.lookupOrCreate(titleinfo.title.identifiers,titleinfo.title.name, true)
+
+    // A title in a package listing comes with several identifiers - sometimes both an electronic and a print ISBN.
+    // This is tricky, as the odds are overwhelmingly that the entitlement described is for the electronic resource, and not the print item
+    // In order to locate instances, we need to group identifiers up - so, for example, DOI and eISSN together, print ISSN to itself.
+    //
+    // We consider the print and the electronic items to be two separate instances, often with different properties linked by a single
+    // work. If a package grants access to both print and electronic resources, that should be modelled as two separate instaces in the package
+    //
+    // First step is to locate a work based on the title row. This may throw an exception if the system is unable to locate a unique work. This case
+    // Should be added to the work queue for a data manager and the package partially processed, then re-ingested once a way to uniquely identify the
+    // title is found.
+    def work = workLocatorService.locateWorkFor(titleinfo)
+
+    // def title_instance = GlobalResource.lookupOrCreate(titleinfo.title.identifiers, titleinfo.title.name, work)
   }
 
   def diff(localPackage, globalRecordInfo) {

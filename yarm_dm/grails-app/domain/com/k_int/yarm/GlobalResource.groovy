@@ -4,6 +4,9 @@ import org.hibernate.Transaction
 import org.hibernate.StatelessSession
 
 
+/**
+ *  An instance - IE a particular occurrence of a work -- EG the Electronic version of New Scientist with eISSN 1234-5566
+ */ 
 public class GlobalResource extends Component {
 
   Work work
@@ -39,5 +42,10 @@ public class GlobalResource extends Component {
     }
     result
   }
+
+  def lookupOrCreate(identifiers,name,work) {
+    log.debug("lookupOrCreate(${identifiers},${name},${work}");
+  }
+
 
 }

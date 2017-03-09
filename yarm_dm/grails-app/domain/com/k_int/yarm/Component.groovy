@@ -31,7 +31,7 @@ public abstract class Component {
     id column:'c_id'
     version column:'c_version'
     name column:'c_name', type:'text'
-    componentHash column:'c_component_hash'
+    componentHash column:'c_component_hash', index:'c_componenthash_idx'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
   }
