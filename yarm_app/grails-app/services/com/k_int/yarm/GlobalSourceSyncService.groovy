@@ -743,6 +743,9 @@ class GlobalSourceSyncService {
             switch ( matched_titles.size() ) {
               case 0:
                 log.debug("No match - create new Instance (GlobalResource)");
+                def resource_description = [ ]
+                // def instance = GlobalResource.create( resource_description, work) {
+
                 break;
               case 1:
                 log.debug("Match exactly one - great");

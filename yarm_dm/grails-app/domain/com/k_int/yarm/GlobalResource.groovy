@@ -22,25 +22,23 @@ public class GlobalResource extends Component {
   }
 
 
-  public static GlobalResource create(session, 
-                                      Map resource_description,
-                                      work) {
+  public static GlobalResource create(Map resource_description, work) {
     def result = null
     if ( resource_description.title ) {
-      Transaction tx = session.beginTransaction();
       result = new GlobalResource()
       result.name = resource_description.title
       result.discr = resource_description.discriminator
       result.normname = null
       result.shortcode = null
       result.work = work
-      session.insert(result)
+      result.save(flush:true, failOnError:true);
 
-      result.addHash(session,'title',result.name)
-      result.addHash(session,'discriminator',result.discr)
+      resource_description.identifiers,each { id ->
+        throw new RuntimeException("Not implemented yet");
+      }
 
-      // Add hashvalues for title and discriminator
-      tx.commit()
+      // result.addHash(session,'title',result.name)
+      // result.addHash(session,'discriminator',result.discr)
     }
     result
   }

@@ -45,12 +45,12 @@ public abstract class Component {
     componentHash (nullable:true, blank:false, maxSize:128)
   }
 
-  def addHash(session, type, value) {
+  def addHash(type, value) {
     if ( ( value ) && ( value.length() > 0 ) ) {
       def candidate_hash = titleNormalisationService.generateComponentHash(titleNormalisationService.normalise(value))
       def type_rdv = RefdataCategory.lookupOrCreate(session,'ComponentHashType',type)
       def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:candidate_hash)
-      session.insert(ch)
+      ch.save(flush:true, failOnError:true);
     }
   }
 
