@@ -2,13 +2,11 @@ package com.k_int.yarm
 
 import org.hibernate.Transaction
 import org.hibernate.StatelessSession
-import groovy.util.logging.Log4j
 
 
 /**
  *  An instance - IE a particular occurrence of a work -- EG the Electronic version of New Scientist with eISSN 1234-5566
  */ 
-@Log4j
 public class GlobalResource extends Component {
 
   Work work
@@ -23,6 +21,9 @@ public class GlobalResource extends Component {
 
 
   public static GlobalResource create(Map resource_description, work) {
+
+    log.debug("Create(${resource_description}, ${work})");
+
     def result = null
     if ( resource_description.title ) {
       result = new GlobalResource()
@@ -33,10 +34,11 @@ public class GlobalResource extends Component {
       result.work = work
       result.save(flush:true, failOnError:true);
 
-      resource_description.identifiers,each { id ->
-        throw new RuntimeException("Not implemented yet");
+      resource_description.identifiers.each { id ->
+        def new_io = new IdentifierOccurrence( owner:result,  identifier:Identifier.lookupOrCreateCanonicalIdentifier(id.namespace, id.value))
       }
 
+      result.refresh()
       // result.addHash(session,'title',result.name)
       // result.addHash(session,'discriminator',result.discr)
     }

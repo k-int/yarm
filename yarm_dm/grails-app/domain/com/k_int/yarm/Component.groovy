@@ -1,5 +1,9 @@
 package com.k_int.yarm
 
+import groovy.util.logging.Log4j
+
+
+@Log4j
 public abstract class Component {
 
   transient def titleNormalisationService
@@ -52,6 +56,9 @@ public abstract class Component {
       def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:candidate_hash)
       ch.save(flush:true, failOnError:true);
     }
+  }
+
+  def addIdentifier(namespace, value) {
   }
 
 }

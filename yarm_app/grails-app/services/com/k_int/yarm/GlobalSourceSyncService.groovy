@@ -742,10 +742,13 @@ class GlobalSourceSyncService {
             def matched_titles = GlobalResource.lookup(identifiers)
             switch ( matched_titles.size() ) {
               case 0:
+                def resource_description = [
+                  identifiers:identifiers,
+                  title:titleinfo.title,
+                  medium:family.medium
+                ]
                 log.debug("No match - create new Instance (GlobalResource)");
-                def resource_description = [ ]
-                // def instance = GlobalResource.create( resource_description, work) {
-
+                def instance = workLocatorService.locateGlobalResourceFor( resource_description, work) 
                 break;
               case 1:
                 log.debug("Match exactly one - great");

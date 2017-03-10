@@ -40,4 +40,28 @@ class WorkLocatorService {
     result
   }
 
+  /**
+   *   Return the ID of a global resource diven the description and work ID.
+   *   This function shoud eventually implement partitioned executors so that we can't create duplicate
+   *   titles. For now this will suffice tho.
+   */
+  def locateGlobalResourceFor(description, work) {
+    log.debug("Looking up global resource ${description}");
+    def result = null;
+
+    List<GlobalResource> matches = GlobalResource.lookup(description.identifiers)
+    switch ( matches.size() ) {
+      case 0:
+        result = GlobalResource.create(description, work)
+        break;
+      case 1:
+        result = matches.get(0)
+        break;
+      default:
+        throw new RuntimeException("Package Title Row Matched Multiple Items - this is an error in the package definition or the KB, please correct and re-ingest");
+        break;
+    }
+    result;
+  }
+
 }
