@@ -8,9 +8,11 @@ import com.k_int.grails.tools.utils.GOKbTextUtils
 
 class WorkLocatorService {
 
+  
 
   def locateWorkFor(titleinfo) {
 
+    long start_tm = System.currentTimeMillis();
     def result = null;
 
     if ( ( titleinfo?.title?.name == null ) ||  
@@ -37,6 +39,7 @@ class WorkLocatorService {
         break;
     }
 
+    log.debug("time-locateWorkFor(${titleinfo.title.name},...) elapsed:${System.currentTimeMillis() - start_tm}");
     result
   }
 
@@ -46,7 +49,10 @@ class WorkLocatorService {
    *   titles. For now this will suffice tho.
    */
   def locateGlobalResourceFor(description, work) {
-    log.debug("Looking up global resource ${description}");
+
+    long start_tm = System.currentTimeMillis();
+
+    log.debug("Looking up global resource ${description.title}");
     def result = null;
 
     List<GlobalResource> matches = GlobalResource.lookup(description.identifiers)
@@ -61,6 +67,9 @@ class WorkLocatorService {
         throw new RuntimeException("Package Title Row Matched Multiple Items - this is an error in the package definition or the KB, please correct and re-ingest");
         break;
     }
+
+    log.debug("time-locateGlobalResourceFor(${description.title},...) elapsed:${System.currentTimeMillis() - start_tm}");
+
     result;
   }
 

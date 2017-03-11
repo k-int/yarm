@@ -22,12 +22,12 @@ public class GlobalResource extends Component {
 
   public static GlobalResource create(Map resource_description, work) {
 
-    log.debug("Create(${resource_description}, ${work})");
+    log.debug("GlobalResource::Create(${resource_description},...)");
 
     def result = null
     if ( resource_description.title ) {
       result = new GlobalResource()
-      result.name = resource_description.title
+      result.name = resource_description.title?.name
       result.discr = resource_description.discriminator
       result.normname = null
       result.shortcode = null
@@ -35,13 +35,16 @@ public class GlobalResource extends Component {
       result.save(flush:true, failOnError:true);
 
       resource_description.identifiers.each { id ->
-        def new_io = new IdentifierOccurrence( owner:result,  identifier:Identifier.lookupOrCreateCanonicalIdentifier(id.namespace, id.value))
+        def new_io = new IdentifierOccurrence( owner:result,  identifier:Identifier.lookupOrCreateCanonicalIdentifier(id.namespace, id.value)).save(flush:true, failOnError:true)
       }
+
+      log.debug("GlobalResource created, refresh");
 
       result.refresh()
       // result.addHash(session,'title',result.name)
       // result.addHash(session,'discriminator',result.discr)
     }
+    log.debug("GlobalResource::create returning");
     result
   }
 

@@ -38,6 +38,11 @@ Once connected, issue
     GRANT ALL PRIVILEGES ON DATABASE yarm_t_demo to knowint;
 
 
+DB Session usually checked with
+
+    psql -h localhost -U knowint yarm_dev
+
+
 # Build
 
 The yarm_app can be built without building the dm dependency first. Currently targeted at grais 3.2.3 (This will go up in line with grails releases however) run
