@@ -1,5 +1,9 @@
 package com.k_int.yarm
 
+import groovy.util.logging.Log4j
+
+
+@Log4j
 public abstract class Component {
 
   transient def titleNormalisationService
@@ -31,7 +35,7 @@ public abstract class Component {
     id column:'c_id'
     version column:'c_version'
     name column:'c_name', type:'text'
-    componentHash column:'c_component_hash'
+    componentHash column:'c_component_hash', index:'c_componenthash_idx'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
   }
@@ -45,12 +49,12 @@ public abstract class Component {
     componentHash (nullable:true, blank:false, maxSize:128)
   }
 
-  def addHash(session, type, value) {
+  def addHash(type, value) {
     if ( ( value ) && ( value.length() > 0 ) ) {
       def candidate_hash = titleNormalisationService.generateComponentHash(titleNormalisationService.normalise(value))
       def type_rdv = RefdataCategory.lookupOrCreate(session,'ComponentHashType',type)
       def ch = new ComponentHash(owner:this,hashType:type_rdv,hashValue:candidate_hash)
-      session.insert(ch)
+      ch.save(flush:true, failOnError:true);
     }
   }
 
@@ -58,5 +62,8 @@ public abstract class Component {
     throw new RuntimeException("lookupOrCreate ${idlist} ${name} not implemented");
   }
 
+
+  def addIdentifier(namespace, value) {
+  }
 
 }
