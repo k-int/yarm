@@ -385,7 +385,8 @@ class GlobalSourceSyncService {
       newtip.title.identifiers.add([namespace:'uri',value:newtip.titleId]);
 
       log.debug("Harmonise identifiers - This makes sure we have records for the title in the DB before we start worrying about TIPPs");
-      harmoniseTitleIdentifiers(newtip);
+      // A side effect of creating the list of tipps is to make sure we have a local entry for the title before processing.
+      newtip.yarm_title_id = harmoniseTitleIdentifiers(newtip);
 
       result.parsed_rec.tipps.add(newtip)
     }
@@ -716,57 +717,66 @@ class GlobalSourceSyncService {
    */
   def harmoniseTitleIdentifiers(titleinfo) {
     log.debug("harmoniseTitleIdentifiers(${titleinfo})");
-    // println("harmoniseTitleIdentifiers");
-    // println("Remote Title ID: ${titleinfo.titleId}");
-    // println("Identifiers: ${titleinfo.title.identifiers}");
 
-    // A title in a package listing comes with several identifiers - sometimes both an electronic and a print ISBN.
-    // This is tricky, as the odds are overwhelmingly that the entitlement described is for the electronic resource, and not the print item
-    // In order to locate instances, we need to group identifiers up - so, for example, DOI and eISSN together, print ISSN to itself.
-    //
-    // We consider the print and the electronic items to be two separate instances, often with different properties linked by a single
-    // work. If a package grants access to both print and electronic resources, that should be modelled as two separate instaces in the package
-    //
-    // First step is to locate a work based on the title row. This may throw an exception if the system is unable to locate a unique work. This case
-    // Should be added to the work queue for a data manager and the package partially processed, then re-ingested once a way to uniquely identify the
-    // title is found.
-    def work = workLocatorService.locateWorkFor(titleinfo)
+    def global_resource_id = null;
 
-    // If the titleinfo as a linking issn - it belongs at the work level (more or less)
-    identifier_families.each { family ->
-      switch ( family.level ) {
-        case 'instance':
-          def identifiers = titleinfo.title.identifiers.findAll { candidate_id -> family.namespaces.contains(candidate_id.namespace) }
-          log.debug("Collected together the following identifiers: ${identifiers} for ${family.name} (${family.medium}) ${family.namespaces} ${titleinfo.title.identifiers}");
-          if ( identifiers.size() > 0 ) {
-            def matched_titles = GlobalResource.lookup(identifiers)
-            switch ( matched_titles.size() ) {
-              case 0:
-                def resource_description = [
-                  identifiers:identifiers,
-                  title:titleinfo.title,
-                  medium:family.medium
-                ]
-                log.debug("No match - create new Instance (GlobalResource)");
-                def instance = workLocatorService.locateGlobalResourceFor( resource_description, work) 
-                break;
-              case 1:
-                log.debug("Match exactly one - great");
-                break;
-              default:
-                log.debug("Match multiple - Nightmare");
-                break;
+    GlobalResource.withNewTransaction {
+      // println("harmoniseTitleIdentifiers");
+      // println("Remote Title ID: ${titleinfo.titleId}");
+      // println("Identifiers: ${titleinfo.title.identifiers}");
+  
+      // A title in a package listing comes with several identifiers - sometimes both an electronic and a print ISBN.
+      // This is tricky, as the odds are overwhelmingly that the entitlement described is for the electronic resource, and not the print item
+      // In order to locate instances, we need to group identifiers up - so, for example, DOI and eISSN together, print ISSN to itself.
+      //
+      // We consider the print and the electronic items to be two separate instances, often with different properties linked by a single
+      // work. If a package grants access to both print and electronic resources, that should be modelled as two separate instaces in the package
+      //
+      // First step is to locate a work based on the title row. This may throw an exception if the system is unable to locate a unique work. This case
+      // Should be added to the work queue for a data manager and the package partially processed, then re-ingested once a way to uniquely identify the
+      // title is found.
+      def work = workLocatorService.locateWorkFor(titleinfo)
+  
+      // If the titleinfo as a linking issn - it belongs at the work level (more or less)
+      identifier_families.each { family ->
+        switch ( family.level ) {
+          case 'instance':
+            def identifiers = titleinfo.title.identifiers.findAll { candidate_id -> family.namespaces.contains(candidate_id.namespace) }
+            log.debug("Collected together the following identifiers: ${identifiers} for ${family.name} (${family.medium}) ${family.namespaces} ${titleinfo.title.identifiers}");
+            if ( identifiers.size() > 0 ) {
+              def matched_titles = GlobalResource.lookup(identifiers, 'g.id')
+              switch ( matched_titles.size() ) {
+                case 0:
+                  def resource_description = [
+                    identifiers:identifiers,
+                    title:titleinfo.title,
+                    medium:family.medium
+                  ]
+                  log.debug("No match - create new Instance (GlobalResource)");
+                  def new_gr = GlobalResource.create( resource_description, work) 
+                  global_resource_id = new_gr.id;
+                  break;
+                case 1:
+                  log.debug("Match exactly one - great");
+                  global_resource_id = matched_titles.get(0);
+                  break;
+                default:
+                  log.debug("Match multiple - Nightmare");
+                  break;
+              }
             }
-          }
-         
-          break;
-        default:
-          break;
+           
+            break;
+          default:
+            break;
+        }
       }
+  
+      // def title_instance = GlobalResource.lookupOrCreate(titleinfo.title.identifiers, titleinfo.title.name, work)
+      // Now group the identifiers together into families
     }
-
-    // def title_instance = GlobalResource.lookupOrCreate(titleinfo.title.identifiers, titleinfo.title.name, work)
-    // Now group the identifiers together into families
+    log.debug("harmoniseTitleIdentifiers - returns ${global_resource_id}");
+    global_resource_id
   }
 
   def diff(localPackage, globalRecordInfo) {

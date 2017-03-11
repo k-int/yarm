@@ -48,26 +48,26 @@ public class GlobalResource extends Component {
     result
   }
 
-  public static List<GlobalResource> lookup(List identifiers) {
+  public static List<GlobalResource> lookup(List identifiers, String select_list) {
     log.debug("lookup(${identifiers}");
 
-    def result = lookupByValueOnly(identifiers)
+    def result = lookupByValueOnly(identifiers, select_list)
     if ( result.size() > 1 ) {
       // Too many matches when trying to lookup by value only, lets try with namespaces
-      result = lookupByValueAndNamespace(identifiers)
+      result = lookupByValueAndNamespace(identifiers, select_list)
     }
     result
   }
 
-  public static List<GlobalResource> lookupByValueAndNamespace(List identifiers) {
-    String base_query = 'select g from GlobalResource as g where exists ( select io from IdentifierOccurrence as io where '
+  public static List<GlobalResource> lookupByValueAndNamespace(List identifiers, String select_list) {
+    String base_query = 'select '+select_list+' from GlobalResource as g where exists ( select io from IdentifierOccurrence as io where '
     StringWriter sw = new StringWriter()
     def bindvars = [:]
     int ctr=0;
     identifiers.each { id ->
       if ( ctr>0 ) { sw.write(' OR ' ) }
-      sw.write("(io.owner = g AND io.identifier.value = :v${ctr} AND io.identifier.namespace.ns = :ns${ctr} )");
-      bindvars["v${ctr}"] = id.value
+      sw.write("(io.owner = g AND io.identifier.normalisedValue = :v${ctr} AND io.identifier.namespace.ns = :ns${ctr} )");
+      bindvars["v${ctr}"] = Identifier.normalizeIdentifier(id.value)
       bindvars["ns${ctr}"] = id.namespace
       ctr++
     }
@@ -76,19 +76,23 @@ public class GlobalResource extends Component {
     GlobalResource.executeQuery(lookup_query, bindvars);
   }
 
-  private static List<GlobalResource> lookupByValueOnly(List identifiers) {
-    String base_query = 'select g from GlobalResource as g where exists ( select io from IdentifierOccurrence as io where '
+  private static List<GlobalResource> lookupByValueOnly(List identifiers, String select_list) {
+    String base_query = 'select '+select_list+' from GlobalResource as g where exists ( select io from IdentifierOccurrence as io where '
     StringWriter sw = new StringWriter()
     def bindvars = [:]
     int ctr=0;
     identifiers.each { id ->
       if ( ctr>0 ) { sw.write(' OR ' ) }
-      sw.write("(io.owner = g AND io.identifier.value = :v${ctr})");
-      bindvars["v${ctr}"] = id.value
+      sw.write("(io.owner = g AND io.identifier.normalisedValue = :v${ctr})");
+      bindvars["v${ctr}"] = Identifier.normalizeIdentifier(id.value)
       ctr++
     }
     def lookup_query = base_query+sw.toString()+' ) ';
-    GlobalResource.executeQuery(lookup_query, bindvars);
+    log.debug("Created query ${lookup_query}, ${bindvars}");
+    def result = GlobalResource.executeQuery(lookup_query, bindvars);
+    log.debug("Compete - found ${result.size()} items");
+
+    result;
   }
 
 

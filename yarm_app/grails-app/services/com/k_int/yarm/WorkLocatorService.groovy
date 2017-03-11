@@ -48,29 +48,32 @@ class WorkLocatorService {
    *   This function shoud eventually implement partitioned executors so that we can't create duplicate
    *   titles. For now this will suffice tho.
    */
-  def locateGlobalResourceFor(description, work) {
+  def locateGlobalResourceIdFor(description, work) {
 
     long start_tm = System.currentTimeMillis();
 
     log.debug("Looking up global resource ${description.title}");
-    def result = null;
+    def global_resource_id = null;
 
-    List<GlobalResource> matches = GlobalResource.lookup(description.identifiers)
+    List<GlobalResource> matches = GlobalResource.lookup(description.identifiers,'g.id')
     switch ( matches.size() ) {
       case 0:
-        result = GlobalResource.create(description, work)
+        long create_start_tm = System.currentTimeMillis()
+        def new_res = GlobalResource.create(description, work)
+        global_resource_id = new_res.id
+        log.debug("time-CreateGlobalResource : ${System.currentTimeMillis() - create_start_tm}");
         break;
       case 1:
-        result = matches.get(0)
+        global_resource_id = matches.get(0)
         break;
       default:
         throw new RuntimeException("Package Title Row Matched Multiple Items - this is an error in the package definition or the KB, please correct and re-ingest");
         break;
     }
 
-    log.debug("time-locateGlobalResourceFor(${description.title},...) elapsed:${System.currentTimeMillis() - start_tm}");
+    log.debug("time-locateGlobalResourceFor(${description.title},...) elapsed:${System.currentTimeMillis() - start_tm} - result ${global_resource_id}");
 
-    result;
+    global_resource_id;
   }
 
 }
