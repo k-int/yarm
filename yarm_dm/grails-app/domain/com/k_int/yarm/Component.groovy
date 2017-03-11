@@ -54,4 +54,9 @@ public abstract class Component {
     }
   }
 
+  public static lookupOrCreate(idlist,name) {
+    throw new RuntimeException("lookupOrCreate ${idlist} ${name} not implemented");
+  }
+
+
 }
