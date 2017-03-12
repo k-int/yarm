@@ -155,16 +155,16 @@ class GlobalSourceSyncService {
 
   def packageReconcile = { grt ,oldpkg, newpkg ->
 
-    log.debug("packageReconcile...");
+    log.debug("packageReconcile... (${grt.identifier}...)");
 
     def pkg = null;
     boolean auto_accept_flag = false
 
-    def scope = RefdataCategory.lookupOrCreate(RefdataCategory.PKG_SCOPE,(newpkg?.scope)?:'Unknown');
-    def listStatus = RefdataCategory.lookupOrCreate(RefdataCategory.PKG_LIST_STAT,(newpkg?.listStatus)?:'Unknown');
-    def breakable = RefdataCategory.lookupOrCreate(RefdataCategory.PKG_BREAKABLE,(newpkg?.breakable)?:'Unknown');
-    def consistent = RefdataCategory.lookupOrCreate(RefdataCategory.PKG_CONSISTENT,(newpkg?.consistent)?:'Unknown');
-    def fixed = RefdataCategory.lookupOrCreate(RefdataCategory.PKG_FIXED,(newpkg?.fixed)?:'Unknown');
+    def scope = RefdataCategory.lookupOrCreate('Package.Scope',(newpkg?.scope)?:'Unknown');
+    def listStatus = RefdataCategory.lookupOrCreate('Package.ListStatus',(newpkg?.listStatus)?:'Unknown');
+    def breakable = RefdataCategory.lookupOrCreate('Package.Breakable',(newpkg?.breakable)?:'Unknown');
+    def consistent = RefdataCategory.lookupOrCreate('Package.Consistent',(newpkg?.consistent)?:'Unknown');
+    def fixed = RefdataCategory.lookupOrCreate('Package.Fixed',(newpkg?.fixed)?:'Unknown');
     def paymentType = RefdataCategory.lookupOrCreate('Package.PaymentType',(newpkg?.paymentType)?:'Unknown');
     def global = RefdataCategory.lookupOrCreate('Package.Global',(newpkg?.global)?:'Unknown');
     def isPublic = RefdataCategory.lookupOrCreate('YN','Yes');
@@ -440,12 +440,21 @@ class GlobalSourceSyncService {
     }
   }
 
-  def onNewPackage= { global_record_tracker, newpackage ->
+  def onNewPackage= { global_record_info, newpackage ->
     log.debug("Attempting to import new record");
 
     // def packageReconcile = { grt ,oldpkg, newpkg ->
+    def grt = new GlobalRecordTracker(
+      owner:global_record_info,
+      localOid:null,
+      identifier:java.util.UUID.randomUUID().toString(),
+      name:'package tracker'
+    ).save(flush:true)
 
-    // diff(newpackage, globalRecordInfo)
+    def oldpkg = [:]
+    oldpkg.tipps=[]
+
+    packageReconcile(grt ,oldpkg, newpackage)
   }
 
 
