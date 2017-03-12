@@ -442,7 +442,10 @@ class GlobalSourceSyncService {
 
   def onNewPackage= { global_record_info, newpackage ->
     log.debug("Attempting to import new record");
-    diff(newpackage, globalRecordInfo) {
+
+    // def packageReconcile = { grt ,oldpkg, newpkg ->
+
+    // diff(newpackage, globalRecordInfo)
   }
 
 
