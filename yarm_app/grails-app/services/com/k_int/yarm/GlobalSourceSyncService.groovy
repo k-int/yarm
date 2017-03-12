@@ -440,10 +440,15 @@ class GlobalSourceSyncService {
     }
   }
 
+  def onNewPackage= { global_record_info, newpackage ->
+    log.debug("Attempting to import new record");
+    diff(newpackage, globalRecordInfo) {
+  }
+
 
   // Main configuration map
   def rectypes = [
-    [ name:'Package', converter:packageConv, reconciler:packageReconcile, newRemoteRecordHandler:null, complianceCheck:testPackageCompliance ],
+    [ name:'Package', converter:packageConv, reconciler:packageReconcile, newRemoteRecordHandler:onNewPackage, complianceCheck:testPackageCompliance ],
     [ name:'Title', converter:titleConv, reconciler:titleReconcile, newRemoteRecordHandler:onNewTitle, complianceCheck:testTitleCompliance ],
   ]
 
@@ -575,6 +580,7 @@ class GlobalSourceSyncService {
             ins.close()
             def new_record_info = parsed_rec.parsed_rec
   
+            log.debug("Calling reconciler...");
             // For each tracker we need to update the local object which reflects that remote record
             existing_record_info[0].trackers.each { tracker ->
               cfg.reconciler.call(tracker, old_rec_info, new_record_info)
@@ -626,6 +632,7 @@ class GlobalSourceSyncService {
                                                         yarmCompliant: yarm_compliant);
   
             if ( existing_record_info.save(flush:true) ) {
+            log.debug("Calling reconciler...");
               log.debug("existing_record_info created ok");
             }
             else {
