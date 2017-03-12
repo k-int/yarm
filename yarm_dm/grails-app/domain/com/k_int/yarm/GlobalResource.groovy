@@ -95,5 +95,24 @@ public class GlobalResource extends Component {
     result;
   }
 
+  public static lookupOrCreate(idlist,name) {
+
+    def result = null
+    def matches = GlobalResource.lookup(idlist,'g')
+    switch ( matches.size() ) {
+      case 0:
+        throw new RuntimeException("GlobalResource.lookupOrCreate(${idlist},${name}) not implemented");
+        //result = GlobalResource.create()
+        break;
+      case 1:
+        result = matches.get(0);
+        break;
+      default:
+        throw new RuntimeException('Too many matches');
+        break;
+    }
+    result
+  }
+
 
 }
