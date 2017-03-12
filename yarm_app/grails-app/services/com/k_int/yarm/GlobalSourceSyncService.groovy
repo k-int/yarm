@@ -154,6 +154,9 @@ class GlobalSourceSyncService {
   }
 
   def packageReconcile = { grt ,oldpkg, newpkg ->
+
+    log.debug("packageReconcile...");
+
     def pkg = null;
     boolean auto_accept_flag = false
 
