@@ -204,18 +204,19 @@ class GlobalSourceSyncService {
     def onNewTipp = { ctx, tipp, auto_accept ->
       def sdf = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
       println("new tipp: ${tipp}");
-      println("identifiers: ${tipp.title.identifiers}");
 
-      def title_instance = GlobalResource.lookupOrCreate(tipp.title.identifiers,tipp.title.name)
-      println("Result of lookup or create for ${tipp.title.name} with identifiers ${tipp.title.identifiers} is ${title_instance}");
+      if ( tipp.yarm_title_id == null ) {
+        throw new RuntimeException("preflight failed to locate a title for this tipp");
+      }
 
-      def plat_instance = Platform.lookupOrCreatePlatform([name:tipp.platform]);
+      def title_instance = GlobalResource.get(tipp.yarm_title_id);
+      def plat_instance = Platform.lookupOrCreateByName(Platform.class, tipp.plat);
       def tipp_status_str = tipp.status ? tipp.status.capitalize():'Current'
-      def tipp_status = RefdataCategory.lookupOrCreate(RefdataCategory.TIPP_STATUS,tipp_status_str);
+      def tipp_status = RefdataCategory.lookupOrCreate('tipp.status',tipp_status_str);
 
         def new_tipp = new Grpp()
         new_tipp.pkg = ctx;
-        new_tipp.platform = plat_instance;
+        new_tipp.plat = plat_instance;
         new_tipp.title = title_instance;
         new_tipp.status = tipp_status;
 
@@ -323,7 +324,7 @@ class GlobalSourceSyncService {
       }
 
       // tipp.titleid
-      // tipp.platform
+      // tipp.plat
       // tipp.platformId
       // tipp.coverage
       // tipp.url

@@ -96,6 +96,7 @@ public class GlobalResource extends Component {
   }
 
   public static lookupOrCreate(idlist,name) {
+    log.debug("GlobalResource.lookupOrCreate(${idlist},${name})")
 
     def result = null
     def matches = GlobalResource.lookup(idlist,'g')
@@ -108,7 +109,7 @@ public class GlobalResource extends Component {
         result = matches.get(0);
         break;
       default:
-        throw new RuntimeException('Too many matches');
+        throw new RuntimeException("Too many matches (${matches.size()})");
         break;
     }
     result

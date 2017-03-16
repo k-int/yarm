@@ -1,6 +1,7 @@
 package com.k_int.yarm
 
 import groovy.util.logging.Log4j
+import com.k_int.grails.tools.utils.GOKbTextUtils
 
 
 @Log4j
@@ -62,8 +63,32 @@ public abstract class Component {
     throw new RuntimeException("lookupOrCreate ${idlist} ${name} not implemented");
   }
 
-
   def addIdentifier(namespace, value) {
+  }
+
+  public static def lookupOrCreateByName(clazz, name) {
+
+    log.debug("lookupOrCreateByName(${clazz.name},${name})");
+
+    def result = null;
+    def name_hash = GOKbTextUtils.simpleComponentHash(name)
+
+    def lookup_result = clazz.executeQuery("select c from ${clazz.name} as c where c.normname = :normname",[normname:name_hash])
+
+    switch(lookup_result.size() ) {
+      case 0:
+        result = clazz.newInstance()
+        result.name = name
+        result.save(flush:true, failOnError:true);
+        break;
+      case 1:
+        result = lookup_result.get(0);
+        break;
+      default:
+        throw new RuntimeException("unable to locate unique ${clazz.name} for name ${name}");
+        break;
+    }
+    result;
   }
 
 }

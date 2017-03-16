@@ -19,7 +19,7 @@ class TitleNormalisationService {
    * Deal with diacritics, stopwords, punctuation, extra spacing, etc.
    */
   public String normalise(title) {
-    return this.normaliseString(title)
+    return this.norm2(title)
   }
 
   public static int levenshteinDistance(String str1, String str2) {
