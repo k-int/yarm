@@ -236,7 +236,8 @@ class GlobalSourceSyncService {
         // }
         new_tipp.url=tipp.url;
 
-        new_tipp.save();
+        new_tipp.save(flush:true, failOnError:true);
+        log.debug("Save new tipp....${new_tipp.id}");
     }
 
     def onUpdatedTipp = { ctx, tipp, oldtipp, changes, auto_accept ->

@@ -59,9 +59,9 @@ public class Grpp extends Component {
   ]
 
   static constraints = {
-    global_resource(nullable:false, blank:false);
-    plat(nullable:false, blank:false);
-    pkg(nullable:false, blank:false);
+    global_resource(nullable:false);
+    plat(nullable:false);
+    pkg(nullable:false);
 
     startDate (nullable:true, blank:true)
     startVolume (nullable:true, blank:true)
@@ -70,12 +70,12 @@ public class Grpp extends Component {
     endVolume (nullable:true, blank:true)
     endIssue (nullable:true, blank:true)
     embargo (nullable:true, blank:true)
-    coverageDepth (nullable:true, blank:true)
+    coverageDepth (nullable:true)
     coverageNote (nullable:true, blank:true)
-    format (nullable:true, blank:true)
-    delayedOA (nullable:true, blank:true)
-    delayedOAEmbargo (nullable:true, blank:true)
-    hybridOA (nullable:true, blank:true)
+    format (nullable:true)
+    delayedOA (nullable:true)
+    delayedOAEmbargo (nullable:true)
+    hybridOA (nullable:true)
     hybridOAUrl (nullable:true, blank:true)
     primary (nullable:true, blank:true)
     paymentType (nullable:true, blank:true)

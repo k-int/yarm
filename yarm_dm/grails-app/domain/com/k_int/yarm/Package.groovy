@@ -53,5 +53,24 @@ public class Package extends Component {
                  forumId column:'pkg_forum_id'
   }
 
+ static constraints = {
+                identifier(nullable:false, blank:false);
+                      name(nullable:false, blank:false);
+                  sortName(nullable:true, blank:false);
+               packageType(nullable:true);
+             packageStatus(nullable:true);
+         packageListStatus(nullable:true);
+                 breakable(nullable:true);
+                consistent(nullable:true);
+                     fixed(nullable:true);
+           nominalPlatform(nullable:true);
+                 startDate(nullable:true, blank:false);
+                   endDate(nullable:true, blank:false);
+                  isPublic(nullable:true, blank:false);
+              packageScope(nullable:true, blank:false);
+                 vendorURL(nullable:true, blank:false);
+    cancellationAllowances(nullable:true, blank:false);
+
+  }
   
 }
