@@ -210,14 +210,14 @@ class GlobalSourceSyncService {
       }
 
       def title_instance = GlobalResource.get(tipp.yarm_title_id);
-      def plat_instance = Platform.lookupOrCreateByName(Platform.class, tipp.plat);
+      def plat_instance = Platform.lookupOrCreateByName(Platform.class, tipp.platform);
       def tipp_status_str = tipp.status ? tipp.status.capitalize():'Current'
       def tipp_status = RefdataCategory.lookupOrCreate('tipp.status',tipp_status_str);
 
         def new_tipp = new Grpp()
         new_tipp.pkg = ctx;
         new_tipp.plat = plat_instance;
-        new_tipp.title = title_instance;
+        new_tipp.global_resource = title_instance;
         new_tipp.status = tipp_status;
 
         // We rely upon there only being 1 coverage statement for now, it seems likely this will need
@@ -231,10 +231,10 @@ class GlobalSourceSyncService {
           new_tipp.endVolume=cov.endVolume;
           new_tipp.endIssue=cov.endIssue;
           new_tipp.embargo=cov.embargo;
-          new_tipp.coverageDepth=cov.coverageDepth;
-          new_tipp.coverageNote=cov.coverageNote;
+          // new_tipp.coverageDepth=cov.coverageDepth;
+          // new_tipp.coverageNote=cov.coverageNote;
         // }
-        new_tipp.hostPlatformURL=tipp.url;
+        new_tipp.url=tipp.url;
 
         new_tipp.save();
     }

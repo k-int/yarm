@@ -20,6 +20,8 @@ public abstract class Component {
   String componentHash
   Set hashes
 
+  RefdataValue status
+
   static hasMany = [
     hashes:ComponentHash,
     identifiers: IdentifierOccurrence
@@ -39,6 +41,7 @@ public abstract class Component {
     componentHash column:'c_component_hash', index:'c_componenthash_idx'
     normname column:'c_normname', type:'text', index:'c_normname_idx'
     shortcode column:'c_shortcode', index:'c_shortcode'
+    status column:'c_status_rdv_fk'
   }
 
 
@@ -48,6 +51,7 @@ public abstract class Component {
          normname (nullable:true, blank:false, maxSize:2048)
         shortcode (nullable:true, blank:false, maxSize:128)
     componentHash (nullable:true, blank:false, maxSize:128)
+           status (nullable:true, blank:false)
   }
 
   def addHash(type, value) {
