@@ -60,7 +60,15 @@
               <li><g:link controller="home" action="switchContext"><i class="glyphicon glyphicon-education gi-2x"></i><span class="collapse in hidden-xs"> Change Home Institution</span></g:link></li>
               <li><g:link mapping="tenantTitles" params="[institution_shortcode:'shu']"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
 
-              <li><g:link controller="home" action="agreements"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Agreements</span></g:link></li>
+              <li>
+                  <a href="#" data-target="#agreements-menu"
+                              data-toggle="collapse"><i class="glyphicon glyphicon-file gi-2x"></i> <span class="collapse in hidden-xs">Agreements <span class="caret"></span></span></a>
+
+                  <ul class="nav nav-stacked collapse left-submenu" id="agreements-menu">
+                    <li><g:link controller="home" action="agreements"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Current</span></g:link></li>
+                  </ul>
+              </li>
+
               <li><g:link controller="home" action="logout"><i class="glyphicon glyphicon-home gi-2x"></i><span class="collapse in hidden-xs"> Logout</span></g:link></li>
 
               <sec:ifAnyGranted roles="ROLE_ADMIN">
