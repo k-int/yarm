@@ -23,9 +23,10 @@ class GlobalSourceSyncService {
   boolean parallel_jobs = false
 
   def identifier_families = [
-    [ name:'print',      level:'instance', medium:'print',      namespaces:[ 'issn' ]],
-    [ name:'electronic', level:'instance', medium:'electronic', namespaces:[ 'eissn', 'doi' ]],
-    [ name:'work',       level:'work',     medium:null,         namespaces:[ 'issnl' ]]
+    [ name:'printJournal',      level:'instance', medium:'print',      namespaces:[ 'issn' ]],
+    [ name:'electronicJournal', level:'instance', medium:'electronic', namespaces:[ 'eissn', 'doi' ]],
+    [ name:'work',              level:'work',     medium:null,         namespaces:[ 'issnl' ]],
+    [ name:'book',              level:'instance', medium:null,         namespaces:[ 'isbn' ]]
   ];
 
   def triggerSync() {
@@ -151,7 +152,7 @@ class GlobalSourceSyncService {
       result.parsed_rec.history.add(history_statement)
     }
 
-    log.debug(result);
+    // log.debug(result);
     result
   }
 
@@ -391,7 +392,7 @@ class GlobalSourceSyncService {
       }
       newtip.title.identifiers.add([namespace:'uri',value:newtip.titleId]);
 
-      log.debug("Harmonise identifiers - This makes sure we have records for the title in the DB before we start worrying about TIPPs");
+      // log.debug("Harmonise identifiers - This makes sure we have records for the title in the DB before we start worrying about TIPPs");
       // A side effect of creating the list of tipps is to make sure we have a local entry for the title before processing.
       newtip.yarm_title_id = harmoniseTitleIdentifiers(newtip);
 
@@ -580,105 +581,105 @@ class GlobalSourceSyncService {
   
         oai_client.getChangesSince(date, sync_job.fullPrefix) { rec ->
 
-          GlobalRecordSource.withNewSession { Session s ->
-  
-            log.debug("Got OAI Record ${rec.header.identifier} datestamp: ${rec.header.datestamp} job:${sync_job.id} url:${sync_job.uri} cfg:${cfg.name}")
+          
+          GlobalRecordSource.withTransaction { transaction_status ->
+            GlobalRecordSource.withNewSession { Session s ->
     
-            def qryparams = [sync_job.id, rec.header.identifier.text()]
-            def record_timestamp = sdf.parse(rec.header.datestamp.text())
-            def existing_record_info = GlobalRecordInfo.executeQuery('select r from GlobalRecordInfo as r where r.source.id = ? and r.identifier = ?',qryparams);
-            if ( existing_record_info.size() == 1 ) {
-              log.debug("convert xml into json - config is ${cfg} ");
-              def parsed_rec = cfg.converter.call(rec.metadata, sync_job)
-    
-              // Deserialize
-              def bais = new ByteArrayInputStream((byte[])(existing_record_info[0].record))
-              def ins = new ObjectInputStream(bais);
-              def old_rec_info = ins.readObject()
-              ins.close()
-              def new_record_info = parsed_rec.parsed_rec
-    
-              log.debug("Calling reconciler...");
-              // For each tracker we need to update the local object which reflects that remote record
-              existing_record_info[0].trackers.each { tracker ->
-                cfg.reconciler.call(tracker, old_rec_info, new_record_info)
-              }
-    
-              log.debug("Calling compliance check, cfg name is ${cfg.name}");
-              existing_record_info[0].yarmCompliant = cfg.complianceCheck.call(parsed_rec.parsed_rec)
-              log.debug("Result of compliance check: ${existing_record_info[0].yarmCompliant}");
-    
-              // Finally, update our local copy of the remote object
-              def baos = new ByteArrayOutputStream()
-              def out= new ObjectOutputStream(baos)
-              out.writeObject(new_record_info)
-              out.close()
-              existing_record_info[0].record = baos.toByteArray();
-              existing_record_info[0].desc="Package ${parsed_rec.title} consisting of ${parsed_rec.parsed_rec.tipps?.size()} titles"
-              existing_record_info[0].save()
-            }
-            else {
-              log.debug("First time we have seen this record - converting ${cfg.name}");
-              def parsed_rec = cfg.converter.call(rec.metadata, sync_job)
-              log.debug("Converter thinks this rec has title :: ${parsed_rec.title}");
-    
-              // Evaluate the incoming record to see if it meets KB+ stringent data quality standards
-              log.debug("Calling compliance check, cfg name is ${cfg.name}");
-              def yarm_compliant = cfg.complianceCheck.call(parsed_rec.parsed_rec) // RefdataCategory.lookupOrCreate("YNO","No")
-              log.debug("Result of compliance [new] check: ${yarm_compliant}");
-    
-              def baos = new ByteArrayOutputStream()
-              def out= new ObjectOutputStream(baos)
-              log.debug("write object ${parsed_rec.parsed_rec}");
-              out.writeObject(parsed_rec.parsed_rec)
-  
-              log.debug("written, closed...");
-  
-              out.close()
-    
-              log.debug("Create new GlobalRecordInfo");
-  
-              // Because we don't know about this record, we can't possibly be already tracking it. Just create a local tracking record.
-              existing_record_info = new GlobalRecordInfo(
-                                                          ts:record_timestamp,
-                                                          name:parsed_rec.title,
-                                                          identifier:rec.header.identifier.text(),
-                                                          desc:"${parsed_rec.title}",
-                                                          source: sync_job,
-                                                          rectype:sync_job.rectype,
-                                                          record: baos.toByteArray(),
-                                                          yarmCompliant: yarm_compliant);
-    
-              if ( existing_record_info.save(flush:true) ) {
-              log.debug("Calling reconciler...");
-                log.debug("existing_record_info created ok");
+              log.debug("Got OAI Record ${rec.header.identifier} datestamp: ${rec.header.datestamp} job:${sync_job.id} url:${sync_job.uri} cfg:${cfg.name}")
+      
+              def qryparams = [sync_job.id, rec.header.identifier.text()]
+              def record_timestamp = sdf.parse(rec.header.datestamp.text())
+              def existing_record_info = GlobalRecordInfo.executeQuery('select r from GlobalRecordInfo as r where r.source.id = ? and r.identifier = ?',qryparams);
+              if ( existing_record_info.size() == 1 ) {
+                log.debug("convert xml into json - config is ${cfg} ");
+                def parsed_rec = cfg.converter.call(rec.metadata, sync_job)
+      
+                // Deserialize
+                def bais = new ByteArrayInputStream((byte[])(existing_record_info[0].record))
+                def ins = new ObjectInputStream(bais);
+                def old_rec_info = ins.readObject()
+                ins.close()
+                def new_record_info = parsed_rec.parsed_rec
+      
+                log.debug("Calling reconciler...");
+                // For each tracker we need to update the local object which reflects that remote record
+                existing_record_info[0].trackers.each { tracker ->
+                  cfg.reconciler.call(tracker, old_rec_info, new_record_info)
+                }
+      
+                log.debug("Calling compliance check, cfg name is ${cfg.name}");
+                existing_record_info[0].yarmCompliant = cfg.complianceCheck.call(parsed_rec.parsed_rec)
+                log.debug("Result of compliance check: ${existing_record_info[0].yarmCompliant}");
+      
+                // Finally, update our local copy of the remote object
+                def baos = new ByteArrayOutputStream()
+                def out= new ObjectOutputStream(baos)
+                out.writeObject(new_record_info)
+                out.close()
+                existing_record_info[0].record = baos.toByteArray();
+                existing_record_info[0].desc="Package ${parsed_rec.title} consisting of ${parsed_rec.parsed_rec.tipps?.size()} titles"
+                existing_record_info[0].save()
               }
               else {
-                log.error("Problem saving record info: ${existing_record_info.errors}");
-              }
-  
-              if ( yarm_compliant?.value == 'Yes' ) {
-                if ( cfg.newRemoteRecordHandler != null ) {
-                  log.debug("Calling new remote record handler...");
-                  cfg.newRemoteRecordHandler.call(existing_record_info, parsed_rec.parsed_rec)
-                  log.debug("Call completed");
+                log.debug("First time we have seen this record - converting ${cfg.name}");
+                def parsed_rec = cfg.converter.call(rec.metadata, sync_job)
+                log.debug("Converter thinks this rec has title :: ${parsed_rec.title}");
+      
+                // Evaluate the incoming record to see if it meets KB+ stringent data quality standards
+                log.debug("Calling compliance check, cfg name is ${cfg.name}");
+                def yarm_compliant = cfg.complianceCheck.call(parsed_rec.parsed_rec) // RefdataCategory.lookupOrCreate("YNO","No")
+                log.debug("Result of compliance [new] check: ${yarm_compliant}");
+      
+                def baos = new ByteArrayOutputStream()
+                def out= new ObjectOutputStream(baos)
+                log.debug("write object ${parsed_rec.parsed_rec}");
+                out.writeObject(parsed_rec.parsed_rec)
+    
+                log.debug("written, closed...");
+    
+                out.close()
+      
+                log.debug("Create new GlobalRecordInfo");
+    
+                // Because we don't know about this record, we can't possibly be already tracking it. Just create a local tracking record.
+                existing_record_info = new GlobalRecordInfo(
+                                                            ts:record_timestamp,
+                                                            name:parsed_rec.title,
+                                                            identifier:rec.header.identifier.text(),
+                                                            desc:"${parsed_rec.title}",
+                                                            source: sync_job,
+                                                            rectype:sync_job.rectype,
+                                                            record: baos.toByteArray(),
+                                                            yarmCompliant: yarm_compliant);
+      
+                if ( existing_record_info.save(flush:true) ) {
+                log.debug("Calling reconciler...");
+                  log.debug("existing_record_info created ok");
                 }
                 else {
-                  log.debug("No new record handler");
+                  log.error("Problem saving record info: ${existing_record_info.errors}");
+                }
+    
+                if ( yarm_compliant?.value == 'Yes' ) {
+                  if ( cfg.newRemoteRecordHandler != null ) {
+                    log.debug("Calling new remote record handler...");
+                    cfg.newRemoteRecordHandler.call(existing_record_info, parsed_rec.parsed_rec)
+                    log.debug("Call completed");
+                  }
+                  else {
+                    log.debug("No new record handler");
+                  }
+                }
+                else {
+                  log.debug("Skip record - not KBPlus compliant");
                 }
               }
-              else {
-                log.debug("Skip record - not KBPlus compliant");
+      
+              if ( record_timestamp.getTime() > max_timestamp ) {
+                max_timestamp = record_timestamp.getTime()
+                log.debug("Max timestamp is now ${record_timestamp}");
               }
             }
-    
-            if ( record_timestamp.getTime() > max_timestamp ) {
-              max_timestamp = record_timestamp.getTime()
-              log.debug("Max timestamp is now ${record_timestamp}");
-            }
-    
-            s.flush()
-            s.getTransaction().commit()
           }
 
           log.debug("Updating sync job max timestamp");
@@ -748,7 +749,7 @@ class GlobalSourceSyncService {
    *  record.
    */
   def harmoniseTitleIdentifiers(titleinfo) {
-    log.debug("harmoniseTitleIdentifiers(${titleinfo})");
+    // log.debug("harmoniseTitleIdentifiers(${titleinfo})");
 
     def global_resource_id = null;
 
