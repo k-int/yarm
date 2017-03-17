@@ -77,15 +77,19 @@ public abstract class Component {
     def result = null;
     def name_hash = GOKbTextUtils.simpleComponentHash(name)
 
-    def lookup_result = clazz.executeQuery("select c from ${clazz.name} as c where c.normname = :normname",[normname:name_hash])
+    log.debug("Lookup component(${clazz.name}) by name : ${name} ${name_hash}");
+    def lookup_result = clazz.executeQuery("select c from ${clazz.name} as c where c.componentHash = :componentHash",[componentHash:name_hash])
 
     switch(lookup_result.size() ) {
       case 0:
+        log.debug(" --> create");
         result = clazz.newInstance()
         result.name = name
+        result.componentHash = name_hash
         result.save(flush:true, failOnError:true);
         break;
       case 1:
+        log.debug(" --> match 1");
         result = lookup_result.get(0);
         break;
       default:
