@@ -21,5 +21,10 @@ class UrlMappings {
           cls='com.k_int.yarm.GlobalRecordSource' 
           gsp='globalRecordSource'
         }
+        name 'admManageTenants': '/admin/tenants' ( controller:'DBSearch', action:'index' ) { srch_cfg='adm_tenants' }
+        name 'admEditTenant': "/admin/tenants/$id" ( controller:'Resource', action:'index' ) { 
+          cls='com.k_int.yarm.Tenant' 
+          gsp='admTenant'
+        }
     }
 }

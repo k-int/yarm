@@ -94,6 +94,37 @@ srch_cfg = [
         [ heading:'Link', labelKey:'resource.Link',  visible:true, name:"lnk", type:'link' ]
       ]
     ]
-
+  ],
+  'adm_tenants':[
+    name:'Tenants',
+    baseclass:'com.k_int.yarm.Tenant',
+    title:'All Tenants',
+    selectType:'scalar',
+    discriminatorType:'manual',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'uriName']
+        ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.uriName', name:'uriName' ],
+        [ type:'bv', bv:'o.displayName', name:'displayName' ]
+      ],
+      enrichments:[
+        [ name:'lnk', type:'link', label:[prop:'uriName'], typeProp:'__cls', idProp:'__id', mapping:'admEditTenant' ]
+      ],
+      qbeResults:[
+        [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
+        [ heading:'Display Name', labelKey:'resource.displayName',  visible:true, name:"name" ],
+        [ heading:'URI', labelKey:'resource.uriName',  visible:true, name:"lnk", type:'link' ]
+      ]
+    ]
   ]
 ]

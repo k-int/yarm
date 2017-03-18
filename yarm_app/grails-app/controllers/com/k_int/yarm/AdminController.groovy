@@ -23,4 +23,9 @@ class AdminController {
     redirect(controller:'home',action:'index');
   }
 
+  @Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+  def createiTenant() {
+    def result=[:]
+    result;
+  }
 }
