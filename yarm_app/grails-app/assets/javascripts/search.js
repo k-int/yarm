@@ -1,5 +1,8 @@
 // search.js
 
+//= require jquery-2.2.0.min
+//= require bootstrap
+//= require select2/js/select2.min
 //= require datatables.min
 
 if (typeof jQuery !== 'undefined') {

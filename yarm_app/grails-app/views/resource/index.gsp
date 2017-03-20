@@ -5,8 +5,6 @@
     <meta name="layout" content="main"/>
     <title>YARM</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
-    <asset:stylesheet src="datatables.min.css"/>
-    <asset:javascript src="gokb/resource.js" />
     <g:set var="dt_configs" value="${[:]}" scope="request"/>
 </head>
 <body>
@@ -27,10 +25,11 @@
       </div>
     </div>
   </div>
-  <script language="JavaScript">
+  <script type="text/javascript">
     <g:applyCodec encodeAs="none">
-    var yar_dt_configs=${request.dt_configs as JSON};
+    var yarm_dt_configs=${request.dt_configs as JSON};
     </g:applyCodec>
   </script>
+  <asset:javascript src="resource.js" />
 </body>
 </html>

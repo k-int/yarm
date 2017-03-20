@@ -100,10 +100,6 @@
     </div>
   </div>
 
-
-
-  <asset:javascript src="application.js"/>
-
   <g:ifPageProperty name="page.footScripts">
     <g:pageProperty name="page.footScripts" />
   </g:ifPageProperty>

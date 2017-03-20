@@ -4,8 +4,6 @@
     <meta name="layout" content="main"/>
     <title>YARM</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
-    <asset:stylesheet src="datatables.min.css"/>
-    <asset:javascript src="gokb/search.js" />
     <script language="JavaScript">
       var yarm_dt_config = {
         "searching": false,
@@ -71,5 +69,6 @@
       </div>
     </div>
   </div>
+  <asset:javascript src="search.js" />
 </body>
 </html>
