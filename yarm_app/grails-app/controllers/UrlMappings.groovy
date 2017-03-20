@@ -30,5 +30,11 @@ class UrlMappings {
           cls='com.k_int.yarm.Tenant' 
           gsp='admTenant'
         }
+
+        name 'admManageUsers': '/admin/users' ( controller:'DBSearch', action:'index' ) {
+          srch_cfg='adm_users'
+          newResourceMapping='admEditUser'
+        }
+
     }
 }

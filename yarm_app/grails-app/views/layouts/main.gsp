@@ -81,6 +81,7 @@
                     <li><g:link controller="admin" action="sync"><i class="glyphicon glyphicon-cloud-download gi-2x"></i><span class="collapse in hidden-xs"> Force Sync</span></g:link></li>
                     <li><link:admManageGlobalSources>Manage Global Sources</link:admManageGlobalSources></li>
                     <li><g:link mapping="admManageTenants">Manage Tenants</g:link></li>
+                    <li><g:link mapping="admManageUsers">Manage Users</g:link></li>
                   </ul>
                 </li>
               </sec:ifAnyGranted>
