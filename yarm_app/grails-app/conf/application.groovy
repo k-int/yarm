@@ -122,7 +122,7 @@ srch_cfg = [
       qbeResults:[
         [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
-        [ heading:'Display Name', labelKey:'resource.displayName',  visible:true, name:"name" ],
+        [ heading:'Display Name', labelKey:'resource.displayName',  visible:true, name:"displayName" ],
         [ heading:'URI', labelKey:'resource.uriName',  visible:true, name:"lnk", type:'link' ]
       ]
     ]
