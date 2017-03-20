@@ -26,7 +26,7 @@ class GenericOIDService {
 
     if ( clazz ) {
       if ( id=='__new__' ) {
-        throw new RuntimeException("Unhandled");
+        result = clazz.newInstance()
       }
       else {
         result = clazz.get(id)
