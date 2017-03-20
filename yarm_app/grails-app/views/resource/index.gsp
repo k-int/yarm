@@ -1,9 +1,13 @@
+<%@ page import="grails.converters.JSON" %>
 <!doctype html>
 <html>
 <head>
     <meta name="layout" content="main"/>
     <title>YARM</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <asset:stylesheet src="datatables.min.css"/>
+    <asset:javascript src="gokb/resource.js" />
+    <g:set var="dt_configs" value="${[:]}" scope="request"/>
 </head>
 <body>
   <div class="container-fluid">
@@ -23,5 +27,10 @@
       </div>
     </div>
   </div>
+  <script language="JavaScript">
+    <g:applyCodec encodeAs="none">
+    var yar_dt_configs=${request.dt_configs as JSON};
+    </g:applyCodec>
+  </script>
 </body>
 </html>
