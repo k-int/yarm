@@ -7,4 +7,8 @@ class YarmTagLib {
   def yarmTextField = { attrs, body ->
     out << render(template: "simpleTextField", model: attrs, contextPath: '/templates')
   }
+
+  def yarmEmbeddedSearch = { attrs, body ->
+    out << render(template: "embeddedSearch", model: attrs, contextPath: '/templates')
+  }
 }
