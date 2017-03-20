@@ -27,7 +27,13 @@
   </div>
   <script type="text/javascript">
     <g:applyCodec encodeAs="none">
-    var yarm_dt_configs=${request.dt_configs as JSON};
+    <g:set var="first" value="true" />
+    var yarm_dt_configs={
+      <g:each in="${request.dt_configs}" var="k,v" status="i">
+        <g:if test="${i>0}">,</g:if>
+        ${k} : { i=${i} }
+      </g:each>
+    }
     </g:applyCodec>
   </script>
   <asset:javascript src="resource.js" />
