@@ -55,7 +55,7 @@
           ],
           ajax : function(data,callback,settings) {
             console.log("ajax(%o,%o,%o)",data,callback,settings);
-            var url = "${createLink(controller:'DBSearch', action:'getSearchResult')}?"+$('#${k}_qryform').serialize();
+            var url = "${createLink(controller:'DBSearch', action:'getSearchResult', params:[srch_cfg:k])}"
             console.log("Do callback %s",url);
 
             $.ajax({
