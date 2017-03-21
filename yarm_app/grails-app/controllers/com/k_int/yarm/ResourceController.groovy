@@ -12,6 +12,18 @@ class ResourceController {
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() {
+    return processResource()
+  }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def processChild() {
+    processResource()
+    redirect(url: request.getHeader('referer'))
+  }
+
+ 
+
+  private def processResource() {
 
     log.debug("ResourceController::index ${params}");
 
