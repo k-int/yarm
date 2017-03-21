@@ -1,3 +1,4 @@
+<!-- See https://github.com/twitter/typeahead.js/issues/193 -->
 <input type="text" 
        id="${id}"
        value="${value?:''}" 
