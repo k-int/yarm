@@ -2,6 +2,7 @@
 //= require bootstrap
 //= require select2/js/select2.min
 //= require datatables.min
+//= require typeahead.bundle
 
 if (typeof jQuery !== 'undefined') {
   (function($) {
@@ -20,6 +21,13 @@ if (typeof jQuery !== 'undefined') {
     //   $('#yarmQResTable').dataTable().reload();
     //   return false;
     // });
+
+    // Activate any select2 typedown elements
+    $(".yarmRefSelect").each(function(elem) {
+      var dom = $(this).data('domain');
+      var filter1 = $(this).data('filter1');
+    });
+
 
   })(jQuery);
 

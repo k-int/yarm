@@ -37,6 +37,8 @@
         </div>
       </div>
 
+      <g:simpleReferenceTypedown id="userid_controller" name="userid" baseClass="com.k_int.yarm.auth.User" />
+
     </g:form>
   </div>
 </g:if>

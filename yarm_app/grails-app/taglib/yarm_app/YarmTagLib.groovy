@@ -16,4 +16,9 @@ class YarmTagLib {
     request.dt_configs[attrs.config]=[context:attrs.context, cfg:grailsApplication.config.srch_cfg[attrs.config]];
     out << render(template: "embeddedSearch", model: attrs, contextPath: '/templates')
   }
+
+  def simpleReferenceTypedown = { attrs, body ->
+    out << render(template: "simpleReferenceTypedown", model: attrs, contextPath: '/templates')
+  }
+
 }

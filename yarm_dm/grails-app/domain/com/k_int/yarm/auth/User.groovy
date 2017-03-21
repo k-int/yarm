@@ -49,4 +49,27 @@ class User extends Party implements Serializable {
     password column: '`password`'
   }
 
+  static def refdataFind(params) {
+    def result = [];
+    def ql = null;
+
+    def query = "from User as u where lower(u.username) like :q or lower(u.displayName) like :q or lower(u.email) like :q"
+    def query_params = [q:"%${params.q.toLowerCase()}%"]
+
+    ql = User.findAll(query, query_params, params)
+
+    if ( ql ) {
+      ql.each { id ->
+        result.add([id:"${id.class.name}:${id.id}",text:"${id.username} / ${id.displayName?:''}"])
+      }
+    }
+
+    result
+  }
+
+  public String toString() {
+    return "${username} / ${displayName?:'No display name'}".toString();
+  }
+
+
 }
