@@ -142,6 +142,13 @@ srch_cfg = [
           qparam:'qp_name',
           placeholder:'Name or title of item',
           contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'uriName']
+        ],
+        [
+          prompt:'Related Party',
+          qparam:'qp_relparty',
+          placeholder:'Related Party',
+          contextTree:[ 'ctxtp':'qry', 'comparator' : 'eq', 'prop':'outgoingRelations.to.id'],
+          hide:true
         ]
       ],
       selectList:[

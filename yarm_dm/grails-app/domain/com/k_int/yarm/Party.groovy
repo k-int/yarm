@@ -18,6 +18,16 @@ class Party {
     displayName column:'p_displayname'
   }
 
+  static hasMany = [
+    incomingRelations:PartyRelationship,
+    outgoingRelations:PartyRelationship
+  ]
+
+  static mappedBy = [
+    incomingRelations:'to',
+    outgoingRelations:'from'
+  ]
+
   static constraints = {
         uriName (nullable:false, blank:false, maxSize:64)
     displayName (nullable:false, blank:false, maxSize:64)
