@@ -4,6 +4,10 @@
 //= require datatables.min
 //= require typeahead.bundle
 
+var datasrc = function(query, syncResults, asyncResults) {
+  console.log("%o,%o,%o",query, syncResults, asyncResults);
+};
+
 if (typeof jQuery !== 'undefined') {
   (function($) {
 
@@ -22,10 +26,18 @@ if (typeof jQuery !== 'undefined') {
     //   return false;
     // });
 
-    // Activate any select2 typedown elements
-    $(".yarmRefSelect").each(function(elem) {
+    $(".simpleReferenceTypedown").each(function(elem) {
       var dom = $(this).data('domain');
       var filter1 = $(this).data('filter1');
+
+
+      $(this).typeahead(
+        {}, 
+        {
+          name: 'best-pictures',
+          source: datasrc
+        });
+
     });
 
 

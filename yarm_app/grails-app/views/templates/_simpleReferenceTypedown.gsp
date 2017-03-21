@@ -1,4 +1,4 @@
-<input type="hidden" 
+<input type="text" 
        id="${id}"
        value="${value?:''}" 
        name="${name}" 
