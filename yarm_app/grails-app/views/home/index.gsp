@@ -13,5 +13,6 @@
       </div>
     </div>
   </div>
+  <asset:javascript src="application.js" />
 </body>
 </html>

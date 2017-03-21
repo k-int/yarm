@@ -11,17 +11,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="container-fluid">
-        <form class="form-horizontal" method="POST">
-
-         <g:render template="${params.gsp}" contextPath="." model="${['yrt':yrt]}" />
-
-         <div class="form-group">
-           <div class="col-sm-offset-2 col-sm-10">
-             <button type="submit" class="btn btn-default">Save</button>
-           </div>
-         </div>
-
-        </form>
+       <g:render template="${params.gsp}" contextPath="." model="${['yrt':yrt]}" />
       </div>
     </div>
   </div>
@@ -40,7 +30,7 @@
           "bPaginate": false,
           "sAjaxDataProp": "recset",
           "columns": [
-            <g:each in="${v.qbeConfig.qbeResults}" var="coldef">
+            <g:each in="${v.cfg.qbeConfig.qbeResults}" var="coldef">
               {
                 <g:if test="${coldef.type=='link'}">
                   "render":function ( data, type, row ) {
@@ -55,7 +45,7 @@
           ],
           ajax : function(data,callback,settings) {
             console.log("ajax(%o,%o,%o)",data,callback,settings);
-            var url = "${createLink(controller:'DBSearch', action:'getSearchResult', params:[srch_cfg:k])}"
+            var url = "${createLink(controller:'DBSearch', action:'getSearchResult', params:[srch_cfg:k]+v.context)}"
             console.log("Do callback %s",url);
 
             $.ajax({

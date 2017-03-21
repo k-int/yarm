@@ -60,7 +60,7 @@
 
         <table id="yarmQResTable" 
                data-qryurl="${createLink(action:'getSearchResult',params:[srch_cfg:params.srch_cfg])}"
-               class="table table-striped">
+               class="table-striped">
           <thead>
           </thead>
           <tbody>

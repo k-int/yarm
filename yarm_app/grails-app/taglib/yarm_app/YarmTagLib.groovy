@@ -13,7 +13,7 @@ class YarmTagLib {
     if ( request.dt_configs == null ) {
       request.dt_configs=[:]
     }
-    request.dt_configs[attrs.config]=grailsApplication.config.srch_cfg[attrs.config];
+    request.dt_configs[attrs.config]=[context:attrs.context, cfg:grailsApplication.config.srch_cfg[attrs.config]];
     out << render(template: "embeddedSearch", model: attrs, contextPath: '/templates')
   }
 }
