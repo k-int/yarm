@@ -27,9 +27,7 @@
         <div class="col-sm-10">
           <div class="input-group">
             <input class="form-control" style="width:50%;" type="text" name="username" />
-            <select class="form-control" style="width:50%;" name="role">
-              <option value="1">Member</option>
-            </select>
+            <g:simpleReferenceTypedown id="userid_controller" style="width:50%;" name="role" baseClass="com.k_int.yarm.auth.User" cssCls="form-control"/>
             <span class="input-group-btn">
               <button class="form-control" type="submit" class="btn btn-default">Add</button>
             </span>
@@ -37,7 +35,6 @@
         </div>
       </div>
 
-      <g:simpleReferenceTypedown id="userid_controller" name="userid" baseClass="com.k_int.yarm.auth.User" />
 
     </g:form>
   </div>

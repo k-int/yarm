@@ -1,8 +1,9 @@
-<!-- See https://github.com/twitter/typeahead.js/issues/193 -->
-<input type="text" 
-       id="${id}"
-       value="${value?:''}" 
-       name="${name}" 
-       data-domain="${baseClass}" 
-       class="simpleReferenceTypedown typeahead"
-       <g:if test="${filter1}">data-filter1="${filter1}"</g:if> />
+<select id="${id}"
+        value="${value?:''}" 
+        name="${name}" 
+        style="${style?:''}" 
+        data-domain="${baseClass}" 
+        data-lookupurl="<g:createLink controller='ajaxSupport' action='lookup'/>"
+        class="simpleReferenceTypedown typeahead ${cssCls}"
+        <g:if test="${filter1}">data-filter1="${filter1}"</g:if> >
+</select>

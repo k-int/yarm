@@ -23,9 +23,47 @@ if (typeof jQuery !== 'undefined') {
     // });
 
     $(".simpleReferenceTypedown").each(function(idx,value) {
-      console.log("Set typeahead %o",value);
       var dom = $(this).data('domain');
       var filter1 = $(this).data('filter1');
+      var lookup_url = $(this).data('lookupurl');
+      console.log("Configure Select2 %o %s %s",value,dom,lookup_url);
+
+      $(value).select2({
+        ajax: {
+          url: lookup_url,
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+            return {
+              q: '',
+              baseClass:dom,
+              qp: params.term, // search term
+              page: params.page
+            };
+          },
+          processResults: function (data, params) {
+            // parse the results into the format expected by Select2
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data, except to indicate that infinite
+            // scrolling can be used
+            params.page = params.page || 1;
+
+            return {
+              results: data.values,
+              pagination: {
+                more: (params.page * 30) < data.total_count
+              }
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        // templateResult: formatRepo, // omitted for brevity, see the source of this page
+        // templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        minimumInputLength: 1,
+      });
+
+
     });
 
 
