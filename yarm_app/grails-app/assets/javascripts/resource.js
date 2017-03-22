@@ -2,14 +2,7 @@
 //= require bootstrap
 //= require select2/js/select2.min
 //= require datatables.min
-//= require typeahead.bundle
-
-var datasrc = function(query, syncResults, asyncResults) {
-  console.log("%o,%o",query, syncResults);
-  $.get('http://localhost:8080/ajaxSupport/lookup?baseClass=com.k_int.yarm.auth.User&q=&t=' + query, function(data) {
-      asyncResults(data.values);
-  });
-};
+//= require select2.min
 
 if (typeof jQuery !== 'undefined') {
   (function($) {
@@ -33,19 +26,6 @@ if (typeof jQuery !== 'undefined') {
       console.log("Set typeahead %o",value);
       var dom = $(this).data('domain');
       var filter1 = $(this).data('filter1');
-
-
-      $(value).typeahead(
-        {
-          minLength:1,
-        },
-        {
-          name: 'best-pictures',
-          source: datasrc,
-          display: function(obj) { return obj.text; }
-        }
-      );
-
     });
 
 
