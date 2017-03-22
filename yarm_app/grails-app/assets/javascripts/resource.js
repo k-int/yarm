@@ -7,7 +7,7 @@
 var datasrc = function(query, syncResults, asyncResults) {
   console.log("%o,%o",query, syncResults);
   $.get('http://localhost:8080/ajaxSupport/lookup?baseClass=com.k_int.yarm.auth.User&q=&t=' + query, function(data) {
-      asyncResults(data);
+      asyncResults(data.values);
   });
 };
 
@@ -41,7 +41,8 @@ if (typeof jQuery !== 'undefined') {
         },
         {
           name: 'best-pictures',
-          source: datasrc
+          source: datasrc,
+          display: function(obj) { return obj.text; }
         }
       );
 
