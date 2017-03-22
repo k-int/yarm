@@ -4,5 +4,5 @@
        value="${value?:''}" 
        name="${name}" 
        data-domain="${baseClass}" 
-       class="simpleReferenceTypedown"
+       class="simpleReferenceTypedown typeahead"
        <g:if test="${filter1}">data-filter1="${filter1}"</g:if> />

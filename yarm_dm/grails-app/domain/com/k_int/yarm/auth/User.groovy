@@ -14,6 +14,7 @@ class User extends Party implements Serializable {
 
   String username
   String password
+  String email
   boolean enabled = true
   boolean accountExpired
   boolean accountLocked
@@ -42,6 +43,7 @@ class User extends Party implements Serializable {
   static constraints = {
     password blank: false, password: true
     username blank: false, unique: true
+    email blank: false, nullable:true
   }
 
   static mapping = {
