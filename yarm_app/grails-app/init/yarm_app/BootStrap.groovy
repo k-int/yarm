@@ -71,12 +71,12 @@ class BootStrap {
   }
 
   def setUpRefdata() {
-     RefdataCategory.lookupOrCreate('relationshipRole','Administrator')
-     RefdataCategory.lookupOrCreate('relationshipRole','Member')
-     RefdataCategory.lookupOrCreate('relationshipRole','Read Only User')
-     RefdataCategory.lookupOrCreate('relationshipStatus','Pending')
-     RefdataCategory.lookupOrCreate('relationshipStatus','Approved')
-     RefdataCategory.lookupOrCreate('relationshipStatus','Rejected')
+     RefdataCategory.lookupOrCreate('relationshipRole','Administrator',"2")
+     RefdataCategory.lookupOrCreate('relationshipRole','Member', "1")
+     RefdataCategory.lookupOrCreate('relationshipRole','Read Only User',"3")
+     RefdataCategory.lookupOrCreate('relationshipStatus','Pending',"2")
+     RefdataCategory.lookupOrCreate('relationshipStatus','Approved',"1")
+     RefdataCategory.lookupOrCreate('relationshipStatus','Rejected',"3")
      RefdataCategory.lookupOrCreate('orgType','Institution')
      RefdataCategory.lookupOrCreate('orgType','Consortium')
      RefdataCategory.lookupOrCreate('orgType','Vendor')
