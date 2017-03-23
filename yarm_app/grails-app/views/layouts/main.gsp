@@ -70,8 +70,7 @@
                               data-toggle="collapse"><i class="glyphicon glyphicon-file gi-2x"></i> <span class="collapse in hidden-xs">Agreements <span class="caret"></span></span></a>
 
                   <ul class="nav nav-stacked collapse left-submenu" id="agreements-menu">
-                    <li><g:link controller="home" 
-                                action="agreements" 
+                    <li><g:link mapping="tenantAgreements"
                                 params="${[institution_shortcode:params.institution_shortcode]}"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Current</span></g:link></li>
                   </ul>
                 </li>

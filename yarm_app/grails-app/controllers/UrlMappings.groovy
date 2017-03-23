@@ -16,6 +16,15 @@ class UrlMappings {
 
         name 'tenantDash' : "/instituion/$institution_shortcode" ( controller:'Institution', action:'index')
         name 'tenantTitles' : "/instituion/$institution_shortcode/titles" ( controller:'DBSearch', action:'index') { srch_cfg='tenant_titles' }
+        name 'tenantAgreements' : "/instituion/$institution_shortcode/agreements" ( controller:'DBSearch', action:'index') { 
+          srch_cfg='tenant_titles' 
+          newResourceMapping='tenantAgreement' 
+        }
+
+        name 'tenantAgreement': "/instituion/$institution_shortcode/agreements/$id" ( controller:'Resource', action:'index' ) {
+          cls='com.k_int.yarm.Agreement'
+          gsp='tennantAgreement'
+        }
 
         name 'admManageGlobalSources': '/admin/globalSources' ( controller:'DBSearch', action:'index' ) { srch_cfg='adm_global_sources' }
         name 'admEditGlobalSource': "/admin/globalSources/$id" ( controller:'Resource', action:'index' ) { 
