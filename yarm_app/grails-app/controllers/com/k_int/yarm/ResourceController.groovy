@@ -16,7 +16,8 @@ class ResourceController {
   }
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
-  def processChild() {
+  def processEmbeddedResource() {
+    log.debug("processEmbeddedResource(${params})");
     processResource()
     redirect(url: request.getHeader('referer'))
   }

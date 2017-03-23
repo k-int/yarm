@@ -71,9 +71,9 @@ class BootStrap {
   }
 
   def setUpRefdata() {
-     RefdataCategory.lookupOrCreate('relationshipRole','UOAdmin')
-     RefdataCategory.lookupOrCreate('relationshipRole','UOMember')
-     RefdataCategory.lookupOrCreate('relationshipRole','UOReadOnly')
+     RefdataCategory.lookupOrCreate('relationshipRole','Administrator')
+     RefdataCategory.lookupOrCreate('relationshipRole','Member')
+     RefdataCategory.lookupOrCreate('relationshipRole','Read Only User')
      RefdataCategory.lookupOrCreate('relationshipStatus','Pending')
      RefdataCategory.lookupOrCreate('relationshipStatus','Approved')
      RefdataCategory.lookupOrCreate('relationshipStatus','Rejected')

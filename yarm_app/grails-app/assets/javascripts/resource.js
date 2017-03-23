@@ -26,7 +26,7 @@ if (typeof jQuery !== 'undefined') {
       var dom = $(this).data('domain');
       var filter1 = $(this).data('filter1');
       var lookup_url = $(this).data('lookupurl');
-      console.log("Configure Select2 %o %s %s",value,dom,lookup_url);
+      var mode = $(this).data('lookupurl');
 
       $(value).select2({
         ajax: {
@@ -35,9 +35,9 @@ if (typeof jQuery !== 'undefined') {
           delay: 250,
           data: function (params) {
             return {
-              q: '',
               baseClass:dom,
-              qp: params.term, // search term
+              q: params.term, // search term
+              mode: mode,
               page: params.page
             };
           },

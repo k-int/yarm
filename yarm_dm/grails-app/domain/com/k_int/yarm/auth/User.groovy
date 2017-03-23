@@ -62,7 +62,14 @@ class User extends Party implements Serializable {
 
     if ( ql ) {
       ql.each { id ->
-        result.add([id:"${id.class.name}:${id.id}",text:"${id.username} / ${id.displayName?:''}"])
+        switch(params.mode) {
+          case 'stdid':
+            result.add([id:id.id,text:"${id.username} / ${id.displayName?:''}"])
+            break;
+          default:
+            result.add([id:"${id.class.name}:${id.id}",text:"${id.username} / ${id.displayName?:''}"])
+            break;
+        }
       }
     }
 
