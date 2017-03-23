@@ -51,7 +51,11 @@ class BootStrap {
                       uriName: su.uriName,
                       displayName: su.display,
                       email: su.email,
-                      enabled: true).save(failOnError: true)
+                      enabled: true,
+                      accountExpired: false,
+                      accountLocked:false,
+                      passwordExpired:false
+                      ).save(failOnError: true)
       }
 
       log.debug("Add roles for ${su.name} (${su.roles})");

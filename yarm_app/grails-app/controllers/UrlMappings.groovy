@@ -14,6 +14,7 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
+        name 'tenantDash' : "/instituion/$institution_shortcode" ( controller:'Institution', action:'index')
         name 'tenantTitles' : "/instituion/$institution_shortcode/titles" ( controller:'DBSearch', action:'index') { srch_cfg='tenant_titles' }
 
         name 'admManageGlobalSources': '/admin/globalSources' ( controller:'DBSearch', action:'index' ) { srch_cfg='adm_global_sources' }

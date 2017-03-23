@@ -28,6 +28,12 @@ class DirectoryController {
   def orgDash() { 
     log.debug("Directory::OrgDash ${params}");
     def result=[:]
+    result.tenant = Tenant.findByUriName(params.id)
+    if ( result.tenant ) {
+    }
+    else {
+      log.error("Unable to locate tenant ${params.id}");
+    }
     result
   }
 }
