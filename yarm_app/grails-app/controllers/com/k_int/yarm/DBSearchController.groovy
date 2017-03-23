@@ -100,7 +100,8 @@ class DBSearchController {
     def result = [:]
     result.label = row_as_map[cfg.label.prop]
     if ( cfg.mapping ) {
-      result.link = createLink(controller:'resource', action:'index', id : row_as_map[cfg.idProp], mapping:cfg.mapping);
+      log.debug("Create link using mapping and params ${params}");
+      result.link = createLink(controller:'resource', action:'index', params: params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
     }
     else {
       result.link = createLink(controller:'resource', action:'index', params: [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ], mapping:cfg.mapping);

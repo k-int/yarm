@@ -165,5 +165,43 @@ srch_cfg = [
         [ heading:'Username', labelKey:'resource.username',  visible:true, name:"lnk", type:'link' ]
       ]
     ]
+  ],
+  'tenant_agreements':[
+    name:'Agreements',
+    baseclass:'com.k_int.yarm.Agreement',
+    title:'Agreements',
+    selectType:'scalar',
+    discriminatorType:'manual',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
+        ],
+        [
+          prompt:'Owner',
+          qparam:'qp_owner',
+          placeholder:'Owner',
+          contextTree:[ 'ctxtp':'qry', 'comparator' : 'eq', 'prop':'owner.id'],
+          hide:true
+        ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.name', name:'name' ]
+      ],
+      enrichments:[
+        // [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'tenantAgreement' ]
+      ],
+      qbeResults:[
+        [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
+        [ heading:'Agreement Name', labelKey:'resource.name',  visible:true, name:"name" ]
+        // [ heading:'Agreement Name', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ]
+      ]
+    ]
   ]
 ]
