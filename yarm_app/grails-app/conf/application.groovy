@@ -193,17 +193,16 @@ srch_cfg = [
       selectList:[
         [ type:'bv', bv:'o.name', name:'name' ],
         [ type:'bv', bv:'o.owner.id', name:'ownerId' ],
-        [ type:'bv', bv:'o.owner.uriName', name:'ownerUriName' ]
+        [ type:'bv', bv:'o.owner.uriName', name:'institution_shortcode' ]
       ],
       enrichments:[
-        // [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'tenantAgreement' ]
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'tenantAgreement', params:['institution_shortcode'] ]
       ],
       qbeResults:[
         [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
         [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
-        [ heading:'Agreement Name', labelKey:'resource.name',  visible:true, name:"name" ],
-        [ heading:'Owner', labelKey:'resource.ownerUriName',  visible:true, name:"ownerUriName" ]
-        // [ heading:'Agreement Name', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ]
+        [ heading:'Agreement Name', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ],
+        [ heading:'Owner', labelKey:'resource.ownerUriName',  visible:true, name:"institution_shortcode" ]
       ]
     ]
   ]

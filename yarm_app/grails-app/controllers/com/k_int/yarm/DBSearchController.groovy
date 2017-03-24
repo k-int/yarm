@@ -96,16 +96,32 @@ class DBSearchController {
     }
   }
 
+  /**
+   *  If the enrichments section contains links, they are created here. Search properties can be used in the params
+   *
+   *  enrichments:[
+   *    [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'tenantAgreement', params:['institution_shortcode'] ]
+   *  ],
+   */
   def private linkValue(cfg, row_as_map) {
     def result = [:]
     result.label = row_as_map[cfg.label.prop]
+    def link_params = [:]
+    cfg.params?.each { p ->
+      link_params[p] = row_as_map[p]
+    }
+
     if ( cfg.mapping ) {
-      log.debug("Create link using mapping and params ${params}");
-      result.link = createLink(controller:'resource', action:'index', params: params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
+      link_params.id = row_as_map[cfg.idProp]
+      log.debug("Create link using mapping ${cfg.mapping} and params ${params}");
+      result.link = createLink(controller:'resource', action:'index', params: link_params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
     }
     else {
-      result.link = createLink(controller:'resource', action:'index', params: [ cls : row_as_map[cfg.typeProp], id : row_as_map[cfg.idProp] ], mapping:cfg.mapping);
+      link_params.cls = row_as_map[cfg.typeProp]
+      log.debug("Create link using params ${params}");
+      result.link = createLink(controller:'resource', action:'index', params: link_params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
     }
+
     result;
   }
 }
