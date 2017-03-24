@@ -18,9 +18,16 @@
           </thead>
           <g:each in="${agreements}" var="a">
             <tr>
-              <td>${a.name}</td>
-              <td>${a.owner.displayName}</td>
-              <td></td>
+              <td>${a[0].name}</td>
+              <td>${a[0].owner.displayName}</td>
+              <td>
+                <g:if test="${a[1]}">
+                  ${a[1].status.value}
+                </g:if>
+                <g:else>
+                  Available
+                </g:else>
+              </td>
             </tr>
           </g:each>
         </table>

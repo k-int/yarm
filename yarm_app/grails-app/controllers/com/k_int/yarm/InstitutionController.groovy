@@ -23,8 +23,8 @@ class InstitutionController {
     def result=[:]
     result.tenant = Tenant.findByUriName(params.institution_shortcode)
     if ( result.tenant ) {
-      def qry_builder = [ where_count:0, sw:new StringWriter(), qpmap:[:] ]
-      qry_builder.sw.write('select a from Agreement as a');
+      def qry_builder = [ where_count:0, sw:new StringWriter(), qpmap:[inst:result.tenant] ]
+      qry_builder.sw.write('select agg, asig from Agreement as agg left outer join AgreementSignatory as asig with ( asig.agreement.id = agg.id and asig.signatory = :inst )');
 
       addOwnerClause(qry_builder, result.tenant)
 
@@ -46,7 +46,6 @@ class InstitutionController {
       info.sw.write(' and');
     }
 
-    info.sw.write(' a.owner = :inst')
-    info.qpmap.inst = tenant;
+    info.sw.write(' agg.owner = :inst')
   }
 }
