@@ -72,6 +72,8 @@
                   <ul class="nav nav-stacked collapse left-submenu" id="agreements-menu">
                     <li><g:link mapping="tenantAgreements"
                                 params="${[institution_shortcode:params.institution_shortcode]}"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Current</span></g:link></li>
+                    <li><g:link mapping="tenantAgreement" id="__new__" params="${params}"></i><span class="collapse in hidden-xs"> Create</span></g:link></li>
+                      </li>
                   </ul>
                 </li>
               </g:if>
