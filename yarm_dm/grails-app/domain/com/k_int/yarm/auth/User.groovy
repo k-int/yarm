@@ -3,6 +3,7 @@ package com.k_int.yarm.auth
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import com.k_int.yarm.Party
+import com.k_int.yarm.Tenant
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
@@ -19,6 +20,8 @@ class User extends Party implements Serializable {
   boolean accountExpired
   boolean accountLocked
   boolean passwordExpired
+
+  Tenant homeInstitution
 
   Set<Role> getAuthorities() {
     UserRole.findAllByUser(this)*.role
@@ -44,11 +47,16 @@ class User extends Party implements Serializable {
     password blank: false, password: true
     username blank: false, unique: true
     email blank: false, nullable:true
+    homeInstitution blank: false, nullable:true
+    accountLocked blank: false, nullable:true
+    accountExpired blank: false, nullable:true
+    passwordExpired blank: false, nullable:true
   }
 
   static mapping = {
     table 'yarm_user'
     password column: '`password`'
+    homeInstitution column:'home_inst_fk'
   }
 
   static def refdataFind(params) {

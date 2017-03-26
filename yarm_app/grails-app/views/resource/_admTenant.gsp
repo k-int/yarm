@@ -25,24 +25,33 @@
         <input type="hidden" name="cls" value="com.k_int.yarm.PartyRelationship"/>
         <input type="hidden" name="id" value="__new__"/>
         <input type="hidden" name="yrt.to" value="${yrt.id}"/>
-        <input type="hidden" name="yrt.status" value=""/>
 
     
         <div class="form-group col-xs-2">
           <label class="col-sm-2 control-label">Add User</label>
         </div>
 
-        <div class="form-group col-xs-7">
+        <div class="form-group col-xs-5">
           <label for="yrt.from.id">User</label>
           <g:simpleReferenceTypedown id="userid_controller" name="yrt.from.id" mode="stdid" style="width:100%;" baseClass="com.k_int.yarm.auth.User" cssCls="form-control"/>
         </div>
 
+        <div class="form-group col-xs-2">
+          <label for="yrt.status.id">Status</label>
+          <g:select name="yrt.status.id" 
+                        class="form-control" 
+                        from="${com.k_int.yarm.RefdataValue.executeQuery('select rdv from RefdataValue as rdv where rdv.owner.label=:l order by rdv.sortKey',[l:'relationshipStatus'])}"
+                        optionKey="id"
+                        optionValue="${value}"
+                        >
+          </g:select>
+        </div>
 
         <div class="form-group col-xs-2">
           <label for="yrt.role.id">Role</label>
           <g:select name="yrt.role.id" 
                         class="form-control" 
-                        from="${com.k_int.yarm.RefdataValue.executeQuery('select rdv from RefdataValue as rdv where rdv.owner.label=:l',[l:'relationshipRole'])}"
+                        from="${com.k_int.yarm.RefdataValue.executeQuery('select rdv from RefdataValue as rdv where rdv.owner.label=:l order by rdv.sortKey',[l:'relationshipRole'])}"
                         optionKey="id"
                         optionValue="${value}"
                         >

@@ -26,7 +26,7 @@ if (typeof jQuery !== 'undefined') {
       var dom = $(this).data('domain');
       var filter1 = $(this).data('filter1');
       var lookup_url = $(this).data('lookupurl');
-      var mode = $(this).data('lookupurl');
+      var mode = $(this).data('mode');
 
       $(value).select2({
         ajax: {

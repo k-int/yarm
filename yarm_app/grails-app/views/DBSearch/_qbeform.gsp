@@ -58,7 +58,7 @@
             <div class="btn-group pull-right" role="group" aria-label="Search Buttons">
               <button name="searchAction" class="btn btn-success btn-sm" value="search" type="submit">Search</button>
               <g:if test="${params.newResourceMapping}">
-                <g:link class="btn btn-success btn-sm" mapping="${params.newResourceMapping}" id="__new__">New</g:link>
+                <g:link class="btn btn-success btn-sm" mapping="${params.newResourceMapping}" params="${params}" id="__new__">New</g:link>
               </g:if>
               <!--
               <div class="btn-group" role="group">
