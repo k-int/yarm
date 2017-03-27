@@ -184,7 +184,7 @@ class GlobalSourceSyncService {
 
       pkg = new Package(
                          identifier:grt.identifier,
-                         name:grt.name,
+                         name:newpkg.packageName,
                          impId:grt.owner.identifier,
                          autoAccept:false,
                          packageType:null,

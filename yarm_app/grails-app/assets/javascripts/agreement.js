@@ -18,7 +18,8 @@ if (typeof jQuery !== 'undefined') {
               baseClass:'com.k_int.yarm.Package',
               q: ''
           }
-        }).done(function() {
+        }).done(function(data) {
+          console.log("%o",data);
         });
       }
     );
