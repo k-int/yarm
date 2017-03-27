@@ -18,7 +18,7 @@
           </thead>
           <g:each in="${agreements}" var="a">
             <tr>
-              <td>${a[0].name}</td>
+              <td><g:link mapping="tenantAgreement" id="${a[0].id}" params="${[institution_shortcode:params.institution_shortcode]}">${a[0].name}</g:link></td>
               <td>${a[0].owner.displayName}</td>
               <td>
                 <g:if test="${a[1]}">
