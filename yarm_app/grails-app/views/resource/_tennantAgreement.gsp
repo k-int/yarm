@@ -59,13 +59,18 @@
         <div class="form-group">
           <label for="pkgSearchTxt" class="col-sm-2 control-label">Package Name:</label>
           <div class="col-sm-10">
-            <input type="text" id="pkgSearchTxt" class="form-control">
+
+            <div class="input-group">
+              <input type="text" id="pkgSearchTxt" class="form-control"> 
+              <span class="input-group-btn"> <button id="findPkgBtn" class="btn btn-success">Find Packages</button> </span>
+            </div>
           </div>
         </div>
 
         <table class="table table-striped">
           <thead>
             <tr>
+              <th>Provider</th>
               <th>Package</th>
               <th>Nominal Platform</th>
               <th>Actions</th>
@@ -84,5 +89,3 @@
 
   </div>
 </div>
-
-

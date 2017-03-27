@@ -2,6 +2,7 @@
 //= require bootstrap
 //= require select2/js/select2.min
 //= require datatables.min
+//= require agreement
 
 if (typeof jQuery !== 'undefined') {
   (function($) {
