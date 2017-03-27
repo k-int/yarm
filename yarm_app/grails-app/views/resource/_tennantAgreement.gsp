@@ -62,7 +62,11 @@
 
             <div class="input-group">
               <input type="text" id="pkgSearchTxt" class="form-control"> 
-              <span class="input-group-btn"> <button id="findPkgBtn" class="btn btn-success">Find Packages</button> </span>
+              <span class="input-group-btn"> 
+                <button id="findPkgBtn"
+                        data-lookup="${createLink(controller:'ajaxSupport', action:'lookup')}"
+                        class="btn btn-success">Find Packages</button> 
+              </span>
             </div>
           </div>
         </div>

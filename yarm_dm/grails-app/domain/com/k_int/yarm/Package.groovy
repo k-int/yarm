@@ -3,7 +3,6 @@ package com.k_int.yarm
 public class Package extends Component {
 
   String identifier
-  String name
   String sortName
   String impId
   String vendorURL
@@ -35,7 +34,6 @@ public class Package extends Component {
                       id column:'pkg_id'
                  version column:'pkg_version'
               identifier column:'pkg_identifier'
-                    name column:'pkg_name'
                 sortName column:'pkg_sort_name'
              packageType column:'pkg_type_rv_fk'
            packageStatus column:'pkg_status_rv_fk'
@@ -55,7 +53,6 @@ public class Package extends Component {
 
  static constraints = {
                 identifier(nullable:false, blank:false);
-                      name(nullable:false, blank:false);
                   sortName(nullable:true, blank:false);
                packageType(nullable:true);
              packageStatus(nullable:true);
@@ -73,4 +70,13 @@ public class Package extends Component {
 
   }
   
+  public static List refdataFind(grails.web.servlet.mvc.GrailsParameterMap params) {
+    def result = []
+    def qr = Org.executeQuery('select o.id, o.name from Package as o where o.name like :f',[f:"%${params.q?:''}%"],params)
+    qr.each { r ->
+      result.add([id:r[0], text:r[1]]);
+    }
+    result
+  }
+
 }
