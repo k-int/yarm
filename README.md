@@ -89,3 +89,17 @@ Notes on mongo and grails::
 
 
 http://krixi.com/index.php/2016/05/17/bulk-insert-grails-gorm/#more-174
+
+
+## Next Tasks
+
+Add Package to Agreement
+Add Title to Agreement
+Share Agreement
+Sign Agreement
+Search My Titles
+Export Title List
+
+KB
+Search Packages
+Search Titles
