@@ -15,6 +15,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">Contents</div>
+  <button type="button" name="" class="btn btn-success" data-toggle="modal" data-target="#addPackageModal">Add Package To Agreement</button>
   <button type="button" name="" class="btn btn-success" data-toggle="modal" data-target="#addTitleModal">Add Title To Agreement</button>
 </div>
 
@@ -30,7 +31,12 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="form-group">
+          <label for="titleSearchTxt" class="col-sm-2 control-label">Title:</label>
+          <div class="col-sm-10">
+            <input type="text" id="titleSearchTxt">
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -50,7 +56,26 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="form-group">
+          <label for="pkgSearchTxt" class="col-sm-2 control-label">Package Name:</label>
+          <div class="col-sm-10">
+            <input type="text" id="pkgSearchTxt" class="form-control">
+          </div>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Nominal Platform</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
