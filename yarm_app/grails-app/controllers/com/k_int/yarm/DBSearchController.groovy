@@ -39,6 +39,8 @@ class DBSearchController {
     log.debug("DBSearchController::getSearchResult(${params})");
     def result=[:]
 
+    // Pagenumber comes in as draw:<int>
+
     def qry_params = [:]
     qry_params << params;
     qry_params.max=50
@@ -120,12 +122,12 @@ class DBSearchController {
 
     if ( cfg.mapping ) {
       link_params.id = row_as_map[cfg.idProp]
-      log.debug("Create link using mapping ${cfg.mapping} and params ${params}");
+      // log.debug("Create link using mapping ${cfg.mapping} and params ${params}");
       result.link = createLink(controller:'resource', action:'index', params: link_params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
     }
     else {
       link_params.cls = row_as_map[cfg.typeProp]
-      log.debug("Create link using params ${params}");
+      // log.debug("Create link using params ${params}");
       result.link = createLink(controller:'resource', action:'index', params: link_params, id : row_as_map[cfg.idProp], mapping:cfg.mapping);
     }
 
