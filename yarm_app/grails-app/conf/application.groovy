@@ -265,6 +265,35 @@ srch_cfg = [
         [ heading:'Package Name', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ],
       ]
     ]
+  ],
+  'agreement_content':[
+    name:'Agreement Content',
+    baseclass:'com.k_int.yarm.AgreementItem',
+    title:'Agreement Content',
+    selectType:'scalar',
+    discriminatorType:'manual',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Owner',
+          qparam:'qp_agreement',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'eq', 'prop':'owner.id']
+        ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.linkedContent.name', name:'name' ]
+      ],
+      enrichments:[
+      ],
+      qbeResults:[
+        [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
+        [ heading:'Content', labelKey:'resource.name',  visible:true, name:"name"]
+      ]
+    ]
   ]
 
 

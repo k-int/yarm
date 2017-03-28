@@ -17,6 +17,10 @@
   <div class="panel-heading">Contents</div>
   <button type="button" name="" class="btn btn-success" data-toggle="modal" data-target="#addPackageModal">Add Package To Agreement</button>
   <button type="button" name="" class="btn btn-success" data-toggle="modal" data-target="#addTitleModal">Add Title To Agreement</button>
+
+  <div class="container">
+    <g:yarmEmbeddedSearch label="Package Content" config="agreement_content" context="${[qp_agreement:yrt.id]}"/>
+  </div>
 </div>
 
 
