@@ -49,7 +49,18 @@ class InstitutionController {
     info.sw.write(' agg.owner = :inst')
   }
 
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def addToAgreement() {
-    log.debug("addToAgreement() ${params}");
+    log.debug("addToAgreement() ${params} - ${request.instituion}");
+    if ( params.id ) {
+      def agreement = Agreement.get(params.id)
+
+      if ( params.pkg ) {
+        log.debug("Add package ${params.pkg}");
+        def pkg = Package.get(params.pkg);
+        def existingItem = AgreementItem.findByOwnerAndLinkedContent(agreement, pkg) ?:new AgreementItem(owner:agreement, linkedContent:pkg).save(flush:true, failOnError:true);
+      }
+    }
+    redirect(url: request.getHeader('referer'))
   }
 }

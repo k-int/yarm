@@ -3,6 +3,7 @@ package com.k_int.yarm
 public class AgreementItem {
   
   Agreement owner
+  Component linkedContent
 
   static mapping = {
     tablePerHierarchy false
