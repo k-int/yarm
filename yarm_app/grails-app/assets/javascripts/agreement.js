@@ -10,16 +10,25 @@ if (typeof jQuery !== 'undefined') {
     $("#findPkgBtn").click(
       function(event)  {
         var lookupUrl = $(this).data('lookup');
+        var pkg_search_text = $('#pkgSearchTxt').val();
         console.log("cleek url:%s",lookupUrl);
         event.preventDefault();
         $.ajax({
           url: lookupUrl,
           data:{
               baseClass:'com.k_int.yarm.Package',
-              q: ''
+              q: pkg_search_text
           }
         }).done(function(data) {
           console.log("%o",data);
+          $('#pkgListTableBody').empty();
+          $.each(data.values, function(i, item) {
+            console.log("Adding %o",item);
+            $('#pkgListTableBody').append("<tr><td>"+item.text+"</td><td></td><td></td><td>"+
+                                            "<a href=\"\" class=\"btn btn-success\">Add</a>"+
+                                            "</td></tr>");
+          });
+          console.log("done");
         });
       }
     );
