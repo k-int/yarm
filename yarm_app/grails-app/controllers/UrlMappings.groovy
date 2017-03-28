@@ -61,6 +61,8 @@ class UrlMappings {
           newResourceMapping='admEditUser'
         }
       
-        "/instituion/$institution_shortcode/agreements/$id/$action" (controller:'Institution')
+	"/instituion/$institution_shortcode/agreements/$id/$action" (controller:'Institution')
+        name 'selectAgreement': "/instituion/$institution_shortcode/selectAgreement" (controller:'Institution', action:'selectAgreement')
+        name 'updateAgreementStatus': "/instituion/$institution_shortcode/updateAgreementStatus" (controller:'Institution', action:'updateAgreementStatus')
     }
 }

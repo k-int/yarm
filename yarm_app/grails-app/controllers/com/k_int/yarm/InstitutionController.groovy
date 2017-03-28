@@ -74,4 +74,51 @@ class InstitutionController {
     }
     redirect(url: request.getHeader('referer'))
   }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def selectAgreement() {
+    log.debug("selectAgreement ${params} ${request.institution}");
+    def agreement = Agreement.get(params.agreement);
+
+    if ( ( agreement != null ) && ( request.institution != null ) ) {
+
+      def asig = AgreementSignatory.findBySignatoryAndAgreement(request.institution, agreement)
+
+      if ( asig == null ) {
+        log.debug("New agreement signatory ${request.instituion}");
+        asig = new AgreementSignatory(
+                                      signatory:request.institution, 
+                                      agreement:agreement,
+                                      status:RefdataCategory.lookupOrCreate('ASStatus','Selected'),
+                                      activeYN:RefdataCategory.lookupOrCreate('YN','Yes')).save(flush:true, failOnError:true);
+
+      }
+      else {
+        log.debug("Already a signatory");
+      }
+    }
+    redirect(url: request.getHeader('referer'))
+  }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def updateAgreementStatus() {
+    log.debug("updateAgreementStatus ${params} ${request.institution}");
+    def asig = AgreementSignatory.get(params.asig);
+    if ( ( asig != null ) && ( request.institution != null ) ) {
+      if ( params.status=='Yes' ) {
+        log.debug("Set yes");
+        asig.activeYN = RefdataCategory.lookupOrCreate('YN','Yes')
+      }
+      else {
+        log.debug("Set no");
+        asig.activeYN = RefdataCategory.lookupOrCreate('YN','No')
+      }
+      asig.save(flush:true, failOnError:true)
+    }
+    else {
+      log.debug("No asig");
+    }
+
+    redirect(url: request.getHeader('referer'))
+  }
 }
