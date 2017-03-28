@@ -38,6 +38,24 @@ class UrlMappings {
           gsp='admTenant'
         }
 
+        name 'kbtitles': '/kb/titles' ( controller:'DBSearch', action:'index' ) { 
+          srch_cfg='kb_titles' 
+        }
+        name 'kbtitle': "/kb/titles/$id" ( controller:'Resource', action:'index' ) {
+          cls='com.k_int.yarm.GlobalResource'
+          gsp='kbtitle'
+        }
+
+
+        name 'kbpackages': '/kb/packages' ( controller:'DBSearch', action:'index' ) { 
+          srch_cfg='kb_packages' 
+        }
+        name 'kbpackage': "/kb/packages/$id" ( controller:'Resource', action:'index' ) {
+          cls='com.k_int.yarm.Package'
+          gsp='kbpackage'
+        }
+
+
         name 'admManageUsers': '/admin/users' ( controller:'DBSearch', action:'index' ) {
           srch_cfg='adm_users'
           newResourceMapping='admEditUser'

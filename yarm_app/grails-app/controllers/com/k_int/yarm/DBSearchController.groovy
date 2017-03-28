@@ -39,12 +39,16 @@ class DBSearchController {
     log.debug("DBSearchController::getSearchResult(${params})");
     def result=[:]
 
+    def qry_params = [:]
+    qry_params << params;
+    qry_params.max=50
+
     if (springSecurityService.isLoggedIn()){
       def qryconfig = yarmConfigService.getQueryConfig(params.srch_cfg);
 
       def qry_result = com.k_int.grails.tools.query.HQLBuilder.build(grailsApplication,
                                                                      qryconfig,
-                                                                     params,
+                                                                     qry_params,
                                                                      genericOIDService)
 
 

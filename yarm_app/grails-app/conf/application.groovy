@@ -205,5 +205,68 @@ srch_cfg = [
         [ heading:'Owner', labelKey:'resource.ownerUriName',  visible:true, name:"institution_shortcode" ]
       ]
     ]
+  ],
+  'kb_titles':[
+    name:'KB Titles',
+    baseclass:'com.k_int.yarm.GlobalResource',
+    title:'KB Titles',
+    selectType:'scalar',
+    discriminatorType:'manual',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
+        ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.name', name:'name' ]
+      ],
+      enrichments:[
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'kbtitle']
+      ],
+      qbeResults:[
+        [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
+        [ heading:'Title', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ]
+      ]
+    ]
+  ],
+  'kb_packages':[
+    name:'KB Packages',
+    baseclass:'com.k_int.yarm.Package',
+    title:'KB Packages',
+    selectType:'scalar',
+    discriminatorType:'manual',
+    qbeConfig:[
+      // For querying over associations and joins, here we will need to set up scopes to be referenced in the qbeForm config
+      // Until we need them tho, they are omitted. qbeForm entries with no explicit scope are at the root object.
+      qbeForm:[
+        [
+          prompt:'Name or Title',
+          qparam:'qp_name',
+          placeholder:'Name or title of item',
+          contextTree:['ctxtp':'qry', 'comparator' : 'like', 'prop':'name']
+        ]
+      ],
+      selectList:[
+        [ type:'bv', bv:'o.name', name:'name' ]
+      ],
+      enrichments:[
+        [ name:'lnk', type:'link', label:[prop:'name'], typeProp:'__cls', idProp:'__id', mapping:'kbpackage']
+      ],
+      qbeResults:[
+        [ heading:'ID', labelKey:'resource.ID',  visible:false, name:"__id" ],
+        [ heading:'Class', labelKey:'resource.Class',  visible:false, name:"__cls" ],
+        [ heading:'Package Name', labelKey:'resource.name',  visible:true, name:"lnk", type:'link' ],
+      ]
+    ]
   ]
+
+
+
 ]

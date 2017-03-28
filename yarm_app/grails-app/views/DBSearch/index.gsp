@@ -11,7 +11,8 @@
         "bScrollInfinite": true,
         "bScrollCollapse": true,
         "sScrollY": "200px",
-        "bPaginate": false,
+        "bPaginate": true,
+        "pageLength": 50,
         "sAjaxDataProp": "recset",
         "columns": [
           <g:each in="${qryconfig.qbeConfig.qbeResults}" var="coldef">
