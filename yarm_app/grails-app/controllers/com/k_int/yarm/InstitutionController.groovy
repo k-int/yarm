@@ -19,7 +19,7 @@ class InstitutionController {
 
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def agreements() { 
-    log.debug("Institution::Index ${params}");
+    log.debug("Institution::agreements ${params}");
     def result=[:]
     result.tenant = Tenant.findByUriName(params.institution_shortcode)
     if ( result.tenant ) {
@@ -34,6 +34,17 @@ class InstitutionController {
     }
     else {
       log.error("Unable to locate tenant ${params.id}");
+    }
+    result
+  }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def agreement() {
+    log.debug("Institution::agreement ${params}");
+    def result=[:]
+    result.tenant = Tenant.findByUriName(params.institution_shortcode)
+    if ( result.tenant ) {
+      result.yrt = Agreement.get(params.id);
     }
     result
   }

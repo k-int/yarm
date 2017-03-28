@@ -56,10 +56,20 @@
         <h4 class="modal-title">Add Package To Agreement</h4>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label for="pkgSearchTxt" class="col-sm-2 control-label">Package Name:</label>
-          <div class="col-sm-10">
 
+        <div class="form-group">
+          <label for="addMode" class="col-sm-3 control-label">Add Package:</label>
+          <div class="col-sm-7">
+            <select id="addMode" name="addMode" class="form-control">
+              <option id="now">Now (Current)</option>
+              <option id="nextRevision">For next year/revision (Proposed)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pkgSearchTxt" class="col-sm-3 control-label">Package Name:</label>
+          <div class="col-sm-7">
             <div class="input-group">
               <input type="text" id="pkgSearchTxt" class="form-control"> 
               <span class="input-group-btn"> 
