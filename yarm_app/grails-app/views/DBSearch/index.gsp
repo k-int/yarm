@@ -6,6 +6,8 @@
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
     <script language="JavaScript">
       var yarm_dt_config = {
+        "serverSide": true,
+        "processing": true,
         "searching": false,
         "bLengthChange": false,
         "bScrollInfinite": true,
@@ -13,6 +15,7 @@
         "sScrollY": "200px",
         "bPaginate": true,
         "pageLength": 50,
+        "pagingType": "full_numbers",
         "sAjaxDataProp": "recset",
         "columns": [
           <g:each in="${qryconfig.qbeConfig.qbeResults}" var="coldef">

@@ -53,8 +53,11 @@ class DBSearchController {
 
 
       if ( qry_result ) {
-        result.reccount = qry_result.reccount
-        result.iTotalRecords = qry_result.reccount
+        result.reccount = qry_result.recset.size()
+        // result.reccount = qry_result.reccount
+        result.recordsTotal = qry_result.reccount
+        result.recordsFiltered = qry_result.reccount
+        // result.iTotalRecords = qry_result.reccount
         result.recset = toMap(qryconfig,qry_result.recset)
       }
     }
