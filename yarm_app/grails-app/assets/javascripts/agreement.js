@@ -11,6 +11,7 @@ if (typeof jQuery !== 'undefined') {
       function(event)  {
         var lookupUrl = $(this).data('lookup');
         var pkg_search_text = $('#pkgSearchTxt').val();
+        var instroot = $('#appBaseDiv').data('instroot');
         console.log("cleek url:%s",lookupUrl);
         event.preventDefault();
         $.ajax({
@@ -25,7 +26,7 @@ if (typeof jQuery !== 'undefined') {
           $.each(data.values, function(i, item) {
             console.log("Adding %o",item);
             $('#pkgListTableBody').append("<tr><td>"+item.text+"</td><td></td><td></td><td>"+
-                                            "<a href=\"\" class=\"btn btn-success\">Add</a>"+
+                                            "<a href=\""+instroot+"/addToAgreement?pkg="+item.id+"\" class=\"btn btn-success\">Add</a>"+
                                             "</td></tr>");
           });
           console.log("done");

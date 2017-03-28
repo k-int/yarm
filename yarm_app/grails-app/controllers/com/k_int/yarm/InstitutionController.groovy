@@ -48,4 +48,8 @@ class InstitutionController {
 
     info.sw.write(' agg.owner = :inst')
   }
+
+  def addToAgreement() {
+    log.debug("addToAgreement() ${params}");
+  }
 }

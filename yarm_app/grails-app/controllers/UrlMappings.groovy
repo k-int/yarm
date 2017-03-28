@@ -60,6 +60,7 @@ class UrlMappings {
           srch_cfg='adm_users'
           newResourceMapping='admEditUser'
         }
-
+      
+        "/instituion/$institution_shortcode/agreements/$id/$action" (controller:'Institution')
     }
 }

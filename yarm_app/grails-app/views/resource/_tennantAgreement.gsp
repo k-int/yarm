@@ -93,3 +93,4 @@
 
   </div>
 </div>
+<div id="appBaseDiv" data-instroot="${createLink(mapping:'tenantAgreement', params:[institution_shortcode:params.institution_shortcode, id:params.id])}"></div>
