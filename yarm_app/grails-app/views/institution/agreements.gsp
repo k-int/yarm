@@ -15,6 +15,7 @@
             <th>Agreement Name</th>
             <th>Owner</th>
             <th>Selection Status</th>
+            <th>Local Agreement</th>
             <th>Action</th>
           </thead>
           <g:each in="${agreements}" var="a">
@@ -28,6 +29,11 @@
                 <g:else>
                   Available
                 </g:else>
+              </td>
+              <td>
+                <g:if test="${a[1]!=null}"> 
+                  <g:link mapping="signedAgreement" params="${[institution_shortcode:params.institution_shortcode]}" id="${a[1].id}">Agreement</g:link>
+                </g:if>
               </td>
               <td>
                 <g:if test="${a[1]==null}">

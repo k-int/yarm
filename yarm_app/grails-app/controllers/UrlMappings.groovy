@@ -14,8 +14,6 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
-        name 'tenantDash' : "/instituion/$institution_shortcode" ( controller:'Institution', action:'index')
-        name 'tenantTitles' : "/instituion/$institution_shortcode/titles" ( controller:'DBSearch', action:'index') { srch_cfg='tenant_titles' }
         name 'tenantAgreements' : "/instituion/$institution_shortcode/agreements" ( controller:'Institution', action:'agreements')
 
         name 'tenantAgreement': "/instituion/$institution_shortcode/agreements/$id" ( controller:'Resource', action:'index' ) {
@@ -62,6 +60,9 @@ class UrlMappings {
         }
       
 	"/instituion/$institution_shortcode/agreements/$id/$action" (controller:'Institution')
+        name 'tenantDash' : "/instituion/$institution_shortcode" ( controller:'Institution', action:'index')
+        name 'tenantTitles' : "/instituion/$institution_shortcode/titles" ( controller:'Institution', action:'titles')
+        name 'signedAgreement': "/instituion/$institution_shortcode/signedAgreement/$id" (controller:'Institution', action:'signedAgreement')
         name 'selectAgreement': "/instituion/$institution_shortcode/selectAgreement" (controller:'Institution', action:'selectAgreement')
         name 'updateAgreementStatus': "/instituion/$institution_shortcode/updateAgreementStatus" (controller:'Institution', action:'updateAgreementStatus')
     }

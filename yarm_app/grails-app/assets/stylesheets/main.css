@@ -24,3 +24,7 @@ body {
     vertical-align: middle;
     width: auto;
 }
+
+.no-top-border { 
+     border-top: none !important; 
+ }

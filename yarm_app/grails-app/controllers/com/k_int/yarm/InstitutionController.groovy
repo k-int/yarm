@@ -4,6 +4,22 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class InstitutionController {
 
+  private static String INST_TITLES_QRY = '''from Grpp as grpp where exists 
+  ( select p from Package as p 
+               join AgreementItem as ai with ( ai.linkedContent.id = p.id ) 
+               join AgreementSignatory as asig with ( asig.agreement.id = ai.owner.id and asig.signatory = :sig and asig.activeYN = :yes )
+    where p.id = grpp.pkg.id )
+'''
+
+
+  // Alternate version
+  // Select all agreement signatory rows and titles related
+  private static String INST_TITLES_QRY_2 = '''from AgreementSignatory as asig
+join AgreementItem as ai with ( ai.owner.id = asig.agreement.id ),
+Grpp as grpp where exists ( select p from Package as p where ai.linkedContent.id = p.id and grpp.pkg = p)
+and asig.signatory = :sig  and asig.activeYN = :yes
+'''
+
   @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
   def index() { 
     log.debug("Institution::Index ${params}");
@@ -120,5 +136,25 @@ class InstitutionController {
     }
 
     redirect(url: request.getHeader('referer'))
+  }
+
+  @Secured(['ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
+  def titles() {
+    log.debug("Institution::Titles ${params}");
+    def result = [:]
+
+    def qry_params = [:]
+    qry_params << params
+
+    if ( qry_params.max == null ) {
+      qry_params.max = 10;
+    }
+
+    // Find all titles the current institution has a live agreement to access
+    def bindvars = [sig:request.institution, yes:RefdataCategory.lookupOrCreate('YN','Yes')]
+    result.titleCount = Grpp.executeQuery('select count(grpp) '+INST_TITLES_QRY,bindvars)[0];
+    result.titles = Grpp.executeQuery('select grpp '+INST_TITLES_QRY+"  order by grpp.global_resource.name",bindvars,qry_params);
+
+    result
   }
 }
