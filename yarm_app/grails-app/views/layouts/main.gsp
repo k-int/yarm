@@ -50,7 +50,7 @@
   <div class="wrapper">
     <div class="row row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
-        <div class="column col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
+        <div class="column col-sm-3 col-xs-1 sidebar-offcanvas sidebar" id="sidebar">
           <ul class="nav" id="menu">
             <li><a href="#" data-toggle="offcanvas"><i class="glyphicon glyphicon-menu-hamburger gi-2x"></i></a></li>
             <sec:ifLoggedIn>
@@ -65,15 +65,13 @@
                             params="${[institution_shortcode:params.institution_shortcode]}"><i class="glyphicon glyphicon-book gi-2x"></i><span class="collapse in hidden-xs"> Titles</span></g:link></li>
 
 
-                <li>
-                  <a href="#" data-target="#agreements-menu"
-                              data-toggle="collapse"><i class="glyphicon glyphicon-file gi-2x"></i> <span class="collapse in hidden-xs">Agreements <span class="caret"></span></span></a>
+                <li class="dropdown-submenu">
+                  <a href="#agreements-menu" data-toggle="collapse"><i class="glyphicon glyphicon-file gi-2x"></i> <span class="collapse in hidden-xs">Agreements <span class="caret"></span></span></a>
 
-                  <ul class="nav nav-stacked collapse left-submenu" id="agreements-menu">
+                  <ul class="right-submenu collapse sidebar" id="agreements-menu">
                     <li><g:link mapping="tenantAgreements"
                                 params="${[institution_shortcode:params.institution_shortcode]}"><i class="glyphicon glyphicon-file gi-2x"></i><span class="collapse in hidden-xs"> Current</span></g:link></li>
                     <li><g:link mapping="tenantAgreement" id="__new__" params="${params}"></i><span class="collapse in hidden-xs"> Create</span></g:link></li>
-                      </li>
                   </ul>
                 </li>
               </g:if>

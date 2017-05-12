@@ -35,7 +35,15 @@ html, body {
     clear: both;
 }
 
-#sidebar {
+.right-submenu {
+  position: fixed;
+  top: 33px;
+  left:310px;
+  width:100px;
+  z-index:1;
+}
+
+.sidebar {
     background-color: #444;
     color: #fff !important;
     padding-left: 0;
@@ -44,18 +52,18 @@ html, body {
     min-height: 100%;
 }
 
-#sidebar a {
+.sidebar a {
     color: #fff !important;
 }
 
-#sidebar ul li a:focus {
+.sidebar ul li a:focus {
 }
 
-#sidebar .collapse.in {
+.sidebar .collapse.in {
     display: inline;
 }
 
-#sidebar > .nav>li>a {
+.sidebar > .nav>li>a {
     white-space: nowrap;
     overflow: hidden;
 }
@@ -70,7 +78,7 @@ html, body {
  * --------------------------------------------------
  */
 @media screen and (max-width: 768px) {
-    #sidebar {
+    .sidebar {
         min-width: 60px;
     }
     
@@ -79,7 +87,7 @@ html, body {
         left: 0;
     }
     
-    #sidebar .visible-xs {
+    .sidebar .visible-xs {
        display:inline !important;
     }
     
