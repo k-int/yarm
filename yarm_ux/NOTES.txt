@@ -1,0 +1,4 @@
+
+Can we build a REACT front end to the yarm datamodel backend?
+
+https://vladimirponomarev.com/blog/authentication-in-react-apps-jwt
