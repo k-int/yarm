@@ -1,17 +1,29 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
+var yarm_api = require('../utils/api')
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
-// import YarmWorkspace from './yarmWorkspace.jsx';
 var YarmWorkspace = require('./yarmWorkspace.jsx');
-// -- Need to understand why this doesn't work for me -- var YarmWorkspace = require('./yarmWorkspace.jsx');
-
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    console.log("App.componentDidMount()");
+    yarm_api.fetchUserProfile(); //.then( function(user_profile) {
+      //console.log("User Profile...");
+    //})
+  }
+
   render() {
     var nav_components = [{label:'one'},{label:'two'},{label:'three'},{label:'four'}];
+    var registeredComponents = {
+      'yarmDashboard': YarmWorkspace
+    };
+
+    // This sets up ActiveComponent as a dynamic thing which can be switched around
+    var ActiveComponent = registeredComponents['yarmDashboard']
 
     return (
       <div className="container">
@@ -19,7 +31,7 @@ export default class App extends React.Component {
         <div>More text</div>
         <TopBar />
         <SideBar nav_components={nav_components} />
-        <YarmWorkspace />
+        <ActiveComponent />
       </div>
     )
   }
