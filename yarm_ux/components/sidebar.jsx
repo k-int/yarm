@@ -20,6 +20,6 @@ export default class SideBar extends React.Component {
 
 SideBar.propTypes={
   nav_components: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
   })).isRequired,
 };
