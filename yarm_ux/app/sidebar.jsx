@@ -1,18 +1,23 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var PropTypes = require('prop-types');
 
 export default class SideBar extends React.Component {
   render() {
-    var nav_components = ['one','two','three','four'];
+
     return (
       <div>
         <h1>Sidebar</h1>
         <ul>
-          {nav_components.map(function(comp){
-              return <li> {comp} </li>
+          {this.props.nav_components.map(function(comp){
+              return <li key={comp}> {comp} </li>
           })}
         </ul>
       </div>
     )
   }
 }
+
+SideBar.propTypes={
+  nav_components: PropTypes.array.isRequired,
+};
