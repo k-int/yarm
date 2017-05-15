@@ -4,7 +4,9 @@ var PropTypes = require('prop-types');
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
-import YarmWorkspace from './yarmWorkspace.jsx'
+// import YarmWorkspace from './yarmWorkspace.jsx';
+var YarmWorkspace = require('./yarmWorkspace.jsx');
+// -- Need to understand why this doesn't work for me -- var YarmWorkspace = require('./yarmWorkspace.jsx');
 
 
 export default class App extends React.Component {

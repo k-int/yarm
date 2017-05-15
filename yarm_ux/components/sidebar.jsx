@@ -25,14 +25,15 @@ export default class SideBar extends React.Component {
     return (
       <div>
         <h1>Sidebar v2</h1>
-        <h2>{this.state.selectedComponent}</h2>
         <ul>
-          {this.props.nav_components.map(function(comp){
+          {this.props.nav_components.map((comp) => {
               return <li
+                style={comp.label === this.state.selectedComponent ? { color:'#cc2222' } : null }
                 onClick={this.updateSelectedComponent.bind(null, comp.label)}
                 key={comp.label}> {comp.label} </li>
-          }, this)}
+          })}
         </ul>
+        <h2>{this.state.selectedComponent}</h2>
       </div>
     )
   }

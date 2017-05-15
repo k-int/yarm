@@ -8,3 +8,5 @@ export default class YarmWorkspace extends React.Component {
     )
   }
 }
+
+module.exports =   YarmWorkspace;
