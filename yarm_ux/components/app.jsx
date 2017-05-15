@@ -12,7 +12,7 @@ export default class App extends React.Component {
     var nav_components = [{label:'one'},{label:'two'},{label:'three'},{label:'four'}];
 
     return (
-      <div>
+      <div className="container">
         <div>Hello World!</div>
         <div>More text</div>
         <TopBar />
