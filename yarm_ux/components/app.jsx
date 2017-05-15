@@ -6,6 +6,7 @@ var yarm_api = require('../utils/api')
 
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
+var Switch = ReactRouter.Switch;
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
@@ -37,8 +38,13 @@ export default class App extends React.Component {
           <div>More text</div>
           <TopBar />
           <SideBar nav_components={nav_components} />
-          <Route exact path='/' component={YarmWorkspace} />
-          <Route path='/search' component={Search} />
+          <Switch>
+            <Route exact path='/' component={YarmWorkspace} />
+            <Route path='/search' component={Search} />
+            <Route render={function() {
+              return ( <p>Not Found</p> )
+            }}/>
+          </Switch>
         </div>
       </Router>
     )
