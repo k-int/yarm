@@ -10,7 +10,7 @@ export default class SideBar extends React.Component {
         <h1>Sidebar</h1>
         <ul>
           {this.props.nav_components.map(function(comp){
-              return <li key={comp}> {comp} </li>
+              return <li key={comp.label}> {comp.label} </li>
           })}
         </ul>
       </div>
@@ -19,5 +19,7 @@ export default class SideBar extends React.Component {
 }
 
 SideBar.propTypes={
-  nav_components: PropTypes.array.isRequired,
+  nav_components: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+  })).isRequired,
 };

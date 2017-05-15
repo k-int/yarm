@@ -11,7 +11,7 @@ import YarmWorkspace from './yarmWorkspace.jsx'
 
 class App extends React.Component {
   render() {
-    var nav_components = ['one','two','three','four'];
+    var nav_components = [{label:'one'},{label:'two'},{label:'three'},{label:'four'}];
 
     return (
       <div>
