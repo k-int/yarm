@@ -1,11 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
+var ReactRouter = require('react-router-dom');
 var yarm_api = require('../utils/api')
+
+var Router = ReactRouter.BrowserRouter;
+var Route = ReactRouter.Route;
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
 var YarmWorkspace = require('./yarmWorkspace.jsx');
+var Search = require('./search.jsx');
 
 export default class App extends React.Component {
 
@@ -26,13 +31,16 @@ export default class App extends React.Component {
     var ActiveComponent = registeredComponents['yarmDashboard']
 
     return (
-      <div className="container">
-        <div>Hello World!</div>
-        <div>More text</div>
-        <TopBar />
-        <SideBar nav_components={nav_components} />
-        <ActiveComponent />
-      </div>
+      <Router>
+        <div className="container">
+          <div>Hello World!</div>
+          <div>More text</div>
+          <TopBar />
+          <SideBar nav_components={nav_components} />
+          <Route exact path='/' component={YarmWorkspace} />
+          <Route path='/search' component={Search} />
+        </div>
+      </Router>
     )
   }
 }

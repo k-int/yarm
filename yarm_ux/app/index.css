@@ -9,3 +9,7 @@ ul {
 li {
   list-style-type: none;
 }
+
+.active {
+  font-weight: bold;
+}

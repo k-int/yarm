@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react-router-dom": "^4.1.1"
   }
 }
