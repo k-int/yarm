@@ -34,17 +34,17 @@ export default class App extends React.Component {
     var ActiveComponent = registeredComponents['yarmDashboard']
 
     return (
-      <Page className="debugLayout">
-        <Box fit column className="debugLayout">
-          <Box className="debugLayout">
+      <Page>
+        <Box fit column>
+          <Box>
             <TopBar />
           </Box>
           <Router>
-            <Box className="debugLayout">
-              <Box flex="0 0 200px" className="debugLayout">
+            <Box flex="1">
+              <Box flex="0 0 200px">
                 <SideBar nav_components={nav_components} />
               </Box>
-              <Box flex="1" flexGrow="1" className="debugLayout">
+              <Box flex="1" flexGrow="1">
                 <Switch>
                   <Route exact path='/' component={YarmWorkspace} />
                   <Route path='/search' component={Search} />
