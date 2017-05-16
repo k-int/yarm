@@ -5,3 +5,4 @@ https://vladimirponomarev.com/blog/authentication-in-react-apps-jwt
 https://twitter.com/evnowandforever/status/713142970074005504
 https://www.npmjs.com/package/react-jwt-auth
 https://medium.com/@satya164/supercharged-javascript-development-in-atom-ea034e22eabc
+https://github.com/rofrischmann/react-layout-components

@@ -8,6 +8,8 @@ var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
 
+import { Box, Page, VBox, Flex } from 'react-layout-components';
+
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
 var YarmWorkspace = require('./yarmWorkspace.jsx');
@@ -32,21 +34,31 @@ export default class App extends React.Component {
     var ActiveComponent = registeredComponents['yarmDashboard']
 
     return (
-      <Router>
-        <div className="container">
-          <div>Hello World!</div>
-          <div>More text</div>
-          <TopBar />
-          <SideBar nav_components={nav_components} />
-          <Switch>
-            <Route exact path='/' component={YarmWorkspace} />
-            <Route path='/search' component={Search} />
-            <Route render={function() {
-              return ( <p>Not Found</p> )
-            }}/>
-          </Switch>
-        </div>
-      </Router>
+      <Page className="debugLayout">
+        <Box fit column className="debugLayout">
+          <Box className="debugLayout">
+            <TopBar />
+          </Box>
+          <Router>
+            <Box className="debugLayout">
+              <Box flex="0 0 200px" className="debugLayout">
+                  Nav
+                  <SideBar nav_components={nav_components} />
+              </Box>
+              <Box flex="1" flexGrow="1" className="debugLayout">
+                Main
+                <Switch>
+                  <Route exact path='/' component={YarmWorkspace} />
+                  <Route path='/search' component={Search} />
+                  <Route render={function() {
+                    return ( <p>Not Found</p> )
+                  }}/>
+                </Switch>
+              </Box>
+            </Box>
+          </Router>
+        </Box>
+      </Page>
     )
   }
 }
