@@ -42,11 +42,9 @@ export default class App extends React.Component {
           <Router>
             <Box className="debugLayout">
               <Box flex="0 0 200px" className="debugLayout">
-                  Nav
-                  <SideBar nav_components={nav_components} />
+                <SideBar nav_components={nav_components} />
               </Box>
               <Box flex="1" flexGrow="1" className="debugLayout">
-                Main
                 <Switch>
                   <Route exact path='/' component={YarmWorkspace} />
                   <Route path='/search' component={Search} />
