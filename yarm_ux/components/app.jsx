@@ -8,7 +8,7 @@ var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
 
-import { Box, Page, VBox, Flex } from 'react-layout-components';
+import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
@@ -44,7 +44,7 @@ export default class App extends React.Component {
               <Box flex="0 0 200px">
                 <SideBar nav_components={nav_components} />
               </Box>
-              <Box flex="1" flexGrow="1">
+              <ScrollView flex="1" flexGrow="1">
                 <Switch>
                   <Route exact path='/' component={YarmWorkspace} />
                   <Route path='/search' component={Search} />
@@ -52,7 +52,7 @@ export default class App extends React.Component {
                     return ( <p>Not Found</p> )
                   }}/>
                 </Switch>
-              </Box>
+              </ScrollView>
             </Box>
           </Router>
         </Box>
