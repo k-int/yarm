@@ -12,8 +12,9 @@ import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import SideBar from './sidebar.jsx';
 import TopBar from './topbar.jsx';
-var YarmWorkspace = require('./yarmWorkspace.jsx');
-var Search = require('./search.jsx');
+import YarmWorkspace from './yarmWorkspace.jsx';
+import Search from './search.jsx';
+import Login from './login.jsx';
 
 export default class App extends React.Component {
 
@@ -47,6 +48,7 @@ export default class App extends React.Component {
               <ScrollView flex="1" flexGrow="1">
                 <Switch>
                   <Route exact path='/' component={YarmWorkspace} />
+                  <Route path='/login' component={Login} />
                   <Route path='/search' component={Search} />
                   <Route render={function() {
                     return ( <p>Not Found</p> )
