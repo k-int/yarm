@@ -39,14 +39,12 @@ export default class OAuthSignInButton extends Component {
     const style = {};
 
     return (
-      <Button
-        loading   = {loading}
-        icon      = {icon}
+      <button
         className = {classnames(className, 'oauth-sign-in-submit')}
         disabled  = {disabled}
         onClick   = {this.handleClick}
         {...restProps}
-      >login</Button>
+      >login</button>
     );
   }
 }
