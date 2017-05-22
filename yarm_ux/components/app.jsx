@@ -16,6 +16,8 @@ import YarmWorkspace from './yarmWorkspace.jsx';
 import Search from './search.jsx';
 import Login from './login.jsx';
 
+import OAuthButton                      from '../containers/OAuthButton.jsx';
+
 export default class App extends React.Component {
 
   componentDidMount() {
@@ -39,6 +41,7 @@ export default class App extends React.Component {
         <Box fit column>
           <Box>
             <TopBar />
+            Login Button:: <OAuthButton provider='github'>GitHub</OAuthButton>
           </Box>
           <Router>
             <Box flex="1">
