@@ -24,12 +24,13 @@ export default class YarmApp extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <Switch>
           <Route exact path='/' component={PublicHome} />
+          <Route path='/wibble' component={PublicHome} />
           <Route render={function() {
-            return ( <p>Not Found</p> )
+            return ( <p><h3>Not Found</h3></p> )
           }}/>
-        </div>
+        </Switch>
       </Router>
     )
   }
