@@ -33,6 +33,7 @@ export default class YarmApp extends React.Component {
     console.log("App.componentDidMount()");
   }
 
+  // https://stackoverflow.com/questions/36273584/redirecting-user-based-on-state-in-react -- Nice use of onboarding towards end
   // https://stackoverflow.com/questions/38279555/auth-based-redirecting-with-react-router
   render() {
     const { signedIn, name, uid, provider } = this.props;
