@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk                                                      from 'redux-thunk';
 import { Provider }                                               from 'react-redux';
 
-import App                                                        from '../components/app.jsx';
+import YarmApp                                                    from '../components/yarmApp.jsx';
 
 require('./index.css');
 
@@ -36,7 +36,7 @@ store.dispatch(initialize(reduxOauthConfig)).then(
   () => {
     ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <YarmApp />
       </Provider>,
       document.getElementById('app')
     );
