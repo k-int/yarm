@@ -12,16 +12,26 @@ import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import PublicHome from './PublicHome.jsx';
 
+import { connect }                      from 'react-redux';
+
+@connect(mapStateToProps)
 export default class YarmApp extends React.Component {
+
+  static propTypes = {
+    signedIn: PropTypes.bool,
+    provider: PropTypes.string,
+    name:     PropTypes.string,
+    uid:      PropTypes.string
+  };
 
   componentDidMount() {
     console.log("App.componentDidMount()");
-    yarm_api.fetchUserProfile(); //.then( function(user_profile) {
-      //console.log("User Profile...");
-    //})
   }
 
   render() {
+    const { signedIn, name, uid, provider } = this.props;
+    console.log("%s %s %s",name,uid,provider);
+
     return (
       <Router>
         <Switch>
@@ -35,3 +45,19 @@ export default class YarmApp extends React.Component {
     )
   }
 }
+
+
+function mapStateToProps(state) {
+    const signedIn = state.auth.getIn(['user', 'isSignedIn']) || false;
+
+    if (signedIn) {
+      const name      = state.auth.getIn(['user', 'attributes', 'name']);
+      const provider  = state.auth.getIn(['user', 'attributes', 'provider']);
+      const uid       = state.auth.getIn(['user', 'attributes', 'uid']);
+
+      return { signedIn, name, provider, uid };
+    }
+
+    return { signedIn };
+}
+
