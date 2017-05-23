@@ -11,11 +11,16 @@ var Switch = ReactRouter.Switch;
 import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import PublicHome from './PublicHome.jsx';
+import YarmWorkspace from './yarmWorkspace.jsx';
 
 import { connect }                      from 'react-redux';
 
 @connect(mapStateToProps)
 export default class YarmApp extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   static propTypes = {
     signedIn: PropTypes.bool,
@@ -28,22 +33,37 @@ export default class YarmApp extends React.Component {
     console.log("App.componentDidMount()");
   }
 
+  // https://stackoverflow.com/questions/38279555/auth-based-redirecting-with-react-router
   render() {
     const { signedIn, name, uid, provider } = this.props;
-    console.log("%s %s %s",name,uid,provider);
+    console.log("%s %s %s %o",name,uid,provider,signedIn);
+
+
+    const requireAuth = (nextState, replace)=>{
+      if (!signedIn) {
+        console.log("Not signed in - redirect");
+        replace({
+          pathname: '/',
+        })
+      }
+      else {
+        console.log("User is signed in - no redirect needed");
+      }
+    };
 
     return (
       <Router>
         <Switch>
           <Route exact path='/' component={PublicHome} />
-          <Route path='/wibble' component={PublicHome} />
+          <Route path='/home' component={YarmWorkspace} onEnter={requireAuth}/>
           <Route render={function() {
-            return ( <p><h3>Not Found</h3></p> )
+            return ( <p>Not Found</p> )
           }}/>
         </Switch>
       </Router>
     )
   }
+
 }
 
 
