@@ -35,6 +35,7 @@ export default class PublicHome extends React.Component {
           <Box>
             Public Body
             <OAuthButton provider='github'>GitHub</OAuthButton>
+            <OAuthButton provider='google'>Google</OAuthButton>
           </Box>
         </Box>
       </Page>

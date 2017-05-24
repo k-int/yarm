@@ -43,7 +43,7 @@ export default class OAuthSignInButton extends Component {
         className = {classnames(className, 'oauth-sign-in-submit')}
         onClick   = {this.handleClick}
         {...restProps}
-      >login d:{disabled}</button>
+      >{this.props.children}{disabled}</button>
     );
   }
 }

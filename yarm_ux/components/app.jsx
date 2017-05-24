@@ -41,12 +41,13 @@ export default class App extends React.Component {
         <Box fit column>
           <Box>
             <TopBar />
-            Login Button:: <OAuthButton provider='github'>GitHub</OAuthButton>
           </Box>
           <Router>
             <Box flex="1">
               <Box flex="0 0 200px">
                 <SideBar nav_components={nav_components} />
+            LButton1:: <OAuthButton provider='github'>GitHub</OAuthButton>
+            LButton2:: <OAuthButton provider='google'>Google</OAuthButton>
               </Box>
               <ScrollView flex="1" flexGrow="1">
                 <Switch>
