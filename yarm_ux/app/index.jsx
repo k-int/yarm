@@ -26,8 +26,8 @@ const reduxOauthConfig = {
     apiUrl:       'http://localhost:8080',
     signOutPath:  null,
     authProviderPaths: {
-      google: '/auth/google',
-      github: '/auth/github'
+      google: '/auth/oauth/google',
+      github: '/auth/oauth/github'
     }
   },
   cookies: document.cookie,
