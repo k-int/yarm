@@ -37,7 +37,7 @@ export default class YarmApp extends React.Component {
   // https://stackoverflow.com/questions/38279555/auth-based-redirecting-with-react-router
   render() {
     const { signedIn, name, uid, provider } = this.props;
-    console.log("%s %s %s %o",name,uid,provider,signedIn);
+    console.log("yarmApp name:%s uid:%s provider:%s signedIn:%o",name,uid,provider,signedIn);
 
 
     const requireAuth = (nextState, replace)=>{

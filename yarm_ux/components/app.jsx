@@ -18,6 +18,9 @@ import Login from './login.jsx';
 
 import OAuthButton                      from '../containers/OAuthButton.jsx';
 
+import { connect }                      from 'react-redux';
+
+@connect(mapStateToProps)
 export default class App extends React.Component {
 
   componentDidMount() {
@@ -28,6 +31,8 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { signedIn, name, uid, provider } = this.props;
+
     var nav_components = [{label:'one'},{label:'two'},{label:'three'},{label:'four'}];
     var registeredComponents = {
       'yarmDashboard': YarmWorkspace
@@ -65,4 +70,18 @@ export default class App extends React.Component {
       </Page>
     )
   }
+}
+
+function mapStateToProps(state) {
+  const signedIn = state.auth.getIn(['user', 'isSignedIn']) || false;
+
+  if (signedIn) {
+    const name      = state.auth.getIn(['user', 'attributes', 'name']);
+    const provider  = state.auth.getIn(['user', 'attributes', 'provider']);
+    const uid       = state.auth.getIn(['user', 'attributes', 'uid']);
+
+    return { signedIn, name, provider, uid };
+  }
+
+  return { signedIn };
 }
