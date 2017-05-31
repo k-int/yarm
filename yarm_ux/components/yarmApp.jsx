@@ -11,6 +11,7 @@ var Switch = ReactRouter.Switch;
 import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import Homepage from './Homepage.jsx';
+import Search from './search.jsx';
 import YarmWorkspace from './yarmWorkspace.jsx';
 
 import { connect }                      from 'react-redux';
@@ -41,6 +42,9 @@ export default class YarmApp extends React.Component {
 
 
     const requireAuth = (nextState, replace)=>{
+
+      console.log("requireAuth...");
+
       if (!signedIn) {
         console.log("Not signed in - redirect");
         replace({
@@ -57,6 +61,7 @@ export default class YarmApp extends React.Component {
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/home' component={YarmWorkspace} onEnter={requireAuth}/>
+          <Route path='/search' component={Search} onEnter={requireAuth}/>
           <Route render={function() {
             return ( <p>Not Found</p> )
           }}/>

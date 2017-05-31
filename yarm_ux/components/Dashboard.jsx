@@ -2,6 +2,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
 
+var ReactRouter = require('react-router-dom');
+
+var Link = ReactRouter.Link;
+
+
 import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 import { connect }                      from 'react-redux';
 
@@ -23,6 +28,7 @@ export default class Dashboard extends React.Component {
         <Box column fit>
           <Box>
             Dash Nav
+            <Link to="/search">Search</Link>
           </Box>
           <Box>
             Logged in Dashboard {name}
