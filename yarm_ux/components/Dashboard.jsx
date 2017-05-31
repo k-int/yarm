@@ -16,6 +16,8 @@ export default class Dashboard extends React.Component {
 
   render() {
 
+    const { signedIn, name, uid, provider } = this.props;
+
     return (
       <Page>
         <Box column fit>
@@ -23,7 +25,7 @@ export default class Dashboard extends React.Component {
             Dash Nav
           </Box>
           <Box>
-            Logged in Dashboard
+            Logged in Dashboard {name}
           </Box>
         </Box>
       </Page>
@@ -32,6 +34,10 @@ export default class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes={
+  signedIn: PropTypes.bool,
+  provider: PropTypes.string,
+  name:     PropTypes.string,
+  uid:      PropTypes.string
 };
 
 module.exports = Dashboard;
@@ -40,6 +46,7 @@ function mapStateToProps(state) {
   const signedIn = state.auth.getIn(['user', 'isSignedIn']) || false;
 
   if (signedIn) {
+    console.log("Dashboard.. load %o",state.auth);
     const name      = state.auth.getIn(['user', 'attributes', 'name']);
     const provider  = state.auth.getIn(['user', 'attributes', 'provider']);
     const uid       = state.auth.getIn(['user', 'attributes', 'uid']);
