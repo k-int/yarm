@@ -10,7 +10,7 @@ var Switch = ReactRouter.Switch;
 
 import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
-import PublicHome from './PublicHome.jsx';
+import Homepage from './Homepage.jsx';
 import YarmWorkspace from './yarmWorkspace.jsx';
 
 import { connect }                      from 'react-redux';
@@ -55,7 +55,7 @@ export default class YarmApp extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/' component={PublicHome} />
+          <Route exact path='/' component={Homepage} />
           <Route path='/home' component={YarmWorkspace} onEnter={requireAuth}/>
           <Route render={function() {
             return ( <p>Not Found</p> )
