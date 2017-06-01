@@ -10,9 +10,10 @@ export default class Search extends React.Component {
       <div>
         <h1>Search Component</h1>
         <Link to="/">Home</Link>
+        <button>Ping</button>
       </div>
     )
   }
 }
 
-module.exports =   Search;
+module.exports = Search;
