@@ -1,11 +1,14 @@
 // var axios = require('axios');
 
 import { fetch as rofetch, parseResponse } from 'redux-oauth';
-import {dispatch, getState} from '../app/store';
+import store from '../app/store';
 
 export default {
-	fetch : function () {
-		return rofetch.apply( null, arguments )(dispatch, getState);
+	fetch : function (url, conf) {
+		var s = store;
+		var fn =  rofetch(url, conf);
+		var promise = fn(s.dispatch, s.getState);
+		return promise;
 	},
 	
 	fetchUserProfile: function () {
@@ -17,7 +20,7 @@ export default {
 	  console.log("yarm_api::Ping...");
 	  // Optionally the request above could also be done as
 	  // axios.get('http://localhost:8080/auth/ping', {
-	  var fr = fetch('http://localhost:8080/auth/ping', {
+	  var fr = this.fetch('http://localhost:8080/auth/ping', {
 	    // credentials: 'same-origin',  // 'include'
 	    credentials: 'include',
 	    params: {

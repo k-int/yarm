@@ -19,7 +19,7 @@ export default class Search extends React.Component {
 
 
   ping() {
-    console.log("Search::ping - calling ping2");
+    console.log("Search::ping - calling ping");
 
     // Ripped off from https://github.com/yury-dymov/redux-oauth-client-demo/blob/master/src/redux/actions.js
     yarm_utils.ping();
