@@ -22,7 +22,6 @@ const store = createStore(
 
 const reduxOauthConfig = {
   backend: {
-    // apiUrl:       'https://redux-oauth-backend.herokuapp.com',
     apiUrl:                'http://localhost:8080',
     tokenValidationPath:   '/auth/oauth/validateToken',
     signOutPath:  null,

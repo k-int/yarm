@@ -7,7 +7,9 @@ export function fetchUserProfile() {
   return { hello : 'hello' };
 }
 
-export function ping() {
+export const YARM_API_PING_OK = 'API_START';
+
+export function oldping() {
   console.log("yarm_api::Ping...");
   // Optionally the request above could also be done as
   // axios.get('http://localhost:8080/auth/ping', {
@@ -34,7 +36,7 @@ export function ping2() {
   return dispatch => {
     return dispatch(fetch('https://redux-oauth-backend.herokuapp.com/test/test'))
       .then(parseResponse)
-      .then(({ payload }) => console.log("%o",payload))
-      .catch(errors => dispatch(apiError(errors)));
+      .then(({ payload }) => dispatch({ type:'YARM_API_PING_OK', payload }))
+      .catch(errors => dispatch({type:'YARM_API_ERROR', payload }));
   };
 }
