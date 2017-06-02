@@ -7,7 +7,20 @@ module.exports = {
   },
 
   ping: function() {
-    console.log("Ping...");
+    console.log("yarm_api::Ping...");
+    // Optionally the request above could also be done as
+    axios.get('http://localhost:8080/auth/ping', {
+      params: {
+        ID: 12345
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     return "OK";
   }
 }
