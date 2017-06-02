@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router-dom');
 var Link = ReactRouter.Link;
 
-var yarm_api = require('../utils/api')
+import * as yarm_utils from '../utils/api'
 
 export default class Search extends React.Component {
 
@@ -17,7 +17,7 @@ export default class Search extends React.Component {
 
   ping() {
     console.log("Search::ping");
-    yarm_api.ping();
+    yarm_utils.ping();
   }
 
   render() {

@@ -6,7 +6,8 @@ module.exports = {
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'index_bundle.js',
-			publicPath: '/'
+			publicPath: '/',
+      sourceMapFilename: 'index_bundle.js.map'
 		},
 		module: {
 			rules: [
