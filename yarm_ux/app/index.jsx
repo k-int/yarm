@@ -1,24 +1,14 @@
 import React                                                      from 'react';
 import ReactDOM                                                   from 'react-dom';
 import PropTypes                                                  from 'prop-types';
-import { initialize, authStateReducer }                           from 'redux-oauth';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunk                                                      from 'redux-thunk';
+import store                                                      from './store';
 import { Provider }                                               from 'react-redux';
+import { initialize }                  from 'redux-oauth';
 
 import YarmApp                                                    from '../components/yarmApp.jsx';
 
 require('./index.css');
 
-const store = createStore(
-  combineReducers({
-    auth: authStateReducer
-  }),
-  {},
-  compose(
-    applyMiddleware(thunk)
-  )
-);
 
 const reduxOauthConfig = {
   backend: {

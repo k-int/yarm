@@ -3,12 +3,10 @@ var ReactRouter = require('react-router-dom');
 var Link = ReactRouter.Link;
 
 import React, { Component, PropTypes }  from 'react';
-import { connect }                      from 'react-redux';
 
 
-import * as yarm_utils from '../utils/api'
+import yarm_utils from '../utils/api'
 
-@connect(mapStateToProps)
 export default class Search extends React.Component {
 
   constructor(props) {
@@ -21,8 +19,10 @@ export default class Search extends React.Component {
 
 
   ping() {
-    console.log("Search::ping - calling ping2");
-    this.props.dispatch(yarm_utils.ping2());
+    console.log("Search::ping - calling ping");
+
+    // Ripped off from https://github.com/yury-dymov/redux-oauth-client-demo/blob/master/src/redux/actions.js
+    yarm_utils.ping();
   }
 
   render() {
