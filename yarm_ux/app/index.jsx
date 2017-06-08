@@ -12,7 +12,7 @@ require('./index.css');
 
 const reduxOauthConfig = {
   backend: {
-    apiUrl:                'http://localhost:8080',
+    apiUrl:                'http://localhost',
     tokenValidationPath:   '/auth/oauth/validateToken',
     signOutPath:  null,
     authProviderPaths: {
