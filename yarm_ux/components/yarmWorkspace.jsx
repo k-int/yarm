@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 export default class YarmWorkspace extends React.Component {
   render() {
     return (
-      <div>Workspace</div>
+      <div>Yarm Workspace</div>
     )
   }
 }

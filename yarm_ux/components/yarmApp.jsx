@@ -11,8 +11,10 @@ var Switch = ReactRouter.Switch;
 import { ScrollView, Box, Page, VBox, Flex } from 'react-layout-components';
 
 import Homepage from './Homepage.jsx';
+import Yarm from './yarm/yarm.jsx';
+import ResourceSharing from './resourceSharing/resourceSharing.jsx';
+import APCManager from './apcManager/apcManager.jsx';
 import Search from './search.jsx';
-import YarmWorkspace from './yarmWorkspace.jsx';
 
 import { connect }                      from 'react-redux';
 
@@ -60,8 +62,10 @@ export default class YarmApp extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/' component={Homepage} />
-          <Route path='/home' component={YarmWorkspace} onEnter={requireAuth}/>
-          <Route path='/search' component={Search} onEnter={requireAuth}/>
+          <Route exact path='/search' component={Search} />
+          <Route path='/:context/erm' component={Yarm} onEnter={requireAuth}/>
+          <Route path='/:context/resourceSharing' component={ResourceSharing} onEnter={requireAuth}/>
+          <Route path='/:context/apc' component={APCManager} onEnter={requireAuth}/>
           <Route render={function() {
             return ( <p>Not Found</p> )
           }}/>

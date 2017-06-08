@@ -29,6 +29,9 @@ export default class Dashboard extends React.Component {
           <Box>
             Dash Nav
             <Link to="/search">Search</Link>
+            <Link to="/UniBorcetshire/erm">ERM</Link>
+            <Link to="/UniBorcetshire/resourceSharing">Resource Sharing</Link>
+            <Link to="/UniBorcetshire/apc">APC Management</Link>
           </Box>
           <Box>
             Logged in Dashboard {name}
