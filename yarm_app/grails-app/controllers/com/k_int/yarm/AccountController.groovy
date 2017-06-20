@@ -3,6 +3,8 @@ package com.k_int.yarm
 import grails.plugin.springsecurity.annotation.Secured
 import grails.converters.JSON
 
+import implicitauth.PartyRelationship
+
 class AccountController {
 
   def slugGeneratorService

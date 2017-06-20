@@ -2,7 +2,7 @@ package com.k_int.yarm
 
 import grails.plugin.springsecurity.annotation.Secured
 
-import com.k_int.yarm.PartyRelationship
+import implicitauth.PartyRelationship
 
 
 class HomeController {

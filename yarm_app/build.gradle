@@ -72,8 +72,8 @@ dependencies {
     println "Looking for yarm_subprojects... ${parent?.subprojects}"
     def gtp = parent?.subprojects?.findAll {
       if (["yarm_dm"].contains(it.name) ) {
+        println "\tfound yarm_dm locally at ${it.projectDir}, compiling..."
         compile it
-        println "\tfound locally at ${it.projectDir}"
         return true
       }
 

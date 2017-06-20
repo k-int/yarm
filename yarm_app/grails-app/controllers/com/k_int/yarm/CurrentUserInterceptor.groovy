@@ -1,6 +1,6 @@
 package yarm_app
 
-import com.k_int.yarm.Tenant
+import implicitauth.Tenant
 
 
 class CurrentUserInterceptor {

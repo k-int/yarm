@@ -1,5 +1,7 @@
 package com.k_int.yarm
 
+import implicitauth.Tenant
+
 public class AgreementSignatory {
   
   Tenant signatory

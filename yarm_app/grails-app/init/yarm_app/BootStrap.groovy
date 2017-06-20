@@ -1,9 +1,9 @@
 package yarm_app
 
 import com.k_int.yarm.GlobalRecordSource
-import com.k_int.yarm.auth.User
-import com.k_int.yarm.auth.Role
-import com.k_int.yarm.auth.UserRole
+import implicitauth.User
+import implicitauth.Role
+import implicitauth.UserRole
 import com.k_int.yarm.RefdataCategory
 
 class BootStrap {

@@ -59,6 +59,22 @@ dependencies {
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+
+    println "Looking for yarm_subprojects... ${parent?.subprojects}"
+    def gtp = parent?.subprojects?.findAll {
+      if (["implicitauth"].contains(it.name) ) {
+        println "\tfound implicitauth locally at ${it.projectDir}, compiling..."
+        compile it
+        return true
+      }
+
+      false
+    }
+
+    if (!gtp) {
+      println "\tno local copy of implicitauth found downloading from Maven"
+    }
+
 }
 grailsPublish {
     // TODO: Provide values here
