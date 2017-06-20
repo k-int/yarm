@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:3.2.0'
+    }
+}
+
+// Provide a download task https://github.com/michel-kraemer/gradle-download-task
+apply plugin: 'de.undercouch.download'
+
+
+
+task yarmAssemble(type: YarmAssemblyTask)
+
+/**
+ *  This task has the job of making sure all dependent projects are up to date, then assembling them all into a local
+ *  tomcat.
+ */
+class YarmAssemblyTask extends DefaultTask {
+    @TaskAction
+    def assemble() {
+        checkAssembly()
+        checkTomcat()
+        println 'hello from GreetingTask'
+    }
+
+    def checkAssembly() {
+      def assembly_dir = new File( './yarm_assembly' )
+      if ( !assembly_dir.exists() ) {
+        println("Configure assembly dir");
+        assembly_dir.mkdir();
+      }
+    }
+
+    def checkTomcat() {
+      println 'Checking tomcat'
+      def tomcat_dir = new File( './yarm_assembly/apache-tomcat-8.5.15' )
+
+      if( !tomcat_dir.exists() ) {
+        println("Downloading tomcat");
+        download {
+          src 'http://mirror.ox.ac.uk/sites/rsync.apache.org/tomcat/tomcat-8/v8.5.15/bin/apache-tomcat-8.5.15.tar.gz'
+          dest './yarm_assembly'
+        }
+
+        println("unpacking tomcat");
+        copy {
+          from tarTree(resources.gzip('./yarm_assembly/apache-tomcat-8.5.15.tar.gz'))
+          into ('./yarm_assembly')
+        }
+      }
+    }
+}
