@@ -1,3 +1,3 @@
 include 'yarm_app', 'yarm_dm', 'implicitauth'
 project(':yarm_dm').projectDir = new File('./yarm_dm')
-project(':implicitauth').projectDir = new File('./implicitauth')
+project(':implicitauth').projectDir = new File('./ImplicitAuthSvc/ImplicitAuthService')
