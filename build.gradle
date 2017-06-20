@@ -41,6 +41,6 @@ task checkTomcat(dependsOn:'checkAssembly') << {
   }
 }
 
-task assemble(dependsOn:'checkTomcat') {
+task assemble(dependsOn:['checkTomcat','implicitauth:war','yarm_app:war']) {
   println "Assmeble"
 }
