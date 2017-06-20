@@ -12,44 +12,35 @@ apply plugin: 'de.undercouch.download'
 
 
 
-task yarmAssemble(type: YarmAssemblyTask)
+// task yarmAssemble(type: YarmAssemblyTask)
 
-/**
- *  This task has the job of making sure all dependent projects are up to date, then assembling them all into a local
- *  tomcat.
- */
-class YarmAssemblyTask extends DefaultTask {
-    @TaskAction
-    def assemble() {
-        checkAssembly()
-        checkTomcat()
-        println 'hello from GreetingTask'
+task checkAssembly << {
+  def assembly_dir = new File( './yarm_assembly' )
+  if ( !assembly_dir.exists() ) {
+    println("make assembly dir");
+    assembly_dir.mkdir();
+  }
+}
+
+task checkTomcat(dependsOn:'checkAssembly') << {
+  println 'Checking tomcat'
+  def tomcat_dir = new File( './yarm_assembly/apache-tomcat-8.5.15' )
+
+  if( !tomcat_dir.exists() ) {
+    println("Downloading tomcat");
+    download {
+      src 'http://mirror.ox.ac.uk/sites/rsync.apache.org/tomcat/tomcat-8/v8.5.15/bin/apache-tomcat-8.5.15.tar.gz'
+      dest new File('./yarm_assembly/', 'apache-tomcat-8.5.15.tar.gz')
     }
 
-    def checkAssembly() {
-      def assembly_dir = new File( './yarm_assembly' )
-      if ( !assembly_dir.exists() ) {
-        println("Configure assembly dir");
-        assembly_dir.mkdir();
-      }
+    println("unpacking tomcat");
+    copy {
+      from tarTree(resources.gzip('./yarm_assembly/apache-tomcat-8.5.15.tar.gz'))
+      into new File('./yarm_assembly')
     }
+  }
+}
 
-    def checkTomcat() {
-      println 'Checking tomcat'
-      def tomcat_dir = new File( './yarm_assembly/apache-tomcat-8.5.15' )
-
-      if( !tomcat_dir.exists() ) {
-        println("Downloading tomcat");
-        download {
-          src 'http://mirror.ox.ac.uk/sites/rsync.apache.org/tomcat/tomcat-8/v8.5.15/bin/apache-tomcat-8.5.15.tar.gz'
-          dest './yarm_assembly'
-        }
-
-        println("unpacking tomcat");
-        copy {
-          from tarTree(resources.gzip('./yarm_assembly/apache-tomcat-8.5.15.tar.gz'))
-          into ('./yarm_assembly')
-        }
-      }
-    }
+task assemble(dependsOn:'checkTomcat') {
+  println "Assmeble"
 }

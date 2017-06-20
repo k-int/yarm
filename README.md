@@ -106,3 +106,14 @@ Search Titles
 
 
 https://github.com/yury-dymov/redux-oauth-client-demo
+
+
+# Assembly
+
+at the root level 
+
+
+    gradle yarmAssemble
+
+Should assembly all the components into a runnable unit
+
