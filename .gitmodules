@@ -1,0 +1,3 @@
+[submodule "ImplicitAuthSvc"]
+	path = ImplicitAuthSvc
+	url = https://github.com/ianibo/ImplicitAuthSvc.git
