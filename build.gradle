@@ -37,7 +37,27 @@ task checkTomcat(dependsOn:'checkAssembly') << {
   }
 }
 
-task assemble(dependsOn:['checkTomcat','implicitauth:war','yarm_app:war']) {
+task copyWarFiles(dependsOn:['checkTomcat','implicitauth:war','yarm_app:war']) {
+
+  // Clear down any existing war files
+  delete(['./yarm_assembly/apache-tomcat-8.5.15/webapps/auth', './yarm_assembly/apache-tomcat-8.5.15/webapps/yarm'])
+
+  // Add new war files
+  copy{
+    from "./ImplicitAuthSvc/ImplicitAuthService/build/libs"
+    into "./yarm_assembly/apache-tomcat-8.5.15/webapps"
+    include '*.original'
+    rename { 'auth.war' }
+  }
+  copy{
+    from "./yarm_app/build/libs"
+    into "./yarm_assembly/apache-tomcat-8.5.15/webapps"
+    include '*.original'
+    rename {'yarm.war' }
+  }
+}
+
+task assemble(dependsOn:['checkTomcat','copyWarFiles']) {
   println "Please make sure implicitauth submodule is updated with \"git submodule update --init --recursive\" before building"
   println "Assmeble"
 }

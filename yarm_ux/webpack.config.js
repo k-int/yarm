@@ -16,7 +16,17 @@ module.exports = {
 			]
 		},
 		devServer:{
-			historyApiFallback:true
+			historyApiFallback:true,
+      proxy: {
+        '/auth': {
+          target: 'http://localhost:8080',
+          secure: false
+        },
+        '/yarm': {
+          target: 'http://localhost:8080',
+          secure: false
+        },
+      }
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
