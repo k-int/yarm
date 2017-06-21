@@ -121,3 +121,6 @@ Should assembly all the components into a runnable unit
 Extras
 
 ln -s ./ImplicitAuthSvc/ImplicitAuthService ./implicitauth
+
+git submodule update --init --recursive
+

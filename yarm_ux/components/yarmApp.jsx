@@ -78,16 +78,19 @@ export default class YarmApp extends React.Component {
 
 
 function mapStateToProps(state) {
-    const signedIn = state.auth.getIn(['user', 'isSignedIn']) || false;
 
-    if (signedIn) {
-      const name      = state.auth.getIn(['user', 'attributes', 'name']);
-      const provider  = state.auth.getIn(['user', 'attributes', 'provider']);
-      const uid       = state.auth.getIn(['user', 'attributes', 'uid']);
+  console.log("yarmApp::mapStateToProps %o",state);
 
-      return { signedIn, name, provider, uid };
-    }
+  const signedIn = state.auth.getIn(['user', 'isSignedIn']) || false;
 
-    return { signedIn };
+  if (signedIn) {
+    const name      = state.auth.getIn(['user', 'attributes', 'name']);
+    const provider  = state.auth.getIn(['user', 'attributes', 'provider']);
+    const uid       = state.auth.getIn(['user', 'attributes', 'uid']);
+
+    return { signedIn, name, provider, uid };
+  }
+
+  return { signedIn };
 }
 

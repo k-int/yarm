@@ -1,18 +1,14 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'de.undercouch:gradle-download-task:3.2.0'
-    }
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'de.undercouch:gradle-download-task:3.2.0'
+  }
 }
 
-// Provide a download task https://github.com/michel-kraemer/gradle-download-task
 apply plugin: 'de.undercouch.download'
 
-
-
-// task yarmAssemble(type: YarmAssemblyTask)
 
 task checkAssembly << {
   def assembly_dir = new File( './yarm_assembly' )
@@ -42,5 +38,6 @@ task checkTomcat(dependsOn:'checkAssembly') << {
 }
 
 task assemble(dependsOn:['checkTomcat','implicitauth:war','yarm_app:war']) {
+  println "Please make sure implicitauth submodule is updated with \"git submodule update --init --recursive\" before building"
   println "Assmeble"
 }
