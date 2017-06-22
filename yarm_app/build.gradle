@@ -51,19 +51,23 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
     console "org.grails:grails-console"
     compile 'org.grails.plugins:quartz:2.0.9'
-    compile 'org.grails.plugins:spring-security-core:3.1.+'
-    compile 'org.grails.plugins:spring-security-oauth2:1.+'
-    compile 'org.grails.plugins:spring-security-oauth2-google:1.1.+'
+
+    compile "org.bitbucket.b_c:jose4j:0.4.2"
+    compile 'org.grails.plugins:spring-security-core:3.1.2'
+    compile "org.springframework.security:spring-security-core:4.2.2.RELEASE"
+    compile "org.springframework.security:spring-security-web:4.2.2.RELEASE"
+
     compile 'com.k-int:goai:1.0.2'
     compile 'org.grails.plugins:views-json:1.1.5'
     compile 'org.grails.plugins:grails-executor:0.4'
+
 
     // compile "org.grails.plugins:slug-generator:0.5"
 
     profile "org.grails.profiles:web"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.9.3"
     runtime "com.h2database:h2"
-    runtime  group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+    runtime "postgresql:postgresql:9.1-901-1.jdbc4"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
@@ -71,7 +75,7 @@ dependencies {
 
     println "Looking for yarm_subprojects... ${parent?.subprojects}"
     def gtp = parent?.subprojects?.findAll {
-      if (["implicitauth", "yarm_dm"].contains(it.name) ) {
+      if (["yarm_dm"].contains(it.name) ) {
         println "\tfound dependency locally at ${it.projectDir}, compiling..."
         compile it
         return true
