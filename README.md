@@ -31,11 +31,13 @@ If you are running postgres locally sudo su - postgres
 Once connected, issue
 
     CREATE USER knowint WITH PASSWORD 'knowint';
-    DROP DATABASE yarm_dev;
-    CREATE DATABASE yarm_dev;
-    GRANT ALL PRIVILEGES ON DATABASE yarm_dev to knowint;
-    CREATE DATABASE yarm_t_demo;
-    GRANT ALL PRIVILEGES ON DATABASE yarm_t_demo to knowint;
+    CREATE DATABASE knowint;
+    GRANT ALL PRIVILEGES ON DATABASE knowint to knowint;
+
+    CREATE USER yarm WITH PASSWORD 'yarm';
+    CREATE SCHEMA yarm;
+    GRANT ALL PRIVILEGES ON SCHEMA yarm to yarm;
+    ALTER USER yarm set search_path = 'yarm', 'authsvc','public';
 
 
 DB Session usually checked with

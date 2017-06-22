@@ -112,9 +112,9 @@ environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:postgresql://pghost:5432/yarm_dev
-            username: knowint
-            password: knowint
+            url: jdbc:postgresql://pghost:5432/knowint
+            username: yarm
+            password: yarm
             driverClassName: org.postgresql.Driver
             dialect: com.k_int.yarm.utils.PgSQLCustomDialect
     test:
@@ -123,8 +123,12 @@ environments:
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update
+            url: jdbc:postgresql://pghost:5432/knowint
+            username: knowint
+            password: knowint
+            driverClassName: org.postgresql.Driver
+            dialect: com.k_int.yarm.utils.PgSQLCustomDialect
             properties:
                 jmxEnabled: true
                 initialSize: 5
