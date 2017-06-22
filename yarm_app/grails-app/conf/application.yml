@@ -172,7 +172,7 @@ grails:
         # N.B. Static Rules need to be the name of the controller, not the mapped URL - so /aoGrant/** and NOT /grant/** or you'll get a 403.
         staticRules:
           -
-            pattern: '/wibble/**'
+            pattern: '/home/**'
             access:
               -
                 'permitAll'

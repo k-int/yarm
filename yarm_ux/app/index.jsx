@@ -17,7 +17,7 @@ const reduxOauthConfig = {
     // apiUrl defaults to location.origin. We are relying upon webpack proxy config in webpack.config.js to set up
     // the appropriate proxies. To isolate a specific service (Say, to run the declared auth and yarm war files, but run
     // some new service via grails run-app) use webpack.config.js to proxy the new service on a different port.
-    apiUrl:                location.origin+'/yarm/ping',
+    apiUrl:                location.origin,
     tokenValidationPath:   '/auth/oauth/validateToken',
     signOutPath:  null,
     authProviderPaths: {

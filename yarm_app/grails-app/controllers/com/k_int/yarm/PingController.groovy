@@ -1,9 +1,8 @@
 package com.k_int.yarm
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import implicitauth.PartyRelationship
-
+import grails.converters.JSON;
 
 class PingController {
 
@@ -14,6 +13,7 @@ class PingController {
     log.debug("PingController::index");
     def user = springSecurityService.currentUser
     def result=[:]
+    render result as JSON
   }
 
 }

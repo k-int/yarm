@@ -20,7 +20,7 @@ export default {
 	  console.log("yarm_api::Ping...");
 	  // Optionally the request above could also be done as
 	  // axios.get('http://localhost:8080/auth/ping', {
-	  var fr = this.fetch(apiUrl, {
+	  var fr = this.fetch(apiUrl+'/yarm/ping', {
 	    // credentials: 'same-origin',  // 'include'
 	    credentials: 'include',
 	    params: {
