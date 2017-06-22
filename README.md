@@ -37,6 +37,9 @@ Once connected, issue
     CREATE USER yarm WITH PASSWORD 'yarm';
     CREATE SCHEMA yarm;
     GRANT ALL PRIVILEGES ON SCHEMA yarm to yarm;
+    GRANT ALL PRIVILEGES ON SCHEMA authsvc to yarm;
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authsvc to yarm;
+    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA authsvc to yarm;
     ALTER USER yarm set search_path = 'yarm', 'authsvc','public';
 
 

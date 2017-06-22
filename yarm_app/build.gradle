@@ -71,8 +71,8 @@ dependencies {
 
     println "Looking for yarm_subprojects... ${parent?.subprojects}"
     def gtp = parent?.subprojects?.findAll {
-      if (["yarm_dm"].contains(it.name) ) {
-        println "\tfound yarm_dm locally at ${it.projectDir}, compiling..."
+      if (["implicitauth", "yarm_dm"].contains(it.name) ) {
+        println "\tfound dependency locally at ${it.projectDir}, compiling..."
         compile it
         return true
       }
@@ -80,10 +80,10 @@ dependencies {
       false
     }
 
-    if (!gtp) {
-      println "\tno local copy found downloading from Maven"
-      compile 'com.k-int.yarm:yarm_dm:0.1'
-    }
+    // if (!gtp) {
+    //   println "\tno local copy found downloading from Maven"
+    //   compile 'com.k-int.yarm:yarm_dm:0.1'
+    // }
 
 }
 
