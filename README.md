@@ -1,5 +1,16 @@
 YARM - dev-integration
 
+
+# Building
+
+run 
+
+gradle assemble
+
+at the root directory to assemble war components and create a tomcat under yarm_assembly which contans all components ready to run. Run with bin/startup.sh
+
+Serve up the client with "npm run start" in the yarm_ux folder
+
 Root Directory
 
 * settings.gradle  -- Controls build and links the yarm_dm plugin to the yarm_app and yarm_services grails apps in a dev environment.
