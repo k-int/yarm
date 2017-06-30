@@ -125,8 +125,8 @@ environments:
         dataSource:
             dbCreate: update
             url: jdbc:postgresql://pghost:5432/knowint
-            username: knowint
-            password: knowint
+            username: yarm
+            password: yarm
             driverClassName: org.postgresql.Driver
             dialect: com.k_int.yarm.utils.PgSQLCustomDialect
             properties:
