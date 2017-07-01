@@ -41,18 +41,34 @@ If you are running postgres locally sudo su - postgres
 
 Once connected, issue
 
+As postgres user
     CREATE USER knowint WITH PASSWORD 'knowint';
     CREATE DATABASE knowint;
     GRANT ALL PRIVILEGES ON DATABASE knowint to knowint;
-
     CREATE USER yarm WITH PASSWORD 'yarm';
+    CREATE USER authsvc WITH PASSWORD 'authsvc';
+    ALTER USER authsvc set search_path = 'authsvc','public';
+    ALTER USER yarm set search_path = 'yarm', 'authsvc','public';
+
+As user knowint
+    CREATE SCHEMA authsvc;
+    GRANT ALL PRIVILEGES ON SEQUENCE hibernate_sequence to authsvc;
+    GRANT ALL PRIVILEGES ON SEQUENCE hibernate_sequence to yarm;
+
+    CREATE SEQUENCE hibernate_sequence;
+
     CREATE SCHEMA yarm;
     GRANT ALL PRIVILEGES ON SCHEMA yarm to yarm;
+
+As user authsvc
+    GRANT ALL PRIVILEGES ON SCHEMA authsvc to authsvc;
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authsvc to authsvc;
+    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA authsvc to authsvc;
     GRANT ALL PRIVILEGES ON SCHEMA authsvc to yarm;
     GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authsvc to yarm;
     GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA authsvc to yarm;
-    ALTER USER yarm set search_path = 'yarm', 'authsvc','public';
 
+As user yarm
 
 DB Session usually checked with
 
