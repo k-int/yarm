@@ -10,6 +10,10 @@ class HomeController {
   def springSecurityService
 
   def index() { 
+    log.debug("Home::Index");
+  }
+
+  def index2() { 
 
     def user = springSecurityService.currentUser
     def result=[:]
