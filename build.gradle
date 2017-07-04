@@ -37,7 +37,7 @@ task checkTomcat(dependsOn:'checkAssembly') << {
   }
 }
 
-task copyWarFiles(dependsOn:['checkTomcat','implicitauth:war','yarm_app:war']) {
+task copyWarFiles(dependsOn:['checkTomcat','implicitauth:clean', 'yarm_app:clean', 'implicitauth:war','yarm_app:war']) {
 
   // Clear down any existing war files
   delete(['./yarm_assembly/apache-tomcat-8.5.15/webapps/auth', './yarm_assembly/apache-tomcat-8.5.15/webapps/yarm'])

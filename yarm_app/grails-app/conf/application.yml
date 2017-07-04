@@ -127,8 +127,10 @@ environments:
             url: jdbc:postgresql://pghost:5432/knowint
             username: yarm
             password: yarm
+            # driverClassName: org.postgresql.Driver
+            # dialect: com.k_int.yarm.utils.PgSQLCustomDialect
             driverClassName: org.postgresql.Driver
-            dialect: com.k_int.yarm.utils.PgSQLCustomDialect
+            dialect: org.hibernate.dialect.PostgreSQL82Dialect
             properties:
                 jmxEnabled: true
                 initialSize: 5

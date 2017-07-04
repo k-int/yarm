@@ -9,11 +9,12 @@ class BootStrap {
   def sessionFactory
 
   def init = { servletContext ->
-    log.debug("BootStrap::init");
+    log.debug("## YARM APP ## BootStrap::init");
     setUpRefdata()
     setUpGlobalSources()
 
     def num_users = User.executeQuery('select count(u.id) from User as u');
+
     log.debug("found ${num_users[0]}. This select checks that cross module domain classes are working as expected");
   }
 

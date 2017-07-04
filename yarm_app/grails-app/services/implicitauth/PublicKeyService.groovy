@@ -28,10 +28,14 @@ class PublicKeyService {
     log.debug("Init");
   }
 
+  @Transactional
   def getAppPublicKey() {
+
+    log.debug("[yarmapp] PublicKeyService::getAppPublicKey()");
+
     // See if the app has a public key, if not generate one and store it
     if ( thekey == null ) {
-      log.debug("Creating public key");
+      log.debug("[yarmapp] Creating public key");
       Map<String, Object> keyparams = authcfgService.cfg.kiauth_jwk
       thekey = new org.jose4j.jwk.RsaJsonWebKey(keyparams)
     }
@@ -39,11 +43,14 @@ class PublicKeyService {
       log.warn("No KEY");
     }
 
+    log.debug("Got key ${thekey}");
     return thekey;
   }
 
 
   def decodeJWT(jwt) {
+
+    log.debug("[yarmapp] PublicKeyService::decodeJWT(...)");
 
     JwtClaims result = null
 
