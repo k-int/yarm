@@ -5,13 +5,15 @@ import implicitauth.Tenant
 
 class CurrentUserInterceptor {
 
-  def springSecurityService
+  // def springSecurityService
 
   public CurrentUserInterceptor() {
     matchAll();
   }
 
   boolean before() { 
+
+    log.debug("yarm::CurrentUserInterceptor::before");
 
     // if (!springSecurityService.principal.email){
     //     flash.message = "Please enter your email before you can proceed"

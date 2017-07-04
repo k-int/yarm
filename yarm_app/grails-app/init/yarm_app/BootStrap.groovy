@@ -4,12 +4,19 @@ import com.k_int.yarm.GlobalRecordSource
 import com.k_int.yarm.RefdataCategory
 import implicitauth.User
 
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.SecurityFilterPosition
+
+
 class BootStrap {
 
   def sessionFactory
 
   def init = { servletContext ->
+
     log.debug("## YARM APP ## BootStrap::init");
+    SpringSecurityUtils.clientRegisterFilter('jwtPreauthFilter', SecurityFilterPosition.PRE_AUTH_FILTER)
+
     setUpRefdata()
     setUpGlobalSources()
 

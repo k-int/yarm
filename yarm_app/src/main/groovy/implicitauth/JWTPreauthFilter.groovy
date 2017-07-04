@@ -19,7 +19,7 @@ public class JWTPreauthFilter extends org.springframework.security.web.authentic
 
   // @javax.annotation.PostConstruct
   def init() {
-    log.debug("Init");
+    log.debug("yarm JWTPreauthFilter::Init");
   }
 
   @Override
